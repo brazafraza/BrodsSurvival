@@ -76,3 +76,16 @@ CapsuleCollider:
   m_Height: 18.127937
   m_Direction: 1
   m_Center: {x: 0.027980804, y: 7.556732, z: -0.25131226}
+--- !u!114 &3891551066481496756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7359165091165131546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3d9ce31db862944a61e4eca6b80117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: Pine Tree

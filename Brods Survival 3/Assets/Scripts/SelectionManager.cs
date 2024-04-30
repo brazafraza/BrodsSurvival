@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using 
+using TMPro;
 
 public class SelectionManager : MonoBehaviour
 {
 
     public GameObject interaction_Info_UI;
-    TextMeshProUGUI interaction_text;;
+    TextMeshProUGUI interaction_text;
 
     private void Start()
     {
-        interaction_text = interaction_Info_UI.GetComponent<Text>();
+        interaction_text = interaction_Info_UI.GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
