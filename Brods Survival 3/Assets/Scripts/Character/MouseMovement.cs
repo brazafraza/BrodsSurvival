@@ -10,22 +10,22 @@ public class MouseMovement : MonoBehaviour
     float xRotation = 0f;
     float YRotation = 0f;
 
-    public bool mouseAcitve;
+    public bool lockCursor;
 
     void Start()
     {
         //Locking the cursor to the middle of the screen and making it invisible
         Cursor.lockState = CursorLockMode.Locked;
-        mouseAcitve = true;
+        lockCursor = true;
     }
 
     void Update()
     {
-        if(mouseAcitve)
+        if(lockCursor)
         //if (InventorySystem.Instance.isOpen == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
-            mouseAcitve = true;
+            lockCursor = true;
 
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

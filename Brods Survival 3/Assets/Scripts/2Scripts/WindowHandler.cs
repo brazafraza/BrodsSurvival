@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class WindowHandler : MonoBehaviour
 {
-    public MouseMovement cam;
+      public CameraLook cam;
+   // public MouseMovement cam;
 
     public bool windowOpened;
 
     public InventoryManager inventory;
     void Start()
     {
-        cam = GetComponentInChildren<MouseMovement>();
+        cam = GetComponentInChildren<CameraLook>();
 
         inventory = GetComponentInChildren<InventoryManager>();
         
@@ -22,11 +23,13 @@ public class WindowHandler : MonoBehaviour
         
         if(windowOpened)
         {
-            cam.mouseAcitve = false;
+            cam.lockCursor = false;
+            cam.canMove = false;
         }
         else
         {
-            cam.mouseAcitve = true;
+            cam.lockCursor = true;
+            cam.canMove = true;
         }
 
         if (inventory.opened)
