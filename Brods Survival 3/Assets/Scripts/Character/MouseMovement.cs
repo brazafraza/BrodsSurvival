@@ -10,17 +10,23 @@ public class MouseMovement : MonoBehaviour
     float xRotation = 0f;
     float YRotation = 0f;
 
+    public bool mouseAcitve;
+
     void Start()
     {
         //Locking the cursor to the middle of the screen and making it invisible
         Cursor.lockState = CursorLockMode.Locked;
+        mouseAcitve = true;
     }
 
     void Update()
     {
-
-        if (InventorySystem.Instance.isOpen == false)
+        if(mouseAcitve)
+        //if (InventorySystem.Instance.isOpen == false)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            mouseAcitve = true;
+
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -36,7 +42,11 @@ public class MouseMovement : MonoBehaviour
             //applying both rotations
             transform.localRotation = Quaternion.Euler(xRotation, YRotation, 0f);
         }
-       
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            
+        }
 
     }
 }

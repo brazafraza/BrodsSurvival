@@ -1,11 +1,12 @@
-using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine;
+
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop");
+        //Debug.Log("OnDrop");
 
         DragDrop itemDragHandler = eventData.pointerDrag.GetComponent<DragDrop>();
 
