@@ -19,4 +19,9 @@ public class ItemSO : ScriptableObject
     [Space]
     public bool isStackable;
     public int maxStack = 1;
+
+    [Header("Consumable")]
+    public float healthChange = 10f;
+    public float hungerChange = 10f;
+    public float thirstChange = 10f;
 }
