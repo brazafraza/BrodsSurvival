@@ -5,16 +5,16 @@ using UnityEngine;
 public class WindowHandler : MonoBehaviour
 {
       public CameraLook cam;
-   // public MouseMovement cam;
-
     public bool windowOpened;
 
-    public InventoryManager inventory;
+    [HideInInspector]public InventoryManager inventory;
+    [HideInInspector] public CraftingManager crafting;
     void Start()
     {
         cam = GetComponentInChildren<CameraLook>();
 
         inventory = GetComponentInChildren<InventoryManager>();
+        crafting = GetComponentInChildren<CraftingManager>();
         
     }
 

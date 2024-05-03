@@ -4,7 +4,7 @@ using System.IO.Enumeration;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu (fileName = "New Item", menuName = "Survial Game/Inventory/New Item")]
+[CreateAssetMenu (fileName = "New Item", menuName = "Survival Game/Inventory/New Item")]
 
 public class ItemSO : ScriptableObject
 {
