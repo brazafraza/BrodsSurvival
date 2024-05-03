@@ -120,7 +120,7 @@ public class CameraLook : MonoBehaviour
     public bool hasReachedHorizontalRecoilPosition = true;
     public float recoilSpeedMovement;
 
-    public void RecoilCamera(float vertical, float horizontal)
+    public void RecoilCamera(float horizontal, float vertical)
     {
         float verticalRecoilPoint = Random.Range(0.75f, vertical);
         float horizontalRecoilPoint = Random.Range(-horizontal, horizontal);
@@ -136,7 +136,7 @@ public class CameraLook : MonoBehaviour
         hasReachedVerticalRecoilPosition = false;
         hasReachedHorizontalRecoilPosition = false;
 
-        Debug.LogWarning("Horizontal Recoil is : " + horizontalRecoilPoint);
+        //Debug.LogWarning("Horizontal Recoil is : " + horizontalRecoilPoint);
 
         //player.Rotate(Vector3.up * Random.Range(-horizontal, horizontal));
 
