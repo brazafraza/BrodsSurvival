@@ -11,6 +11,7 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
 {
     private DragDropHandler dragDropHandler;
     private InventoryManager inventory;
+    public Weapon weaponEquipped;
 
     public ItemSO data;
     public int stackSize;

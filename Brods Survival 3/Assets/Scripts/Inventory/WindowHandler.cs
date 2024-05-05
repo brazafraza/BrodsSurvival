@@ -9,12 +9,14 @@ public class WindowHandler : MonoBehaviour
 
     [HideInInspector]public InventoryManager inventory;
     [HideInInspector] public CraftingManager crafting;
+    [HideInInspector] public StorageUI storage;
     void Start()
     {
         cam = GetComponentInChildren<CameraLook>();
 
         inventory = GetComponentInChildren<InventoryManager>();
         crafting = GetComponentInChildren<CraftingManager>();
+        storage = GetComponentInChildren<StorageUI>();
         
     }
 

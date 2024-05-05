@@ -15,6 +15,8 @@ public class CraftingManager : MonoBehaviour
     public RecipeTemplate recipeInCraft;
     private bool isCrafting;
     private float currentTimer;
+
+    public bool opened;
     
 
     private void Start()
@@ -43,6 +45,12 @@ public class CraftingManager : MonoBehaviour
 
             currentTimer -= Time.deltaTime;
         }
+
+        if (opened)
+            transform.localPosition = new Vector3(0, 0, 0);
+        else
+            transform.position = new Vector3(10000, 0, 0);
+
     }
     public void GenerateRecipes()
     {

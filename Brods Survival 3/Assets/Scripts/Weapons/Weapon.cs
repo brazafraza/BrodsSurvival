@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -14,6 +15,7 @@ public class Weapon : MonoBehaviour
 
     public ItemSO weaponData;
     public bool isAutomatic;
+    public ParticleSystem muzzleFlash;
     [Space]
     public Transform shootPoint;
     public LayerMask shootableLayers;
@@ -56,14 +58,20 @@ public class Weapon : MonoBehaviour
                 currentFireRate += Time.deltaTime;
             }
 
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown(KeyCode.R) && !player.windowHandler.inventory.opened)
             {
                 Start_Reload();
             }
 
-
+           
 
             UpdateAiming();
+
+            if(player.windowHandler.inventory.opened)
+            {
+                return;
+            }
+
 
             if (isAutomatic)
             {
@@ -90,7 +98,16 @@ public class Weapon : MonoBehaviour
         }
         else if (weaponData.itemType == ItemSO.ItemType.MeleeWeapon)
         {
+            if (currentFireRate < fireRate)
+            {
+                currentFireRate += Time.deltaTime;
+            }
 
+
+            if (Input.GetButton("Fire1"))
+            {
+                Swing();
+            }
         }
 
 
@@ -101,10 +118,12 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if (currentFireRate < fireRate || isReloading || !hasTakenOut || player.running || slotEquippedOn.stackSize <= 0)
+        if (currentFireRate < fireRate || isReloading || !hasTakenOut || player.running || slotEquippedOn.stackSize <= 0 || player.windowHandler.inventory.opened)
         {
             return;
         }
+
+        GetComponentInParent<Animator>().SetTrigger("Shake");
 
         RaycastHit hit;
 
@@ -128,6 +147,16 @@ public class Weapon : MonoBehaviour
             Debug.Log($"Hitted : {hit.transform.name}");
         }
 
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Play();
+        }
+        else
+        {
+            Debug.LogWarning("MFLASH not assinged");
+        }
+
+
         anim.CrossFadeInFixedTime("Shoot_M9", 0.015f);
         Debug.Log("shoot");
 
@@ -146,10 +175,12 @@ public class Weapon : MonoBehaviour
 
     public void ShotgunShoot()
     {
-        if (currentFireRate < fireRate || isReloading || !hasTakenOut || player.running || slotEquippedOn.stackSize <= 0)
+        if (currentFireRate < fireRate || isReloading || !hasTakenOut || player.running || slotEquippedOn.stackSize <= 0 || player.windowHandler.inventory.opened)
         {
             return;
         }
+
+        GetComponentInParent<Animator>().SetTrigger("Shake");
 
         for (int i = 0; i < weaponData.pelletsPerShot; i++)
         {
@@ -176,6 +207,18 @@ public class Weapon : MonoBehaviour
                 GameObject bulletHole = Instantiate(bulletHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
                 Debug.Log($"Hitted : {hit.transform.name}");
          }
+        }
+
+
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Stop();
+            muzzleFlash.startRotation = Random.Range(0, 360);
+            muzzleFlash.Play();
+        }
+        else
+        {
+            Debug.LogWarning("MFLASH not assinged");
         }
 
         anim.CrossFadeInFixedTime("Shoot_M9", 0.015f);
@@ -296,7 +339,7 @@ public class Weapon : MonoBehaviour
 
     public void UpdateAiming()
     {
-        if (Input.GetButton("Fire2") && !player.running && !isReloading)
+        if (Input.GetButton("Fire2") && !player.running && !isReloading && !player.windowHandler.inventory.opened)
         {
             //Debug.Log("aiming");
             transform.localPosition = Vector3.Slerp(transform.localPosition, aimPos, aimSpeed * Time.deltaTime);
@@ -306,6 +349,86 @@ public class Weapon : MonoBehaviour
         {
             transform.localPosition = Vector3.Slerp(transform.localPosition, hipPos, aimSpeed * Time.deltaTime);
             isAiming = false;
+        }
+    }
+
+
+
+    #endregion
+
+    #region Melee Functions
+
+    public void Swing()
+    {
+        if (currentFireRate < fireRate || isReloading || !hasTakenOut || player.running || slotEquippedOn.stackSize <= 0 || player.windowHandler.inventory.opened)
+        {
+            return;
+        }
+
+        anim.SetTrigger("Swing");
+        currentFireRate = 0;
+
+       // CheckForHit called from other script
+    }
+
+    public void CheckForHit()
+    {
+
+
+       
+        RaycastHit hit;
+
+        if (Physics.SphereCast(shootPoint.position, 0.2f, shootPoint.forward, out hit, weaponData.range, shootableLayers))
+        {
+
+            Hit();
+            Debug.Log("hit");
+            //Gizmos.color = Color.green;
+            //Gizmos.DrawWireSphere(hit.point, 0.2f);
+        }
+        else
+        {
+            Miss();
+            Debug.Log("miss");
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawWireSphere(hit.point, 0.2f);
+        }
+    }
+
+
+    public void Miss()
+    {
+        anim.SetTrigger("Miss");
+    }
+
+    public void Hit()
+    {
+        anim.SetTrigger("Hit");
+    }
+
+    public void ExecuteHit()
+    {
+        RaycastHit hit;
+
+        GetComponentInParent<Animator>().SetTrigger("Shake"); 
+
+        if (Physics.SphereCast(shootPoint.position, 0.2f, shootPoint.forward, out hit, weaponData.range, shootableLayers))
+        {
+            GatherableObject gatherObj = hit.transform.GetComponent<GatherableObject>();
+            GatherExtension gatherExten = hit.transform.GetComponent<GatherExtension>();
+
+
+            if (gatherObj != null)
+            {
+                gatherObj.Gather(weaponData, GetComponentInParent<WindowHandler>().inventory);
+                
+            }
+
+            if (gatherExten != null)
+            {
+                gatherExten.Gather(weaponData, GetComponentInParent<WindowHandler>().inventory);
+
+            }
         }
     }
 
@@ -325,6 +448,7 @@ public class Weapon : MonoBehaviour
         GetComponentInParent<CameraFOV_Handler>().weapon = this;
 
         slotEquippedOn = slot;
+        slotEquippedOn.weaponEquipped = this;
 
         transform.localPosition = hipPos;
     }
@@ -333,9 +457,15 @@ public class Weapon : MonoBehaviour
     {
         GetComponentInParent<CameraFOV_Handler>().weapon = null;
 
+        slotEquippedOn.weaponEquipped = null;
+        slotEquippedOn = null;
+
+        isReloading = false;
+        hasTakenOut = false;
+
         gameObject.SetActive(false);
 
-        slotEquippedOn = null;
+       
 
 
     }

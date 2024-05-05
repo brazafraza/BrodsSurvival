@@ -72,6 +72,15 @@ public class InventoryManager : MonoBehaviour
             opened = !opened;
         }
 
+        if (GetComponentInParent<WindowHandler>().storage.opened)
+        {
+            GetComponentInParent<WindowHandler>().crafting.opened = false;
+
+        }
+        else
+            GetComponentInParent<WindowHandler>().crafting.opened = true;
+
+
         if(opened)
         {
             transform.localPosition = new Vector3(0, 0, 0);
@@ -79,6 +88,11 @@ public class InventoryManager : MonoBehaviour
         else
         {
             transform.localPosition = new Vector3(-10000, 0, 0);
+
+            if (GetComponentInParent<WindowHandler>().storage.opened)
+            {
+                GetComponentInParent<WindowHandler>().storage.Close();
+            }
         }
     }
 
@@ -127,6 +141,14 @@ public class InventoryManager : MonoBehaviour
 
     public void DragDrop(Slot from, Slot to)
     {
+        //unequip from slot
+        if (from.weaponEquipped != null)
+        {
+            from.weaponEquipped.UnEquip();
+        }
+        if (to.weaponEquipped != null) 
+            to.weaponEquipped.UnEquip();
+
 
                 //swapping
         if(from.data != to.data)
@@ -154,6 +176,12 @@ public class InventoryManager : MonoBehaviour
 
                     to.stackSize = to.data.maxStack;
                 }
+                else
+                    to.stackSize += from.stackSize;
+
+                    from.Clean();
+                from.UpdateSlot();
+                to.UpdateSlot();
             }
             else
             {
