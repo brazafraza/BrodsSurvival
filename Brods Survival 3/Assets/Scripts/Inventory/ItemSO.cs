@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class ItemSO : ScriptableObject
 {
-    public enum ItemType { Generic, Consumable, Weapon, MeleeWeapon}
+    public enum ItemType { Generic, Consumable, Weapon, MeleeWeapon, Buildable}
 
     [Header("General")]
 
@@ -53,4 +53,7 @@ public class ItemSO : ScriptableObject
     public float healthChange = 10f;
     public float hungerChange = 10f;
     public float thirstChange = 10f;
+
+    [Header("Buildable")]
+    public BuildGhost ghost;
 }

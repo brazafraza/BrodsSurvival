@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public Weapon[] weapons;
+    [HideInInspector] public BuildingHandler building;
 
 
     public bool opened;
@@ -30,7 +31,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-      
+        building = GetComponentInParent<WindowHandler>().building;
+
         GenerateHotbarSlots(); 
         GenerateSlots();
     }
@@ -141,6 +143,8 @@ public class InventoryManager : MonoBehaviour
 
     public void DragDrop(Slot from, Slot to)
     {
+
+        //building = not finding  handler fix 6/05/24
         //unequip from slot
         if (from.weaponEquipped != null)
         {
@@ -148,6 +152,17 @@ public class InventoryManager : MonoBehaviour
         }
         if (to.weaponEquipped != null) 
             to.weaponEquipped.UnEquip();
+
+        //stop building
+        if (from == building.slotInUse)
+            building.slotInUse = null;
+
+        if(to == building.slotInUse)
+        {
+            building.slotInUse = null;
+        }
+
+
 
 
                 //swapping
