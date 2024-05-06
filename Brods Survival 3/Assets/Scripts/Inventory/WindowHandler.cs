@@ -10,7 +10,8 @@ public class WindowHandler : MonoBehaviour
     [HideInInspector] public InventoryManager inventory;
     [HideInInspector] public CraftingManager crafting;
     [HideInInspector] public StorageUI storage;
-    [HideInInspector] public BuildingHandler building;
+     public BuildingHandler building;
+    public DeathScreen deathScreen;
     void Start()
     {
         cam = GetComponentInChildren<CameraLook>();
@@ -18,7 +19,8 @@ public class WindowHandler : MonoBehaviour
         inventory = GetComponentInChildren<InventoryManager>();
         crafting = GetComponentInChildren<CraftingManager>();
         storage = GetComponentInChildren<StorageUI>();
-        building = GetComponentInChildren<BuildingHandler>();
+       // building = GetComponentInChildren<BuildingHandler>();
+       
         
     }
 
@@ -36,7 +38,7 @@ public class WindowHandler : MonoBehaviour
             cam.canMove = true;
         }
 
-        if (inventory.opened)
+        if (inventory.opened || GetComponent<PlayerStats>().isDead)
         
             windowOpened = true;
         

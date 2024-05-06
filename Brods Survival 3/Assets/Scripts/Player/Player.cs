@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public WindowHandler windowHandler;
 
     private CharacterController cc;
-    private CameraLook cam;
+    [HideInInspector] public CameraLook cam;
     [Space]
     [Space]
     [SerializeField] private float crouchSpeed = 2f;
@@ -54,6 +54,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(GetComponent<PlayerStats>().health <= 0)
+        {
+            if (!GetComponent<PlayerStats>().isDead)
+                Die();
+
+            return;
+        }
+
 
 
 
@@ -100,6 +108,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        windowHandler.inventory.opened = false;
+
+        //drop inv
+        for (int i = 0; i < windowHandler.inventory.inventorySlots.Length; i++)
+        {
+            windowHandler.inventory.inventorySlots[i].Drop();
+        }
+
+      
+
+
+        windowHandler.deathScreen.gameObject.SetActive(true);
+
+        GetComponent<PlayerStats>().isDead = true;
+
+    }
     void FixedUpdate()
     {
         Movement();
@@ -194,7 +220,7 @@ public class Player : MonoBehaviour
 
         //fix this bug later
 
-        if (Physics.SphereCast(cc.center, 0.2f, Vector3.down, out hit, cc.bounds.extents.y + 0.3f))
+        if (Physics.SphereCast(transform.position + Vector3.up, 0.2f, Vector3.down, out hit, 1.3f))
         {
 
 

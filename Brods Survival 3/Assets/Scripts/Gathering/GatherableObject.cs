@@ -7,7 +7,7 @@ public class GatherableObject : MonoBehaviour
     public GatherDataSO[] gatherDatas;
     public int hits;
     public ItemSO[] prefferedTools;
-    public int toolMultiplier = 2;
+    public float toolMultiplier = 2;
 
 
 

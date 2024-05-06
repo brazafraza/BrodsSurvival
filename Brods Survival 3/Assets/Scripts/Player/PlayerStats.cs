@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
+    public bool isDead;
+
     [Header("Player Stats")]
     public float health;
     public float maxHealth = 100f;
@@ -36,6 +38,9 @@ public class PlayerStats : MonoBehaviour
     }
     private void Update()
     {
+        if (isDead)
+            return;
+
         UpdateStats();
         UpdateUI();
     }

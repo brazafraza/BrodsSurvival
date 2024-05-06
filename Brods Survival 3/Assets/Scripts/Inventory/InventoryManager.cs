@@ -7,6 +7,8 @@ public class InventoryManager : MonoBehaviour
     public Weapon[] weapons;
     [HideInInspector] public BuildingHandler building;
 
+    [Header("debug")]
+    public GameObject buildingGameObj;
 
     public bool opened;
     public KeyCode inventoryKey = KeyCode.I;
@@ -144,7 +146,9 @@ public class InventoryManager : MonoBehaviour
     public void DragDrop(Slot from, Slot to)
     {
 
-        //building = not finding  handler fix 6/05/24
+      
+
+        
         //unequip from slot
         if (from.weaponEquipped != null)
         {
@@ -154,13 +158,16 @@ public class InventoryManager : MonoBehaviour
             to.weaponEquipped.UnEquip();
 
         //stop building
+        //building = not finding slotinUse fix 6/05/24
         if (from == building.slotInUse)
+         
             building.slotInUse = null;
+       
 
         if(to == building.slotInUse)
         {
             building.slotInUse = null;
-        }
+        } 
 
 
 

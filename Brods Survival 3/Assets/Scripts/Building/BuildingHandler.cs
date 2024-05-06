@@ -24,29 +24,49 @@ public class BuildingHandler : MonoBehaviour
         MeshRenderer renderer = null;
 
         if (ghost.GetComponent<MeshRenderer>() != null)
-            renderer = ghost.GetComponent<MeshRenderer>();
-        else if (ghost.GetComponentInChildren<MeshRenderer>() != null)
-            renderer = ghost.GetComponent<MeshRenderer>();
+          renderer = ghost.GetComponent<MeshRenderer>();
+         if (ghost.GetComponentInChildren<MeshRenderer>() != null)
+            renderer = ghost.GetComponentInChildren<MeshRenderer>();
+
+        
+         //change material code dynamically?
 
 
-        if (renderer.materials.Length > 1)
-        {
+
+         if (renderer.materials.Length > 1)
+         {
             for (int i = 0; i < renderer.materials.Length; i++)
             {
+                
                 if (canBuild && ghost.canBuild)
                     renderer.materials[i].color = allowed;
                 else
                     renderer.materials[i].color = blocked;
             }
-        }
+         }
 
         
         else if (renderer.materials.Length == 1)
         {
+
             if (canBuild && ghost.canBuild)
+            {
+              
+
                 renderer.material.color = allowed;
+                Debug.Log("Material set to allowed" + renderer.material.color);
+                
+            }
             else
-                renderer.material.color = blocked;
+            {
+
+                 renderer.material.color = blocked;
+                //renderer.material.SetColor("Red", Color.red);
+                Debug.Log("Material set to blocked" + renderer.material.color);
+                
+
+            }
+
         }
 
     }
@@ -78,6 +98,7 @@ public class BuildingHandler : MonoBehaviour
 
 
         UpdateColors();
+       // Debug.Log("Updated Colours");
 
         RaycastHit hit;
 

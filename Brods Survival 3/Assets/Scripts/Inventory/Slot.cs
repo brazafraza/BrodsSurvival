@@ -117,8 +117,13 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
             //      DRAG AND DROP
             else if (dragDropHandler.slotDraggedTo != null)
             {
+
+                //dragDropHandler.slotDraggedTo = dragDropHandler.slotDraggedFrom;
+                //this line not running
+
                 inventory.DragDrop(dragDropHandler.slotDraggedFrom, dragDropHandler.slotDraggedTo);
                 dragDropHandler.isDragging = false;
+               
             }
 
 
