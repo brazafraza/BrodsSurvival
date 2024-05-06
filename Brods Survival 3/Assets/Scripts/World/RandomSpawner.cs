@@ -88,6 +88,8 @@ public class RandomSpawner : MonoBehaviour
         while (!foundSpot)
         {
             Vector3 spawnPos = transform.position;
+           
+            //make random rotation here
 
             spawnPos.x += Random.Range(-width, width);
             spawnPos.y += height;

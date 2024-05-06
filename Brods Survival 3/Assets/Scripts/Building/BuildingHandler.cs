@@ -21,53 +21,60 @@ public class BuildingHandler : MonoBehaviour
 
     public void UpdateColors()
     {
-        MeshRenderer renderer = null;
+       // MeshRenderer renderer = null;
+        MeshRenderer[] renderers = { };
 
-        if (ghost.GetComponent<MeshRenderer>() != null)
-          renderer = ghost.GetComponent<MeshRenderer>();
+       // if (ghost.GetComponent<MeshRenderer>() != null)
+        //  renderer = ghost.GetComponent<MeshRenderer>();
          if (ghost.GetComponentInChildren<MeshRenderer>() != null)
-            renderer = ghost.GetComponentInChildren<MeshRenderer>();
-
-        
-         //change material code dynamically?
+            renderers = ghost.GetComponentsInChildren<MeshRenderer>();
 
 
+        //change material code dynamically?
 
-         if (renderer.materials.Length > 1)
-         {
-            for (int i = 0; i < renderer.materials.Length; i++)
-            {
-                
-                if (canBuild && ghost.canBuild)
-                    renderer.materials[i].color = allowed;
-                else
-                    renderer.materials[i].color = blocked;
-            }
-         }
-
-        
-        else if (renderer.materials.Length == 1)
+        foreach (MeshRenderer i in renderers)
         {
-
             if (canBuild && ghost.canBuild)
-            {
+                i.materials[0].color = allowed;
+            else
+                i.materials[0].color = blocked;
+        }
+
+        //if (renderer.materials.Length > 1)
+        // {
+        //    for (int i = 0; i < renderer.materials.Length; i++)
+        //    {
+                
+        //        if (canBuild && ghost.canBuild)
+        //            renderer.materials[i].color = allowed;
+        //        else
+        //            renderer.materials[i].color = blocked;
+        //    }
+        // }
+
+        
+        //else if (renderer.materials.Length == 1)
+        //{
+
+        //    if (canBuild && ghost.canBuild)
+        //    {
               
 
-                renderer.material.color = allowed;
-                Debug.Log("Material set to allowed" + renderer.material.color);
+        //        renderer.material.color = allowed;
+        //        Debug.Log("Material set to allowed" + renderer.material.color);
                 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
 
-                 renderer.material.color = blocked;
-                //renderer.material.SetColor("Red", Color.red);
-                Debug.Log("Material set to blocked" + renderer.material.color);
+        //         renderer.material.color = blocked;
+        //        //renderer.material.SetColor("Red", Color.red);
+        //        Debug.Log("Material set to blocked" + renderer.material.color);
                 
 
-            }
+        //    }
 
-        }
+        //}
 
     }
 
