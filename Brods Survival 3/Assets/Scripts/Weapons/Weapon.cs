@@ -149,6 +149,12 @@ public class Weapon : MonoBehaviour
         {
             GameObject bulletHole = Instantiate(bulletHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
 
+            BasicAI ai = hit.transform.GetComponent<BasicAI>();
+            if (ai != null)
+            {
+                ai.health -= weaponData.damage;
+            }
+
             Debug.Log($"Hitted : {hit.transform.name}");
         }
 
@@ -210,6 +216,13 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(shootPoint.position, shootDir, out hit, weaponData.range, shootableLayers))
          {
                 GameObject bulletHole = Instantiate(bulletHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+
+                BasicAI ai = hit.transform.GetComponent<BasicAI>();
+                if (ai != null)
+                {
+                    ai.health -= weaponData.damage;
+                }
+
                 Debug.Log($"Hitted : {hit.transform.name}");
          }
         }
