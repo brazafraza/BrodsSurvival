@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69e8145c437be54c861e9836e6de5db, type: 3}
   m_Name: StorageBox
   m_EditorClassIdentifier: 
+  ID: 1
   itemType: 4
   icon: {fileID: 21300000, guid: 0f2b88d9e4825a941a2e1d6d844b53f2, type: 3}
   itemName: Storage Box

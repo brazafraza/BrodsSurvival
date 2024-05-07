@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69e8145c437be54c861e9836e6de5db, type: 3}
   m_Name: Metal Ore
   m_EditorClassIdentifier: 
+  ID: 3
   itemType: 0
   icon: {fileID: 21300000, guid: ab0de353f139a8745aa90bb85a2dd9d7, type: 3}
   itemName: Metal Ore
@@ -38,3 +39,8 @@ MonoBehaviour:
   healthChange: 10
   hungerChange: 10
   thirstChange: 10
+  ghost: {fileID: 0}
+  isFuel: 0
+  outcome: {fileID: 11400000, guid: 05819629cb73a2745ac7b49918858f67, type: 2}
+  outcomeAmount: 1
+  processTime: 5

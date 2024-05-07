@@ -35,8 +35,9 @@ public class InventoryManager : MonoBehaviour
     {
         building = GetComponentInParent<WindowHandler>().building;
 
-        GenerateHotbarSlots(); 
         GenerateSlots();
+        GenerateHotbarSlots(); 
+       
     }
 
     private void Update()
@@ -104,7 +105,7 @@ public class InventoryManager : MonoBehaviour
     {
         List<Slot> inventorySlots_ = new List<Slot>();
     
-
+        
    
 
         //      generate slots
@@ -125,7 +126,11 @@ public class InventoryManager : MonoBehaviour
         List<Slot> inventorySlots_ = new List<Slot>();
         List<Slot> hotbarList = new List<Slot>();
 
-
+        // UDPAET HOTBAR SLOTS
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots_.Add(inventorySlots[i]);
+        }
 
 
         //      generate hotbar slots
@@ -465,7 +470,7 @@ public class InventoryManager : MonoBehaviour
 
     public void DropItem(Slot slot)
     {
-        Pickup pickup = Instantiate(dropModel, dropPos).AddComponent<Pickup>();
+        Pickup pickup = Instantiate(dropModel, dropPos).GetComponent<Pickup>();
         pickup.transform.position = dropPos.position;
         pickup.transform.SetParent(null);
 
@@ -477,7 +482,7 @@ public class InventoryManager : MonoBehaviour
 
     public void DropItem(ItemSO data, int stackSize)
     {
-        Pickup pickup = Instantiate(dropModel, dropPos).AddComponent<Pickup>();
+        Pickup pickup = Instantiate(dropModel, dropPos).GetComponent<Pickup>();
         pickup.transform.position = dropPos.position;
         pickup.transform.SetParent(null);
 

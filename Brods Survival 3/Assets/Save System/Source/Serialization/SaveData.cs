@@ -22,6 +22,17 @@ public class SaveData
 
     public List<SAVE_SavableObject> savableObjects;
 
+    [Header("Player")]
+    public float currentHealth;
+    public float currentHunger;
+    public float currentThirst;
+
+    public List<int> itemIDs;
+    public List<int> itemStacks;
+
+
+    public float timeOfDay;
+
 
     public static bool Save()
     {

@@ -11,7 +11,7 @@ public class ItemSO : ScriptableObject
     public enum ItemType { Generic, Consumable, Weapon, MeleeWeapon, Buildable}
 
     [Header("General")]
-
+    public int ID;
     public ItemType itemType;
     public Sprite icon;
     public string itemName = "New Item";
@@ -56,4 +56,11 @@ public class ItemSO : ScriptableObject
 
     [Header("Buildable")]
     public BuildGhost ghost;
+
+    [Header("Fuel Smelting")]
+    public bool isFuel;
+    public ItemSO outcome;
+    [Range(1, 100)]
+    public int outcomeAmount = 1;
+    public float processTime = 3f;
 }

@@ -81,7 +81,7 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
 
     public void Drop()
     {
-        GetComponentInParent<InventoryManager>().DropItem(this);
+        GetComponentInParent<Player>().GetComponentInChildren<InventoryManager>().DropItem(this);
     }
 
     public void Clean()
