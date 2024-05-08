@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CameraFOV_Handler : MonoBehaviour
 {
@@ -12,11 +13,15 @@ public class CameraFOV_Handler : MonoBehaviour
     private void Start()
     {
         cam = GetComponent<Camera>();
-        defaultFOV = cam.fieldOfView;
+        defaultFOV = Settings.fov;
+        cam.fieldOfView = defaultFOV;
     }
 
     private void Update()
     {
+        defaultFOV = Settings.fov;
+        GetComponent<PostProcessLayer>().enabled = Settings.postProcessing;
+
         if(weapon != null)
         {
             if (weapon.isAiming)

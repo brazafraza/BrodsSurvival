@@ -5,9 +5,19 @@ using System.IO;
 
 public class SaveHandler : MonoBehaviour
 {
+    public static bool load;
+
     [Header("Savable Objects")]
     [Tooltip("You must drag here every savable object that you wish to load")]
     public List<SavableObject> savableObjects;
+
+    public void Start()
+    {
+        if (load)
+        {
+            Load();
+        }
+    }
 
     public void Load()
     {

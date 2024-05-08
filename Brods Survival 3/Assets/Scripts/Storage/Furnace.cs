@@ -118,9 +118,12 @@ public class Furnace : MonoBehaviour
                     {
                         storage.AddItem(smeltingSlot.data.outcome, smeltingSlot.data.outcomeAmount);
                     }
+
+                    smeltingSlot.stackSize--;
+
                 }
 
-                smeltingSlot.stackSize--;
+               
             }
             
 

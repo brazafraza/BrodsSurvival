@@ -28,45 +28,65 @@ public class StorageUI : MonoBehaviour
         else
             transform.position = new Vector3(-10000, 0, 0);
 
-        if (storageOpened.isFurnace)
+        if (storageOpened != null)
         {
-            if (storageOpened.GetComponent<Furnace>().isOn)
+            if (storageOpened.isFurnace)
             {
-                for (int i = 0; i < storageOpened.slots.Length; i++)
+                if (storageOpened.GetComponent<Furnace>().isOn)
                 {
-                    Slot slot = Instantiate(slotPrefab, content).GetComponent<Slot>();
+                    for (int i = 0; i < storageOpened.slots.Length; i++)
+                    {
+                        Slot[] slots = GetComponentsInChildren<Slot>();
 
-                    if (storageOpened.slots[i].data == null)
-                        slot.data = null;
-                    else
-                        slot.data = storageOpened.slots[i].data;
+                        if (storageOpened.slots[i].data == null)
+                            slots[i].data = null;
+                        else
+                            slots[i].data = storageOpened.slots[i].data;
 
-                    slot.stackSize = storageOpened.slots[i].stackSize;
+                        slots[i].stackSize = storageOpened.slots[i].stackSize;
 
 
 
-                    slot.UpdateSlot();
+                        slots[i].UpdateSlot();
+                    }
                 }
-            }
+                else
+                {
+                    for (int i = 0; i < storageOpened.slots.Length; i++)
+                    {
+                        Slot[] slots = GetComponentsInChildren<Slot>();
 
-            furnaceUI.SetActive(true);
+                        if (slots[i].data == null)
+                            storageOpened.slots[i].data = null;
+                        else
+                            storageOpened.slots[i].data = slots[i].data;
 
-            if (storageOpened.GetComponent<Furnace>().isOn)
-            {
-                turnOffButton.SetActive(true);
-                turnOnButton.SetActive(false);
+                        storageOpened.slots[i].stackSize = slots[i].stackSize;
+
+                    }
+                }
+                
+                furnaceUI.SetActive(true);
+
+                if (storageOpened.GetComponent<Furnace>().isOn)
+                {
+                    turnOffButton.SetActive(true);
+                    turnOnButton.SetActive(false);
+                }
+                else
+                {
+                    turnOffButton.SetActive(false);
+                    turnOnButton.SetActive(true);
+                }
+
             }
             else
             {
-                turnOffButton.SetActive(false);
-                turnOnButton.SetActive(true);
+                furnaceUI.SetActive(false);
             }
+        }
 
-        }
-        else
-        {
-            furnaceUI.SetActive(false);
-        }
+        
     }
 
     public void Open(Storage storage)
@@ -110,7 +130,7 @@ public class StorageUI : MonoBehaviour
             Destroy(slotsToDestroy[i].gameObject);
         }
 
-        
+        storageOpened = null;
 
         opened = false;
 
