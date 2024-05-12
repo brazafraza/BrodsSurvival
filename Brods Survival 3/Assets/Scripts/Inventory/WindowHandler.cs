@@ -40,16 +40,32 @@ public class WindowHandler : MonoBehaviour
             cam.canMove = true;
         }
 
-        if (inventory.opened || GetComponent<PlayerStats>().isDead || gameMenu.opened)
-        
-            windowOpened = true;
-        
+        if (gameMenu != null)
+        {
+            if (inventory.opened || GetComponent<PlayerStats>().isDead || gameMenu.opened)
+
+                windowOpened = true;
+
+            else
+            {
+                windowOpened = false;
+
+            }
+        }
         else
         {
-            windowOpened = false;
-           // cam.lockCursor = true;
-            //cam.canMove = true;
+            if (inventory.opened || GetComponent<PlayerStats>().isDead)
+
+                windowOpened = true;
+
+            else
+            {
+                windowOpened = false;
+
+            }
         }
+
+        
         
            
         
