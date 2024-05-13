@@ -44,8 +44,21 @@ public class BasicAI : MonoBehaviour
 
     bool hasDied;
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, agent.destination);
+    }
+
+
+
     private void Update()
     {
+
+        //Debug.Log("BEAR:  isStopped = " + agent.isStopped);
+
+
         if (health <= 0)
         {
             agent.SetDestination(transform.position);
@@ -83,6 +96,7 @@ public class BasicAI : MonoBehaviour
 
     public void Wander()
     {
+        Debug.Log("WANDER");
         if (currentWanderTime >= wanderWaitTime)
         {
             Vector3 wanderPos = transform.position;
@@ -94,6 +108,7 @@ public class BasicAI : MonoBehaviour
 
             agent.speed = walkSpeed;
             agent.SetDestination(wanderPos);
+            Debug.Log("Wander destination set.");
 
             walk = true;
             run = false;

@@ -23,6 +23,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Stats Damage")]
     public float hungerDamage = 1.5f;
     public float thirstDamage = 2.25f;
+    public float drownDamage = 0.2f;
 
     [Header("UI")]
     public StatsBar healthBar;
@@ -96,6 +97,9 @@ public class PlayerStats : MonoBehaviour
         {
             health -= thirstDamage * Time.deltaTime;
         }
+
+        if (GetComponentInChildren<PostProcessingHandler>().Water != null)
+            health -= drownDamage * Time.deltaTime;
 
         //      depletion
         if(hunger > 0)

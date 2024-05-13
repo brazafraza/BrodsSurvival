@@ -42,16 +42,24 @@ public class GameMenu : MonoBehaviour
             
         {
             UI.transform.localPosition = new Vector3(0, 0, 0);
+            Time.timeScale = 1;
         }
         else if(menuMode == MenuMode.Pause)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 opened = !opened;
 
-            if(opened)
-                UI.transform.localPosition = new Vector3(0, 0, 0);
+            if (opened)
+            {
+                UI.transform.localPosition = new Vector3(0, 0, 0); Time.timeScale = 0;
+                Time.timeScale = 0;
+            }    
             else
+            {
                 UI.transform.localPosition = new Vector3(-10000, 0, 0);
+                Time.timeScale = 1;
+            }
+                
         }
     }
 
@@ -73,6 +81,8 @@ public class GameMenu : MonoBehaviour
 
         saveGameButton.gameObject.SetActive(true);
         backToMainMenuButton.gameObject.SetActive(true);
+
+        SaveHandler.load = false;
 
         SceneManager.LoadScene(1);
     }

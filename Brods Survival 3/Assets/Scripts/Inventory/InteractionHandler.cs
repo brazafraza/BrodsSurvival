@@ -25,6 +25,7 @@ public class InteractionHandler : MonoBehaviour
         {
             Pickup pickup = hit.transform.GetComponent<Pickup>();
             Storage storage = hit.transform.GetComponent<Storage>();
+            Water water = hit.transform.GetComponent<Water>();
 
             if (Input.GetKeyDown(interactionKey))
             {
@@ -43,9 +44,14 @@ public class InteractionHandler : MonoBehaviour
                         storage.Open(GetComponentInParent<WindowHandler>().storage);
                     }
                 }
+
+                if (water != null)
+                {
+                    water.Drink(GetComponentInParent<PlayerStats>());
+                }
             }
 
-            if (pickup != null || storage != null)
+            if (pickup != null || storage != null || water != null)
             {
                 interactionText.gameObject.SetActive(true);
 
@@ -57,6 +63,11 @@ public class InteractionHandler : MonoBehaviour
                 if (storage != null)
                 {
                     interactionText.text = $"Open";
+                }
+
+                if (water != null)
+                {
+                    interactionText.text = "Drink";
                 }
             }
             else
