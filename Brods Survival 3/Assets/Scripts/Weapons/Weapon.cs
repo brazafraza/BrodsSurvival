@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
+
 public class Weapon : MonoBehaviour
 {
     private Player player;
@@ -31,6 +32,11 @@ public class Weapon : MonoBehaviour
 
     private float currentFireRate;
     private float fireRate;
+
+    // Define the delegate type for the shoot event
+    public delegate void ShootAction();
+    // Define the shoot event
+    public static event ShootAction OnShoot;
 
     private void Start()
     {
@@ -128,6 +134,9 @@ public class Weapon : MonoBehaviour
             return;
         }
 
+        // Trigger the shoot event using the class name
+        Weapon.OnShoot?.Invoke();
+
         GetComponentInParent<Animator>().SetTrigger("Shake");
 
         RaycastHit hit;
@@ -144,8 +153,7 @@ public class Weapon : MonoBehaviour
             shootDir.y += Random.Range(-weaponData.hipSpread, weaponData.hipSpread);
         }
 
-
-        if(Physics.Raycast(shootPoint.position, shootDir, out hit, weaponData.range, shootableLayers))
+        if (Physics.Raycast(shootPoint.position, shootDir, out hit, weaponData.range, shootableLayers))
         {
             GameObject bulletHole = Instantiate(bulletHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
 
@@ -154,6 +162,8 @@ public class Weapon : MonoBehaviour
             {
                 ai.health -= weaponData.damage;
             }
+
+            //hit complete pass value
 
             Debug.Log($"Hitted : {hit.transform.name}");
         }
@@ -167,11 +177,10 @@ public class Weapon : MonoBehaviour
             Debug.LogWarning("MFLASH not assinged");
         }
 
-
         anim.CrossFadeInFixedTime("Shoot_M9", 0.015f);
         Debug.Log("shoot");
 
-        GetComponentInParent<CameraLook>().RecoilCamera(Random.Range(-weaponData.horizontalRecoil, weaponData.horizontalRecoil), Random.Range(weaponData.minVerticalRecoil, weaponData.maxVerticalRecoil)); 
+        GetComponentInParent<CameraLook>().RecoilCamera(Random.Range(-weaponData.horizontalRecoil, weaponData.horizontalRecoil), Random.Range(weaponData.minVerticalRecoil, weaponData.maxVerticalRecoil));
 
         audioS.PlayOneShot(weaponData.shootSound);
 
@@ -179,9 +188,6 @@ public class Weapon : MonoBehaviour
 
         slotEquippedOn.stackSize--;
         slotEquippedOn.UpdateSlot();
-
-
-    
     }
 
     public void ShotgunShoot()

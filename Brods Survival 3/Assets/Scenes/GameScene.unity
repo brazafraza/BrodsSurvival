@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
@@ -6258,7 +6258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 47596589477522161, guid: f55a0f8ac38c52a44bfb47238d385e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 530.4967
+      value: 436.3
       objectReference: {fileID: 0}
     - target: {fileID: 47596589477522161, guid: f55a0f8ac38c52a44bfb47238d385e85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6292,6 +6292,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Birch Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 8789079841513844075, guid: f55a0f8ac38c52a44bfb47238d385e85, type: 3}
+      propertyPath: gatherDatas.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789079841513844075, guid: f55a0f8ac38c52a44bfb47238d385e85, type: 3}
+      propertyPath: gatherDatas.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: bf98ea26c8ba9964497d9b8c0d2784ec, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f55a0f8ac38c52a44bfb47238d385e85, type: 3}
 --- !u!4 &1824601958 stripped
@@ -14494,6 +14502,10 @@ PrefabInstance:
     - target: {fileID: 5510613798451713081, guid: 54326d881c092e149bd4ef738dd72ed0, type: 3}
       propertyPath: m_Name
       value: Bear_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510613798451713081, guid: 54326d881c092e149bd4ef738dd72ed0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5922231144640791730, guid: 54326d881c092e149bd4ef738dd72ed0, type: 3}
       propertyPath: agent
