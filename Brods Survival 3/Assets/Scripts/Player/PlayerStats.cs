@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        //      change this in future
+        //      change this in future?
         health = maxHealth;
         hunger = maxHunger;
         thirst = maxThirst;

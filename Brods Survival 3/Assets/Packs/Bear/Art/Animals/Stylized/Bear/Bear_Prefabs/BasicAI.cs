@@ -96,7 +96,7 @@ public class BasicAI : MonoBehaviour
 
     public void Wander()
     {
-        Debug.Log("WANDER");
+     //   Debug.Log("WANDER");
         if (currentWanderTime >= wanderWaitTime)
         {
             Vector3 wanderPos = transform.position;
@@ -117,11 +117,12 @@ public class BasicAI : MonoBehaviour
         {
             if (agent.isStopped)
             {
-                currentWanderTime += Time.deltaTime;
+               currentWanderTime += Time.deltaTime;
+              //  Debug.Log("Stopped.");
 
                 walk = false;
-                run = false;
-            }
+               run = false;
+           }
         }
     }
 
