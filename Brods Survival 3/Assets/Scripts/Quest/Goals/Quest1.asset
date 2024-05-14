@@ -24,8 +24,8 @@ MonoBehaviour:
   comebackCompleted: Good work
   finalWords: Thank you
   happinessGain: 0
-  firstRequirmentItem: 
-  firstRequirementAmount: 0
+  firstRequirmentItem: Wood
+  firstRequirementAmount: 2
   secondRequirmentItem: 
   secondRequirementAmount: 0
   Action: Shoot

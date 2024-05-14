@@ -7,6 +7,7 @@ public class Quest
 {
     public string questName;
     public string questGiver;
+    public string questDescription;
 
     [Header("Bools")]
     public bool accepted;

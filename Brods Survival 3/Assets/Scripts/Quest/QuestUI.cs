@@ -9,6 +9,7 @@ public class QuestUI : MonoBehaviour
 {
     public GameObject questMenu;
     public CameraLook cameraLook;
+    public QuestManager questManager;
     public NPC npc;
     
     public TextMeshProUGUI dialogText;
@@ -29,20 +30,22 @@ public class QuestUI : MonoBehaviour
         {
             if (menuOpen)
             {
+                menuOpen = false;
                 CloseDialogUI();
                 
             }
             else if (!menuOpen)
             {
+                menuOpen = true;
                 OpenDialogUI();
             }
         }
-        if (menuOpen)
+        if (menuOpen && !questManager.isQuestMenuOpen)
         {
             cameraLook.canMove = false;
             cameraLook.lockCursor = false;
         }
-        if (!menuOpen)
+        if (!menuOpen &&!questManager.isQuestMenuOpen)
         {
             cameraLook.canMove = true;
             cameraLook.lockCursor = true;
