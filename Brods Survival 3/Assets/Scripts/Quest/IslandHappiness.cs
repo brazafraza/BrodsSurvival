@@ -5,12 +5,26 @@ using UnityEngine;
 public class IslandHappiness : MonoBehaviour
 {
   
+
+
+    //add clock bar too
+
+
+
+
     public StatsBar happinessBar;
     public DayNightCycle dayNightCycle;
 
     [Header("UI")]
     public float happiness;
     public float maxHappiness = 100f;
+
+    [Header("Placeholder")]
+    public List<Quest> quests;
+    public Quest currentActiveQuest = null;
+    public int activeQuestIndex = 0;
+    public bool firstTimeInteraction = true;
+    public int currentDialog;
 
     public bool questCompleted;
 
@@ -55,13 +69,28 @@ public class IslandHappiness : MonoBehaviour
 
     private void NewQuest()
     {
-        //deactivate old quest = false;
-        //activate new quest = true;
-        //tell player to do xyz
+        if (firstTimeInteraction)
+        {
+            firstTimeInteraction = false;
+            currentActiveQuest = quests[activeQuestIndex];
+            StartQuestInitialDialog();
+            currentDialog = 0;
+        }
+        else
+        {
+
+        }
+       
         
     }
 
-   
+    public void StartQuestInitialDialog()
+    {
+        //open dialogue ui
+
+      //  npcDialogText.text = currentActiveQuest.info.initialDialog[currentDialog];
+
+    }
 
     private void Quest()
     {

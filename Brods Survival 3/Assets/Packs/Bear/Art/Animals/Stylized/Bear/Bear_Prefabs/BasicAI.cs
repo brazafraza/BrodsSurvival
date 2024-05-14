@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,6 +28,7 @@ public class BasicAI : MonoBehaviour
     public float runSpeed = 3.5f;
     public float wanderRange = 5f;
 
+    private string debugState = null;
 
 
 
@@ -49,7 +51,9 @@ public class BasicAI : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, agent.destination);
+        //Handles.Label(transform.position + Vector3.up * 2.6f, debugState);
     }
+
 
 
 
@@ -120,7 +124,7 @@ public class BasicAI : MonoBehaviour
                currentWanderTime += Time.deltaTime;
               //  Debug.Log("Stopped.");
 
-                walk = false;
+               walk = false;
                run = false;
            }
         }
