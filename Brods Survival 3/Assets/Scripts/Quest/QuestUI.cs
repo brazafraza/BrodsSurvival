@@ -11,6 +11,7 @@ public class QuestUI : MonoBehaviour
     public CameraLook cameraLook;
     public QuestManager questManager;
     public NPC npc;
+    public InventoryManager inventoryManager;
     
     public TextMeshProUGUI dialogText;
 
@@ -26,8 +27,22 @@ public class QuestUI : MonoBehaviour
     }
     private void Update()
     {
+        if (!menuOpen)
+        {
+           
+            CloseDialogUI();
+
+        }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
+            if (menuOpen && questAccepted)
+            {
+               // Debug.Log("Quest UI declined");
+                questAccepted = false;
+                menuOpen = false;
+                CloseDialogUI();
+            }
             if (menuOpen)
             {
                 menuOpen = false;
@@ -39,13 +54,14 @@ public class QuestUI : MonoBehaviour
                 menuOpen = true;
                 OpenDialogUI();
             }
+
         }
-        if (menuOpen && !questManager.isQuestMenuOpen)
+        if (menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened)
         {
             cameraLook.canMove = false;
             cameraLook.lockCursor = false;
         }
-        if (!menuOpen &&!questManager.isQuestMenuOpen)
+        if (!menuOpen &&!questManager.isQuestMenuOpen &&!inventoryManager.opened)
         {
             cameraLook.canMove = true;
             cameraLook.lockCursor = true;

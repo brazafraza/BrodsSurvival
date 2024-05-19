@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
-
     public bool playerInRange;
     public bool isTalkingWithPlayer;
 
@@ -27,12 +26,27 @@ public class NPC : MonoBehaviour
     public bool firstTimeInteraction = true;
     public int currentDialog;
 
+    public bool shouldRecordShoot;
+    public bool shouldRecordBuild;
+    public int questShootCount;
+    public int questBuildCount;
+    public int requiredBuildAmount;
+    public int requiredShootAmount;
+    public bool resetShootCount;
+    public bool resetBuildCount;
+
+    private bool firstTimeQuestMenuOpened = true;
+
+    public bool questFaileds;
+
+    public Weapon weapon;
     public QuestUI questUI;
+    public IslandHappiness islandHappiness;
+    public DayNightCycle dayNightCycle;
 
     private void Start()
     {
-       // questUI
-
+        // questUI
         npcDialogText = questUI.dialogText;
 
         optionButton1 = questUI.option1BTN;
@@ -40,19 +54,40 @@ public class NPC : MonoBehaviour
 
         optionButton2 = questUI.option2BTN;
         optionButton2Text = questUI.option2BTN.GetComponentInChildren<TextMeshProUGUI>();
-
     }
 
     private void Update()
     {
-        
+        QuestFailed();
+
+        if (firstTimeInteraction)
+        {
+            questShootCount = 0;
+            questBuildCount = 0;
+        }
     }
 
     public void StartConversation()
     {
         isTalkingWithPlayer = true;
 
-    
+        // Check if it's the first time the player opens the quest menu
+        if (firstTimeQuestMenuOpened)
+        {
+            // Set the flag to false to indicate the quest menu has been opened at least once
+            firstTimeQuestMenuOpened = false;
+            return; // Exit the method without starting any quest
+        }
+
+        // Check if it's time to start the next quest due to a failed quest
+        if (questFaileds && currentActiveQuest != null && currentActiveQuest.isCompleted)
+        {
+            if (dayNightCycle.timeOfDay > dayNightCycle.dayEndTime && dayNightCycle.timeOfDay < dayNightCycle.dayEndTime + 0.015f)
+            {
+                StartNextQuest();
+                return;
+            }
+        }
 
         // Interacting with the NPC for the first time
         if (firstTimeInteraction)
@@ -64,43 +99,30 @@ public class NPC : MonoBehaviour
         }
         else // Interacting with the NPC after the first time
         {
+            // Automatically accept the quest
+            if (!currentActiveQuest.accepted && !currentActiveQuest.declined)
+            {
+                AcceptedQuest();
+            }
 
             // If we return after declining the quest
             if (currentActiveQuest.declined)
             {
-
-                questUI.OpenDialogUI();
-
                 npcDialogText.text = currentActiveQuest.info.comebackAfterDecline;
-
                 SetAcceptAndDeclineOptions();
             }
 
-
             // If we return while the quest is still in progress
-            if (currentActiveQuest.accepted && currentActiveQuest.isCompleted == false)
+            if (currentActiveQuest.accepted && !currentActiveQuest.isCompleted)
             {
                 if (AreQuestRequirmentsCompleted())
                 {
-
-                    SubmitRequiredItems();
-
-                    questUI.OpenDialogUI();
-
-                    npcDialogText.text = currentActiveQuest.info.comebackCompleted;
-
-                    optionButton1Text.text = "[Take Reward]";
-                    optionButton1.onClick.RemoveAllListeners();
-                    optionButton1.onClick.AddListener(() => {
-                        ReceiveRewardAndCompleteQuest();
-                    });
+                    ReceiveRewardAndCompleteQuest();
+                    Debug.Log("Requirements Met");
                 }
                 else
                 {
-                    questUI.OpenDialogUI();
-
                     npcDialogText.text = currentActiveQuest.info.comebackInProgress;
-
                     optionButton1Text.text = "[Close]";
                     optionButton1.onClick.RemoveAllListeners();
                     optionButton1.onClick.AddListener(() => {
@@ -110,12 +132,9 @@ public class NPC : MonoBehaviour
                 }
             }
 
-            if (currentActiveQuest.isCompleted == true)
+            if (currentActiveQuest.isCompleted)
             {
-                questUI.OpenDialogUI();
-
                 npcDialogText.text = currentActiveQuest.info.finalWords;
-
                 optionButton1Text.text = "[Close]";
                 optionButton1.onClick.RemoveAllListeners();
                 optionButton1.onClick.AddListener(() => {
@@ -129,9 +148,21 @@ public class NPC : MonoBehaviour
             {
                 StartQuestInitialDialog();
             }
-
         }
+    }
 
+    private void StartNextQuest()
+    {
+        activeQuestIndex++;
+        if (activeQuestIndex < quests.Count)
+        {
+            currentActiveQuest = quests[activeQuestIndex];
+            StartConversation(); // Start the conversation for the next quest
+        }
+        else
+        {
+            Debug.Log("No more quests available.");
+        }
     }
 
     private void SetAcceptAndDeclineOptions()
@@ -141,76 +172,19 @@ public class NPC : MonoBehaviour
         optionButton1.onClick.AddListener(() => {
             AcceptedQuest();
         });
-
-        optionButton2.gameObject.SetActive(true);
-        optionButton2Text.text = currentActiveQuest.info.declineOption;
-        optionButton2.onClick.RemoveAllListeners();
-        optionButton2.onClick.AddListener(() => {
-            DeclinedQuest();
-        });
-    }
-
-    private void SubmitRequiredItems()
-    {
-        string firstRequiredItem = currentActiveQuest.info.firstRequirmentItem;
-        int firstRequiredAmount = currentActiveQuest.info.firstRequirementAmount;
-
-        if (firstRequiredItem != "")
-        {
-           // InventorySystem.Instance.RemoveItem(firstRequiredItem, firstRequiredAmount);
-
-            //remove item from inv
-        }
-
-
-        string secondtRequiredItem = currentActiveQuest.info.secondRequirmentItem;
-        int secondRequiredAmount = currentActiveQuest.info.secondRequirementAmount;
-
-        if (firstRequiredItem != "")
-        {
-            //InventorySystem.Instance.RemoveItem(secondtRequiredItem, secondRequiredAmount);
-
-            //remove item from inv
-        }
-
     }
 
     private bool AreQuestRequirmentsCompleted()
     {
-        print("Checking Requirments");
+        string shootRequiredItem = currentActiveQuest.info.shootRequirmentItem;
+        int shootRequiredAmount = currentActiveQuest.info.shootRequirementAmount;
+        requiredShootAmount = shootRequiredAmount;
 
-        // First Item Requirment
+        string buildRequiredItem = currentActiveQuest.info.buildRequirmentItem;
+        int buildRequiredAmount = currentActiveQuest.info.buildRequirementAmount;
+        requiredBuildAmount = buildRequiredAmount;
 
-        string firstRequiredItem = currentActiveQuest.info.firstRequirmentItem;
-        int firstRequiredAmount = currentActiveQuest.info.firstRequirementAmount;
-
-        var firstItemCounter = 0;
-
-        //foreach (string item in InventoryManager.inventorySlots)
-        //{
-        //    if (item == firstRequiredItem)
-        //    {
-        //        firstItemCounter++;
-        //    }
-        //}
-
-        // Second Item Requirment -- If we dont have a second item, just set it to 0
-
-        string secondRequiredItem = currentActiveQuest.info.secondRequirmentItem;
-        int secondRequiredAmount = currentActiveQuest.info.secondRequirementAmount;
-
-        var secondItemCounter = 0;
-
-        //foreach (string item in InventorySystem.Instance.itemList)
-        //{
-        //    if (item == secondRequiredItem)
-        //    {
-        //        secondItemCounter++;
-        //    }
-        //}
-
-        //if requirments met
-        if (firstItemCounter >= firstRequiredAmount && secondItemCounter >= secondRequiredAmount)
+        if (questShootCount >= shootRequiredAmount && questBuildCount >= buildRequiredAmount)
         {
             return true;
         }
@@ -220,68 +194,89 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void StartQuestInitialDialog()
+    public void QuestFailed()
     {
-        questUI.OpenDialogUI();
+        if (dayNightCycle.timeOfDay > dayNightCycle.dayEndTime && dayNightCycle.timeOfDay < dayNightCycle.dayEndTime + 0.015f)
+        {
+            questFaileds = true;
+        }
+        if (dayNightCycle.timeOfDay > 2150 && dayNightCycle.timeOfDay < 2151 && questFaileds)
+        {
+            Debug.Log("QuestFailed");
+            islandHappiness.happiness -= 10;
+            resetShootCount = true;
+            questFaileds = false;
 
-        npcDialogText.text = currentActiveQuest.info.initialDialog[currentDialog];
-        optionButton1Text.text = "Next";
-        optionButton1.onClick.RemoveAllListeners();
-        optionButton1.onClick.AddListener(() => {
-            currentDialog++;
-            CheckIfDialogDone();
-        });
-
-        optionButton2.gameObject.SetActive(false);
+            if (activeQuestIndex < quests.Count - 1)
+            {
+                activeQuestIndex++;
+                currentActiveQuest = quests[activeQuestIndex];
+                StartConversation();
+            }
+            else
+            {
+                Debug.Log("No more quests available.");
+            }
+        }
     }
 
-    private void CheckIfDialogDone()
+    private void StartQuestInitialDialog()
     {
-        if (currentDialog == currentActiveQuest.info.initialDialog.Count - 1) // If its the last dialog 
+        if (currentDialog < currentActiveQuest.info.initialDialog.Count)
         {
             npcDialogText.text = currentActiveQuest.info.initialDialog[currentDialog];
-
-            currentActiveQuest.initialDialogCompleted = true;
-
-            SetAcceptAndDeclineOptions();
-        }
-        else  // If there are more dialogs
-        {
             npcDialogText.text = currentActiveQuest.info.initialDialog[currentDialog];
-
             optionButton1Text.text = "Next";
             optionButton1.onClick.RemoveAllListeners();
             optionButton1.onClick.AddListener(() => {
                 currentDialog++;
                 CheckIfDialogDone();
             });
+
+            optionButton2.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Attempted to access an invalid dialog index.");
         }
     }
+
+    private void CheckIfDialogDone()
+    {
+        if (currentDialog >= 0 && currentDialog < currentActiveQuest.info.initialDialog.Count)
+        {
+            if (currentDialog == currentActiveQuest.info.initialDialog.Count - 1)
+            {
+                npcDialogText.text = currentActiveQuest.info.initialDialog[currentDialog];
+                currentActiveQuest.initialDialogCompleted = true;
+                SetAcceptAndDeclineOptions();
+            }
+            else
+            {
+                npcDialogText.text = currentActiveQuest.info.initialDialog[currentDialog];
+                optionButton1Text.text = "Next";
+                optionButton1.onClick.RemoveAllListeners();
+                optionButton1.onClick.AddListener(() => {
+                    currentDialog++;
+                    CheckIfDialogDone();
+                });
+            }
+        }
+        else
+        {
+            currentDialog = 0;
+        }
+    }
+
     private void AcceptedQuest()
     {
         QuestManager.Instance.AddActiveQuest(currentActiveQuest);
 
         currentActiveQuest.accepted = true;
         currentActiveQuest.declined = false;
-
-        if (currentActiveQuest.hasNoRequirements)
-        {
-            npcDialogText.text = currentActiveQuest.info.comebackCompleted;
-            optionButton1Text.text = "[Take Reward]";
-            optionButton1.onClick.RemoveAllListeners();
-            optionButton1.onClick.AddListener(() => {
-                ReceiveRewardAndCompleteQuest();
-            });
-            optionButton2.gameObject.SetActive(false);
-        }
-        else
-        {
-            npcDialogText.text = currentActiveQuest.info.acceptAnswer;
-            CloseDialogUI();
-        }
-
-
-
+        npcDialogText.text = currentActiveQuest.info.acceptAnswer;
+        resetShootCount = false;
+        CloseDialogUI();
     }
 
     private void CloseDialogUI()
@@ -297,60 +292,18 @@ public class NPC : MonoBehaviour
 
     private void ReceiveRewardAndCompleteQuest()
     {
-
+        Debug.Log("adding happ");
         QuestManager.Instance.MarkQuestCompleted(currentActiveQuest);
 
         currentActiveQuest.isCompleted = true;
 
         var happinessGained = currentActiveQuest.info.happinessGain;
-        print("You recieved " + happinessGained + " island happiness");
+        print("You received " + happinessGained + " island happiness");
 
-        //add happiness gained to islandmeter
-
-
-
-        //if (currentActiveQuest.info.rewardItem1 != "")
-        //{
-        //    InventorySystem.Instance.AddToInventory(currentActiveQuest.info.rewardItem1);
-        //}
-
-        //if (currentActiveQuest.info.rewardItem2 != "")
-        //{
-        //    InventorySystem.Instance.AddToInventory(currentActiveQuest.info.rewardItem2);
-        //}
-
-        activeQuestIndex++;
-
-        // Start Next Quest 
-        if (activeQuestIndex < quests.Count)
-        {
-            currentActiveQuest = quests[activeQuestIndex];
-            currentDialog = 0;
-            questUI.CloseDialogUI();
-            isTalkingWithPlayer = false;
-        }
-        else
-        {
-            questUI.CloseDialogUI();
-            isTalkingWithPlayer = false;
-            print("No more quests");
-        }
+        islandHappiness.happiness += happinessGained;
+        resetShootCount = true;
 
     }
-
-    private void DeclinedQuest()
-    {
-        currentActiveQuest.declined = true;
-
-        npcDialogText.text = currentActiveQuest.info.declineAnswer;
-        CloseDialogUI();
-    }
-
-
-
-    
-
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -366,5 +319,17 @@ public class NPC : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+    public void ReceiveShootCount(int shootCount)
+    {
+        Debug.Log("Shoot count received: " + shootCount);
+        questShootCount = shootCount;
+    }
+
+    public void ReceiveBuildCount(int buildCount)
+    {
+        Debug.Log("Build count received: " + buildCount);
+        questBuildCount = buildCount;
     }
 }

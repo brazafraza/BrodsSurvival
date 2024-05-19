@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c1fe2ee071f614fbfdc69e6862b4ec, type: 3}
+  m_Name: Quest2
+  m_EditorClassIdentifier: 
+  initialDialog:
+  - I want to hear your firepower again
+  - Shoot your gun 5 times for me 2
+  acceptOption: Yes
+  acceptAnswer: Accepted answer
+  declineOption: Decline
+  declineAnswer: Decline answer
+  comebackAfterDecline: Comeback after decline
+  comebackInProgress: Do not disapoint me 2
+  comebackCompleted: Completed
+  finalWords: Final words
+  happinessGain: 10
+  shootRequirmentItem: 
+  shootRequirementAmount: 10
+  buildRequirmentItem: 
+  buildRequirementAmount: 0
+  Action: Shoot
+  timesPerformed: 5
+  resourcesBroken: 
+  timesResourcesBroken: 0
+  builtThisMany: 
+  timesBuilt: 0

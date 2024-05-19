@@ -71,15 +71,15 @@ public class QuestManager : MonoBehaviour
             tRow.questName.text = trackedQuest.questName;
             tRow.description.text = trackedQuest.questDescription;
 
-            if (trackedQuest.info.secondRequirmentItem != "") // if we have 2 requirements
-            {
-                tRow.requirements.text = $"{trackedQuest.info.firstRequirmentItem}" /*functionforamnt(itemname)*/ +"/" + $"{trackedQuest.info.firstRequirementAmount}\n" +
-               $"{trackedQuest.info.secondRequirmentItem}" /*functionforamnt(itemname)*/ +"/" + $"{trackedQuest.info.secondRequirementAmount}\n";
-            }
-            else // if we have only one
-            {
-                tRow.requirements.text = $"{trackedQuest.info.firstRequirmentItem}" /*functionforamnt(itemname)*/ +"/" + $"{trackedQuest.info.firstRequirementAmount}\n";
-            }
+            //if (trackedQuest.info.secondRequirmentItem != "") // if we have 2 requirements
+            //{
+            //    tRow.requirements.text = $"{trackedQuest.info.firstRequirmentItem}" /*functionforamnt(itemname)*/ +"/" + $"{trackedQuest.info.firstRequirementAmount}\n" +
+            //   $"{trackedQuest.info.secondRequirmentItem}" /*functionforamnt(itemname)*/ +"/" + $"{trackedQuest.info.secondRequirementAmount}\n";
+            //}
+            //else // if we have only one
+            //{
+            //    tRow.requirements.text = $"{trackedQuest.info.firstRequirmentItem}" /*functionforamnt(itemname)*/ +"/" + $"{trackedQuest.info.firstRequirementAmount}\n";
+            //}
         }
     }
     private void Start()
@@ -87,35 +87,37 @@ public class QuestManager : MonoBehaviour
         isQuestMenuOpen = false;
     }
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (!isQuestMenuOpen)
-            {
-                isQuestMenuOpen = true;
-                questMenu.SetActive(true);
-            }
-            else if (isQuestMenuOpen)
-            {
-                isQuestMenuOpen = false;
-                questMenu.SetActive(false);
-            }        
-        }
+    { }
+    //{
+    //    if (Input.GetKeyDown(KeyCode.H))
+    //    {
+    //        if (!isQuestMenuOpen)
+    //        {
+    //            isQuestMenuOpen = true;
+    //            questMenu.SetActive(true);
+    //        }
+    //        else if (isQuestMenuOpen)
+    //        {
+    //            isQuestMenuOpen = false;
+    //            questMenu.SetActive(false);
+    //        }        
+    //    }
 
-        if (isQuestMenuOpen && !questUI.menuOpen)
-        {
-            cameraLook.canMove = false;
-            cameraLook.lockCursor = false;
-            //Debug.Log("Camera should be active");
-        }
-        if (!isQuestMenuOpen && !questUI.menuOpen)
-        {
-            cameraLook.canMove = true;
-            cameraLook.lockCursor = true;
-           // Debug.Log("Camera should be disabled");
-        }
+        //if (isQuestMenuOpen && !questUI.menuOpen)
+        //{
+        //    cameraLook.canMove = false;
+        //    cameraLook.lockCursor = false;
+        //    //Debug.Log("Camera should be active");
+        //}
+        //if (!isQuestMenuOpen && !questUI.menuOpen)
+        //{
+        //    cameraLook.canMove = true;
+        //    cameraLook.lockCursor = true;
+        //   // Debug.Log("Camera should be disabled");
+        //}
 
-    }
+    
+
 
     public void AddActiveQuest(Quest quest)
     {
@@ -135,45 +137,45 @@ public class QuestManager : MonoBehaviour
 
     public void RefreshQuestList()
     {
-        foreach (Transform child in questMenuContent.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        //foreach (Transform child in questMenuContent.transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
 
 
-        foreach (Quest activeQuest in allActiveQuests)
-        {
-            GameObject  questPrefab = Instantiate(activeQuestPrefab, Vector3.zero, Quaternion.identity);
-            questPrefab.transform.SetParent(questMenuContent.transform, false);
+        //foreach (Quest activeQuest in allActiveQuests)
+        //{
+        //    GameObject  questPrefab = Instantiate(activeQuestPrefab, Vector3.zero, Quaternion.identity);
+        //    questPrefab.transform.SetParent(questMenuContent.transform, false);
 
-            QuestRow qRow = questPrefab.GetComponent<QuestRow>();
+        //    QuestRow qRow = questPrefab.GetComponent<QuestRow>();
 
-            qRow.thisQuest = activeQuest;
+        //    qRow.thisQuest = activeQuest;
 
-            qRow.questName.text = activeQuest.questName;
-            qRow.questGiver.text = activeQuest.questGiver;
+        //    qRow.questName.text = activeQuest.questName;
+        //    qRow.questGiver.text = activeQuest.questGiver;
 
-            qRow.isActive = true;
-            qRow.isTracking = true;
+        //    qRow.isActive = true;
+        //    qRow.isTracking = true;
 
             
-        }
+        //}
 
-        foreach (Quest completedQuest in allCompletedQuests)
-        {
-            GameObject questPrefab = Instantiate(completedQuestPrefab, Vector3.zero, Quaternion.identity);
-            questPrefab.transform.SetParent(questMenuContent.transform, false);
+        //foreach (Quest completedQuest in allCompletedQuests)
+        //{
+        //    GameObject questPrefab = Instantiate(completedQuestPrefab, Vector3.zero, Quaternion.identity);
+        //    questPrefab.transform.SetParent(questMenuContent.transform, false);
 
-            QuestRow qRow = questPrefab.GetComponent<QuestRow>();
+        //    QuestRow qRow = questPrefab.GetComponent<QuestRow>();
 
-            qRow.questName.text = completedQuest.questName;
-            qRow.questGiver.text = completedQuest.questGiver;
+        //    qRow.questName.text = completedQuest.questName;
+        //    qRow.questGiver.text = completedQuest.questGiver;
 
-            qRow.isActive = false;
-            qRow.isTracking = false;
+        //    qRow.isActive = false;
+        //    qRow.isTracking = false;
 
 
-        }
+        //}
     }
 
     //make function to show items in tracker

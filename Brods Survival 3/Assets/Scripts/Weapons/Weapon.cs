@@ -1,3 +1,4 @@
+using AOT;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
@@ -11,6 +12,8 @@ public class Weapon : MonoBehaviour
 
     [HideInInspector] public Animator anim;
     [HideInInspector] public Slot slotEquippedOn;
+    public NPC npc;
+    public int shootCount = 0;
 
     public GameObject bulletHolePrefab;
 
@@ -57,7 +60,10 @@ public class Weapon : MonoBehaviour
         {
             UnEquip();
         }
-
+        if (npc.resetShootCount)
+        {
+            shootCount = 0;
+        }
 
         UpdateAnimations();
         
@@ -133,9 +139,20 @@ public class Weapon : MonoBehaviour
         {
             return;
         }
+        if (npc.firstTimeInteraction == false)
+        {
+            npc.shouldRecordShoot = true;
+        }
+   
+        if (npc.shouldRecordShoot)
+        {
+            shootCount++;
+            npc.ReceiveShootCount(shootCount);
+            
+        }
 
-        // Trigger the shoot event using the class name
-        Weapon.OnShoot?.Invoke();
+        // Trigger the shoot event
+        //Weapon.OnShoot?.Invoke();
 
         GetComponentInParent<Animator>().SetTrigger("Shake");
 

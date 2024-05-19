@@ -19,6 +19,11 @@ public class BasicAI : MonoBehaviour
     public float minAttackDistance = 1.5f;
     public float maxAttackDistance = 2.5f;
 
+    [Header("Cooldown")]
+    public float attackCooldown = 2f;
+    private bool isOnCooldown = false;
+    private float cooldownTimer = 0f;
+
     [Header("Movement")]
     private float currentWanderTime;
     public float wanderWaitTime = 10f;
@@ -30,53 +35,23 @@ public class BasicAI : MonoBehaviour
 
     private string debugState = null;
 
-
-
     public bool walk;
     public bool run;
-
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-
         currentWanderTime = wanderWaitTime;
     }
 
-    bool hasDied;
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, agent.destination);
-        //Handles.Label(transform.position + Vector3.up * 2.6f, debugState);
-    }
-
-
-
-
     private void Update()
     {
-
-        //Debug.Log("BEAR:  isStopped = " + agent.isStopped);
-
-
         if (health <= 0)
         {
-            agent.SetDestination(transform.position);
-
-            Destroy(agent);
-            anim.SetTrigger("Die");
-
-
-
-            GetComponent<GatherableObject>().enabled = true;
-            Destroy(this);
+            Die();
             return;
         }
-
 
         UpdateAnimations();
 
@@ -90,6 +65,23 @@ public class BasicAI : MonoBehaviour
         }
         else
             Wander();
+
+        UpdateCooldown();
+    }
+
+    private void Die()
+    {
+        agent.SetDestination(transform.position);
+        Destroy(agent);
+        anim.SetTrigger("Die");
+        GetComponent<GatherableObject>().enabled = true;
+        Destroy(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, agent.destination);
     }
 
     public void UpdateAnimations()
@@ -100,20 +92,14 @@ public class BasicAI : MonoBehaviour
 
     public void Wander()
     {
-     //   Debug.Log("WANDER");
         if (currentWanderTime >= wanderWaitTime)
         {
             Vector3 wanderPos = transform.position;
-
             wanderPos.x += Random.Range(-wanderRange, wanderRange);
             wanderPos.z += Random.Range(-wanderRange, wanderRange);
-
             currentWanderTime = 0;
-
             agent.speed = walkSpeed;
             agent.SetDestination(wanderPos);
-            Debug.Log("Wander destination set.");
-
             walk = true;
             run = false;
         }
@@ -121,48 +107,53 @@ public class BasicAI : MonoBehaviour
         {
             if (agent.isStopped)
             {
-               currentWanderTime += Time.deltaTime;
-              //  Debug.Log("Stopped.");
-
-               walk = false;
-               run = false;
-           }
+                currentWanderTime += Time.deltaTime;
+                walk = false;
+                run = false;
+            }
         }
     }
 
     public void Chase()
     {
         agent.SetDestination(target.transform.position);
-
         walk = false;
-
         run = true;
-
         agent.speed = runSpeed;
-
         if (Vector3.Distance(target.transform.position, transform.position) <= minAttackDistance && !isAttacking)
             StartAttack();
     }
 
     public void StartAttack()
     {
-        isAttacking = true;
-
-        if (!canMoveWhileAttacking)
-            agent.SetDestination(transform.position);
-
-        anim.SetTrigger("Attack");
+        if (!isAttacking && !isOnCooldown) // Only start attack if not already attacking and not on cooldown
+        {
+            isAttacking = true;
+            if (!canMoveWhileAttacking)
+                agent.SetDestination(transform.position);
+            anim.SetTrigger("Attack");
+            Invoke("FinishAttack", 0.5f);
+        }
     }
 
     public void FinishAttack()
     {
-        if (Vector3.Distance(target.transform.position, transform.position) > maxAttackDistance)
-            return;
-
         target.GetComponent<PlayerStats>().health -= damage;
-
         isAttacking = false;
+        isOnCooldown = true;
+        cooldownTimer = attackCooldown;
+    }
 
+    private void UpdateCooldown()
+    {
+        if (isOnCooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0)
+            {
+                isOnCooldown = false;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

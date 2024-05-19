@@ -14,6 +14,9 @@ public class BuildingHandler : MonoBehaviour
     public BuildGhost ghost;
     public bool canBuild;
 
+    public NPC npc;
+    public int buildCount = 0;
+
     private void Update()
     {
         UpdateBuilding();
@@ -139,6 +142,19 @@ public class BuildingHandler : MonoBehaviour
             slotInUse.UpdateSlot();
 
             Instantiate(ghost.buildPrefab, ghost.transform.position, ghost.transform.rotation);
+
+            //flag event\
+            if (npc.firstTimeInteraction == false)
+            {
+                npc.shouldRecordBuild = true;
+            }
+
+            if (npc.shouldRecordBuild)
+            {
+                buildCount++;
+                npc.ReceiveBuildCount(buildCount);
+
+            }
 
         }
 

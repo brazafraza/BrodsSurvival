@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject buildingGameObj;
 
     public bool opened;
-    public KeyCode inventoryKey = KeyCode.I;
+    public KeyCode inventoryKey = KeyCode.Tab;
 
     [Header("Settings")]
     public int inventorySize = 24;

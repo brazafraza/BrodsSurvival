@@ -34,11 +34,11 @@ public class QuestInfo : ScriptableObject
 
     [Header("Requirements")]
     //add in here gun shot req
-    public string firstRequirmentItem;
-    public int firstRequirementAmount;
+    public string shootRequirmentItem;
+    public int shootRequirementAmount;
 
-    public string secondRequirmentItem;
-    public int secondRequirementAmount;
+    public string buildRequirmentItem;
+    public int buildRequirementAmount;
     [Space]
     public string Action;
     public int timesPerformed;
