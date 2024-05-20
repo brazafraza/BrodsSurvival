@@ -39,7 +39,7 @@ MonoBehaviour:
   healthChange: 10
   hungerChange: 10
   thirstChange: 10
-  ghost: {fileID: 8841727310026978494, guid: 2bbb8ecce6b715a409ce8f17d0716abe, type: 3}
+  ghost: {fileID: -4519521078571364321, guid: b80d94344a1021248938e15a2b91033d, type: 3}
   isFuel: 0
   outcome: {fileID: 0}
   outcomeAmount: 1

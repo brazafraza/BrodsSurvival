@@ -17,59 +17,56 @@ public class InventoryManager : MonoBehaviour
     public int inventorySize = 24;
     public int hotbarSize = 6;
 
-
     [Header("Refs")]
     public GameObject dropModel;
     public Transform dropPos;
     public GameObject slotTemplate;
     public Transform contentHolder;
     public Transform hotbarContentHolder;
-
-
+    public GameObject noSlotSelectedIndicator; // GameObject to activate when no slot is selected
 
     [HideInInspector] public Slot[] inventorySlots;
-    private Slot[] hotbarSlots; 
-
+    private Slot[] hotbarSlots;
+    private Slot selectedSlot; // Variable to keep track of the selected slot
 
     private void Start()
     {
         building = GetComponentInParent<WindowHandler>().building;
 
         GenerateSlots();
-        GenerateHotbarSlots(); 
-       
+        GenerateHotbarSlots();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            hotbarSlots[0].Try_Use();
+            SelectHotbarSlot(0);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            hotbarSlots[1].Try_Use();
+            SelectHotbarSlot(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            hotbarSlots[2].Try_Use();
+            SelectHotbarSlot(2);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            hotbarSlots[3].Try_Use();
+            SelectHotbarSlot(3);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            hotbarSlots[4].Try_Use();
+            SelectHotbarSlot(4);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            hotbarSlots[5].Try_Use();
+            SelectHotbarSlot(5);
         }
 
         if (Input.GetKeyDown(inventoryKey))
@@ -80,13 +77,13 @@ public class InventoryManager : MonoBehaviour
         if (GetComponentInParent<WindowHandler>().storage.opened)
         {
             GetComponentInParent<WindowHandler>().crafting.opened = false;
-
         }
         else
+        {
             GetComponentInParent<WindowHandler>().crafting.opened = true;
+        }
 
-
-        if(opened)
+        if (opened)
         {
             transform.localPosition = new Vector3(0, 0, 0);
         }
@@ -99,26 +96,39 @@ public class InventoryManager : MonoBehaviour
                 GetComponentInParent<WindowHandler>().storage.Close();
             }
         }
+
+        UpdateSlotSelectionIndicator();
+    }
+
+    private void SelectHotbarSlot(int index)
+    {
+        if (index >= 0 && index < hotbarSlots.Length)
+        {
+            hotbarSlots[index].Try_Use();
+            selectedSlot = hotbarSlots[index];
+        }
+    }
+
+    private void UpdateSlotSelectionIndicator()
+    {
+        if (noSlotSelectedIndicator != null)
+        {
+            noSlotSelectedIndicator.SetActive(selectedSlot == null);
+        }
     }
 
     private void GenerateSlots()
     {
         List<Slot> inventorySlots_ = new List<Slot>();
-    
-        
-   
 
-        //      generate slots
-        for(int i = 0; i < inventorySize; i++)
+        // Generate slots
+        for (int i = 0; i < inventorySize; i++)
         {
             Slot slot = Instantiate(slotTemplate.gameObject, contentHolder).GetComponent<Slot>();
-
             inventorySlots_.Add(slot);
-            
         }
 
         inventorySlots = inventorySlots_.ToArray();
-        
     }
 
     private void GenerateHotbarSlots()
@@ -126,59 +136,49 @@ public class InventoryManager : MonoBehaviour
         List<Slot> inventorySlots_ = new List<Slot>();
         List<Slot> hotbarList = new List<Slot>();
 
-        // UDPAET HOTBAR SLOTS
+        // Update hotbar slots
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             inventorySlots_.Add(inventorySlots[i]);
         }
 
-
-        //      generate hotbar slots
+        // Generate hotbar slots
         for (int i = 0; i < hotbarSize; i++)
         {
             Slot slot = Instantiate(slotTemplate.gameObject, hotbarContentHolder).GetComponent<Slot>();
-
             inventorySlots_.Add(slot);
             hotbarList.Add(slot);
-
         }
 
         inventorySlots = inventorySlots_.ToArray();
         hotbarSlots = hotbarList.ToArray();
-
     }
 
     public void DragDrop(Slot from, Slot to)
     {
-
-      
-
-        
-        //unequip from slot
+        // Unequip from slot
         if (from.weaponEquipped != null)
         {
             from.weaponEquipped.UnEquip();
         }
-        if (to.weaponEquipped != null) 
+        if (to.weaponEquipped != null)
+        {
             to.weaponEquipped.UnEquip();
+        }
 
-        //stop building
-        //building = not finding slotinUse fix 6/05/24
+        // Stop building
         if (from == building.slotInUse)
-         
-            building.slotInUse = null;
-       
-
-        if(to == building.slotInUse)
         {
             building.slotInUse = null;
-        } 
+        }
 
+        if (to == building.slotInUse)
+        {
+            building.slotInUse = null;
+        }
 
-
-
-                //swapping
-        if(from.data != to.data)
+        // Swapping
+        if (from.data != to.data)
         {
             ItemSO data = to.data;
             int stackSize = to.stackSize;
@@ -189,8 +189,7 @@ public class InventoryManager : MonoBehaviour
             from.data = data;
             from.stackSize = stackSize;
         }
-
-        //stacking
+        // Stacking
         else
         {
             if (from.data.isStackable)
@@ -198,15 +197,14 @@ public class InventoryManager : MonoBehaviour
                 if (from.stackSize + to.stackSize > from.data.maxStack)
                 {
                     int amountLeft = (from.stackSize + to.stackSize) - from.data.maxStack;
-
                     from.stackSize = amountLeft;
-
-                    to.stackSize = to.data.maxStack;
+                    to.stackSize = from.data.maxStack;
                 }
                 else
+                {
                     to.stackSize += from.stackSize;
-
                     from.Clean();
+                }
                 from.UpdateSlot();
                 to.UpdateSlot();
             }
@@ -225,6 +223,7 @@ public class InventoryManager : MonoBehaviour
 
         from.UpdateSlot();
         to.UpdateSlot();
+        selectedSlot = null; // Reset the selected slot after drag and drop
     }
 
     public void AddItem(Pickup pickUp)
@@ -233,54 +232,43 @@ public class InventoryManager : MonoBehaviour
         {
             Slot stackableSlot = null;
 
-            // TRY FINDING STACKABLE SLOT
+            // Try finding stackable slot
             for (int i = 0; i < inventorySlots.Length; i++)
             {
-                if (!inventorySlots[i].IsEmpty)
+                if (!inventorySlots[i].IsEmpty && inventorySlots[i].data == pickUp.data && inventorySlots[i].stackSize < pickUp.data.maxStack)
                 {
-                    if (inventorySlots[i].data == pickUp.data && inventorySlots[i].stackSize < pickUp.data.maxStack)
-                    {
-                        stackableSlot = inventorySlots[i];
-                        break;
-                    }
-
+                    stackableSlot = inventorySlots[i];
+                    break;
                 }
             }
 
             if (stackableSlot != null)
             {
-
-                // IF IT CANNOT FIT THE PICKED UP AMOUNT
+                // If it cannot fit the picked up amount
                 if (stackableSlot.stackSize + pickUp.stackSize > pickUp.data.maxStack)
                 {
                     int amountLeft = (stackableSlot.stackSize + pickUp.stackSize) - pickUp.data.maxStack;
 
-
-
-                    // ADD IT TO THE STACKABLE SLOT
+                    // Add it to the stackable slot
                     stackableSlot.AddItemToSlot(pickUp.data, pickUp.data.maxStack);
 
-                    // TRY FIND A NEW EMPTY STACK
+                    // Try find a new empty stack
                     for (int i = 0; i < inventorySlots.Length; i++)
                     {
                         if (inventorySlots[i].IsEmpty)
                         {
                             inventorySlots[i].AddItemToSlot(pickUp.data, amountLeft);
                             inventorySlots[i].UpdateSlot();
-
                             break;
                         }
                     }
 
-
-
                     Destroy(pickUp.gameObject);
                 }
-                // IF IT CAN FIT THE PICKED UP AMOUNT
+                // If it can fit the picked up amount
                 else
                 {
                     stackableSlot.AddStackAmount(pickUp.stackSize);
-
                     Destroy(pickUp.gameObject);
                 }
 
@@ -290,8 +278,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Slot emptySlot = null;
 
-
-                // FIND EMPTY SLOT
+                // Find empty slot
                 for (int i = 0; i < inventorySlots.Length; i++)
                 {
                     if (inventorySlots[i].IsEmpty)
@@ -301,12 +288,11 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
 
-                // IF WE HAVE AN EMPTY SLOT THAN ADD THE ITEM
+                // If we have an empty slot, then add the item
                 if (emptySlot != null)
                 {
                     emptySlot.AddItemToSlot(pickUp.data, pickUp.stackSize);
                     emptySlot.UpdateSlot();
-
                     Destroy(pickUp.gameObject);
                 }
                 else
@@ -314,14 +300,12 @@ public class InventoryManager : MonoBehaviour
                     pickUp.transform.position = dropPos.position;
                 }
             }
-
         }
         else
         {
             Slot emptySlot = null;
 
-
-            // FIND EMPTY SLOT
+            // Find empty slot
             for (int i = 0; i < inventorySlots.Length; i++)
             {
                 if (inventorySlots[i].IsEmpty)
@@ -331,19 +315,17 @@ public class InventoryManager : MonoBehaviour
                 }
             }
 
-            // IF WE HAVE AN EMPTY SLOT THAN ADD THE ITEM
+            // If we have an empty slot, then add the item
             if (emptySlot != null)
             {
                 emptySlot.AddItemToSlot(pickUp.data, pickUp.stackSize);
                 emptySlot.UpdateSlot();
-
                 Destroy(pickUp.gameObject);
             }
             else
             {
                 pickUp.transform.position = dropPos.position;
             }
-
         }
     }
 
@@ -353,55 +335,41 @@ public class InventoryManager : MonoBehaviour
         {
             Slot stackableSlot = null;
 
-            // TRY FINDING STACKABLE SLOT
+            // Try finding stackable slot
             for (int i = 0; i < inventorySlots.Length; i++)
             {
-                if (!inventorySlots[i].IsEmpty)
+                if (!inventorySlots[i].IsEmpty && inventorySlots[i].data == data && inventorySlots[i].stackSize < data.maxStack)
                 {
-                    if (inventorySlots[i].data == data && inventorySlots[i].stackSize < data.maxStack)
-                    {
-                        stackableSlot = inventorySlots[i];
-                        break;
-                    }
-
+                    stackableSlot = inventorySlots[i];
+                    break;
                 }
             }
 
             if (stackableSlot != null)
             {
-
-                // IF IT CANNOT FIT THE PICKED UP AMOUNT
+                // If it cannot fit the picked up amount
                 if (stackableSlot.stackSize + stackSize > data.maxStack)
                 {
                     int amountLeft = (stackableSlot.stackSize + stackSize) - data.maxStack;
 
-
-
-                    // ADD IT TO THE STACKABLE SLOT
+                    // Add it to the stackable slot
                     stackableSlot.AddItemToSlot(data, data.maxStack);
 
-                    // TRY FIND A NEW EMPTY STACK
+                    // Try find a new empty stack
                     for (int i = 0; i < inventorySlots.Length; i++)
                     {
                         if (inventorySlots[i].IsEmpty)
                         {
                             inventorySlots[i].AddItemToSlot(data, amountLeft);
                             inventorySlots[i].UpdateSlot();
-
                             break;
                         }
                     }
-
-
-
-  
                 }
-                // IF IT CAN FIT THE PICKED UP AMOUNT
+                // If it can fit the picked up amount
                 else
                 {
                     stackableSlot.AddStackAmount(stackSize);
-
-                  
                 }
 
                 stackableSlot.UpdateSlot();
@@ -410,8 +378,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Slot emptySlot = null;
 
-
-                // FIND EMPTY SLOT
+                // Find empty slot
                 for (int i = 0; i < inventorySlots.Length; i++)
                 {
                     if (inventorySlots[i].IsEmpty)
@@ -421,27 +388,23 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
 
-                // IF WE HAVE AN EMPTY SLOT THAN ADD THE ITEM
+                // If we have an empty slot, then add the item
                 if (emptySlot != null)
                 {
                     emptySlot.AddItemToSlot(data, stackSize);
                     emptySlot.UpdateSlot();
-
-                    
                 }
                 else
                 {
                     DropItem(data, stackSize);
                 }
             }
-
         }
         else
         {
             Slot emptySlot = null;
 
-
-            // FIND EMPTY SLOT
+            // Find empty slot
             for (int i = 0; i < inventorySlots.Length; i++)
             {
                 if (inventorySlots[i].IsEmpty)
@@ -451,21 +414,17 @@ public class InventoryManager : MonoBehaviour
                 }
             }
 
-            // IF WE HAVE AN EMPTY SLOT THAN ADD THE ITEM
+            // If we have an empty slot, then add the item
             if (emptySlot != null)
             {
                 emptySlot.AddItemToSlot(data, stackSize);
                 emptySlot.UpdateSlot();
-
-
             }
             else
             {
                 DropItem(data, stackSize);
             }
         }
-
-    
     }
 
     public void DropItem(Slot slot)
@@ -488,11 +447,6 @@ public class InventoryManager : MonoBehaviour
 
         pickup.data = data;
         pickup.stackSize = stackSize;
-
-      
     }
-
-
-
-
 }
+
