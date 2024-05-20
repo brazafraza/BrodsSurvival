@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69e8145c437be54c861e9836e6de5db, type: 3}
+  m_Name: Wooden Ramp
+  m_EditorClassIdentifier: 
+  ID: 1
+  itemType: 4
+  icon: {fileID: 21300000, guid: f92e52c244e2482448f3bba7d1a24987, type: 3}
+  itemName: Wooden Ramp
+  description: Store your items
+  isStackable: 0
+  maxStack: 1
+  damage: 20
+  range: 200
+  magSize: 30
+  bulletData: {fileID: 0}
+  fireRate: 0.1
+  zoomFOV: 60
+  horizontalRecoil: 0
+  minVerticalRecoil: 0
+  maxVerticalRecoil: 0
+  hipSpread: 0.04
+  aimSpread: 0
+  shotgunFire: 0
+  pelletsPerShot: 8
+  shootSound: {fileID: 0}
+  reloadSound: {fileID: 0}
+  takeoutSound: {fileID: 0}
+  emptySound: {fileID: 0}
+  healthChange: 10
+  hungerChange: 10
+  thirstChange: 10
+  ghost: {fileID: -786237420405209578, guid: 374d2f3a30d620a438640f7cc6d2242b, type: 3}
+  isFuel: 0
+  outcome: {fileID: 0}
+  outcomeAmount: 1
+  processTime: 3

@@ -88,6 +88,8 @@ public class RandomSpawner : MonoBehaviour
         while (!foundSpot)
         {
             Vector3 spawnPos = transform.position;
+           // Vector3 rotationPos = transform.rotation;
+            
            
             //make random rotation here
 
@@ -95,12 +97,15 @@ public class RandomSpawner : MonoBehaviour
             spawnPos.y += height;
             spawnPos.z += Random.Range(-length, length);
 
+            Quaternion randomYRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+
+
 
             if (Physics.Raycast(spawnPos, Vector3.down, out RaycastHit hit, Mathf.Infinity))
             {
                 if (hit.transform.GetComponent<Terrain>() != null)
                 {
-                    GameObject spawnedObj = Instantiate(obj, hit.point, Quaternion.identity);
+                    GameObject spawnedObj = Instantiate(obj, hit.point, randomYRotation);
 
                     spawnedEntities.Add(spawnedObj);
 
