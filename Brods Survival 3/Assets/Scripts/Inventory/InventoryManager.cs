@@ -25,6 +25,8 @@ public class InventoryManager : MonoBehaviour
     public Transform hotbarContentHolder;
     public GameObject noSlotSelectedIndicator; // GameObject to activate when no slot is selected
 
+   // public GameObject defaultWeapon;
+
     [HideInInspector] public Slot[] inventorySlots;
     private Slot[] hotbarSlots;
     private Slot selectedSlot; // Variable to keep track of the selected slot
@@ -114,8 +116,12 @@ public class InventoryManager : MonoBehaviour
         if (noSlotSelectedIndicator != null)
         {
             noSlotSelectedIndicator.SetActive(selectedSlot == null);
+
+           
         }
     }
+
+   
 
     private void GenerateSlots()
     {

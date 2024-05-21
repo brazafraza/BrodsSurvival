@@ -18,7 +18,7 @@ MonoBehaviour:
   itemName: Wood
   description: From tree
   isStackable: 1
-  maxStack: 50
+  maxStack: 99
   damage: 20
   range: 200
   magSize: 30

@@ -18,7 +18,7 @@ MonoBehaviour:
   itemName: Metal Ore
   description: Smelt to get ingots
   isStackable: 1
-  maxStack: 100
+  maxStack: 99
   damage: 20
   range: 200
   magSize: 30

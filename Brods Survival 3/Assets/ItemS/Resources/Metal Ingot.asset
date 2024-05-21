@@ -18,7 +18,7 @@ MonoBehaviour:
   itemName: Metal Ingot
   description: Metal ingot
   isStackable: 1
-  maxStack: 100
+  maxStack: 99
   damage: 20
   range: 200
   magSize: 30

@@ -32,6 +32,7 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         UpdateSlot();
     }
 
+
     public void UpdateSlot()
     {
         if(data != null)

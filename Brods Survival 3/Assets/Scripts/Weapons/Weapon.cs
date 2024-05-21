@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
         }
 
         UpdateAnimations();
-        
+
 
         if (weaponData.itemType == ItemSO.ItemType.Weapon)
         {
@@ -75,16 +75,16 @@ public class Weapon : MonoBehaviour
                 currentFireRate += Time.deltaTime;
             }
 
-            if(Input.GetKeyDown(KeyCode.R) && !player.windowHandler.inventory.opened)
+            if (Input.GetKeyDown(KeyCode.R) && !player.windowHandler.inventory.opened)
             {
                 Start_Reload();
             }
 
-           
+
 
             UpdateAiming();
 
-            if(player.windowHandler.inventory.opened)
+            if (player.windowHandler.inventory.opened)
             {
                 return;
             }
@@ -109,7 +109,7 @@ public class Weapon : MonoBehaviour
                     else
                         ShotgunShoot();
                 }
-            
+
             }
 
         }
@@ -143,12 +143,12 @@ public class Weapon : MonoBehaviour
         {
             npc.shouldRecordShoot = true;
         }
-   
+
         if (npc.shouldRecordShoot)
         {
             shootCount++;
             npc.ReceiveShootCount(shootCount);
-            
+
         }
 
         // Trigger the shoot event
@@ -219,25 +219,25 @@ public class Weapon : MonoBehaviour
         for (int i = 0; i < weaponData.pelletsPerShot; i++)
         {
 
-        
 
-          RaycastHit hit;
+
+            RaycastHit hit;
 
             Vector3 shootDir = shootPoint.forward;
-         if (isAiming)
-         {
-             shootDir.x += Random.Range(-weaponData.aimSpread, weaponData.aimSpread);
-             shootDir.y += Random.Range(-weaponData.aimSpread, weaponData.aimSpread);
-         }
-         else
-         {
-             shootDir.x += Random.Range(-weaponData.hipSpread, weaponData.hipSpread);
-             shootDir.y += Random.Range(-weaponData.hipSpread, weaponData.hipSpread);
-         }
+            if (isAiming)
+            {
+                shootDir.x += Random.Range(-weaponData.aimSpread, weaponData.aimSpread);
+                shootDir.y += Random.Range(-weaponData.aimSpread, weaponData.aimSpread);
+            }
+            else
+            {
+                shootDir.x += Random.Range(-weaponData.hipSpread, weaponData.hipSpread);
+                shootDir.y += Random.Range(-weaponData.hipSpread, weaponData.hipSpread);
+            }
 
 
-        if (Physics.Raycast(shootPoint.position, shootDir, out hit, weaponData.range, shootableLayers))
-         {
+            if (Physics.Raycast(shootPoint.position, shootDir, out hit, weaponData.range, shootableLayers))
+            {
                 GameObject bulletHole = Instantiate(bulletHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
 
                 BasicAI ai = hit.transform.GetComponent<BasicAI>();
@@ -247,7 +247,7 @@ public class Weapon : MonoBehaviour
                 }
 
                 Debug.Log($"Hitted : {hit.transform.name}");
-         }
+            }
         }
 
 
@@ -333,7 +333,7 @@ public class Weapon : MonoBehaviour
         // CHECK FOR THE BULLETS
         for (int i = 0; i < inventory.inventorySlots.Length; i++)
         {
-           
+
 
             if (!inventory.inventorySlots[i].IsEmpty)
             {
@@ -386,7 +386,7 @@ public class Weapon : MonoBehaviour
             transform.localPosition = Vector3.Slerp(transform.localPosition, aimPos, aimSpeed * Time.deltaTime);
             isAiming = true;
         }
-        else           
+        else
         {
             transform.localPosition = Vector3.Slerp(transform.localPosition, hipPos, aimSpeed * Time.deltaTime);
             isAiming = false;
@@ -409,14 +409,14 @@ public class Weapon : MonoBehaviour
         anim.SetTrigger("Swing");
         currentFireRate = 0;
 
-       // CheckForHit called from other script
+        // CheckForHit called from other script
     }
 
     public void CheckForHit()
     {
 
 
-       
+
         RaycastHit hit;
 
         if (Physics.SphereCast(shootPoint.position, 0.2f, shootPoint.forward, out hit, weaponData.range, shootableLayers))
@@ -451,7 +451,7 @@ public class Weapon : MonoBehaviour
     {
         RaycastHit hit;
 
-        GetComponentInParent<Animator>().SetTrigger("Shake"); 
+        GetComponentInParent<Animator>().SetTrigger("Shake");
 
         if (Physics.SphereCast(shootPoint.position, 0.2f, shootPoint.forward, out hit, weaponData.range, shootableLayers))
         {
@@ -462,7 +462,7 @@ public class Weapon : MonoBehaviour
             if (gatherObj != null)
             {
                 gatherObj.Gather(weaponData, GetComponentInParent<WindowHandler>().inventory);
-                
+
             }
 
             if (gatherExten != null)
@@ -506,7 +506,7 @@ public class Weapon : MonoBehaviour
 
         gameObject.SetActive(false);
 
-       
+
 
 
     }

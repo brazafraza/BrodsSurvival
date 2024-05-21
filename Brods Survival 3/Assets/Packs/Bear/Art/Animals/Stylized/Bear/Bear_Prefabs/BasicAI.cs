@@ -25,7 +25,7 @@ public class BasicAI : MonoBehaviour
     private float cooldownTimer = 0f;
 
     [Header("Movement")]
-    private float currentWanderTime;
+    public float currentWanderTime;
     public float wanderWaitTime = 10f;
     public bool canMoveWhileAttacking;
     [Space]
@@ -43,6 +43,11 @@ public class BasicAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentWanderTime = wanderWaitTime;
+
+        if (agent == null)
+        {
+           // Debug.LogError("No NavMeshAgent component found.");
+        }
     }
 
     private void Update()
@@ -64,7 +69,9 @@ public class BasicAI : MonoBehaviour
                 Chase();
         }
         else
+        {
             Wander();
+        }
 
         UpdateCooldown();
     }
@@ -80,8 +87,11 @@ public class BasicAI : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, agent.destination);
+        if (agent != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, agent.destination);
+        }
     }
 
     public void UpdateAnimations()
@@ -94,6 +104,7 @@ public class BasicAI : MonoBehaviour
     {
         if (currentWanderTime >= wanderWaitTime)
         {
+           // Debug.Log("Generating new wander position.");
             Vector3 wanderPos = transform.position;
             wanderPos.x += Random.Range(-wanderRange, wanderRange);
             wanderPos.z += Random.Range(-wanderRange, wanderRange);
@@ -105,28 +116,45 @@ public class BasicAI : MonoBehaviour
         }
         else
         {
-            if (agent.isStopped)
+            // Additional debug logs for troubleshooting
+            //Debug.Log($"Agent.velocity: {agent.velocity.magnitude}");
+            //Debug.Log($"Agent.isStopped: {agent.isStopped}");
+            //Debug.Log($"Agent.pathPending: {agent.pathPending}");
+            //Debug.Log($"Agent.remainingDistance: {agent.remainingDistance}");
+            //Debug.Log($"Agent.stoppingDistance: {agent.stoppingDistance}");
+            //Debug.Log($"Agent.hasPath: {agent.hasPath}");
+
+            // Define a small tolerance for considering the agent as stopped
+            float stoppingThreshold = 0.1f;
+
+            // Improved condition to determine if the agent has effectively stopped
+            if (!agent.pathPending && agent.remainingDistance <= stoppingThreshold)
             {
-                currentWanderTime += Time.deltaTime;
-                walk = false;
-                run = false;
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                   // Debug.Log("Agent has effectively stopped.");
+                    currentWanderTime += Time.deltaTime;
+                    walk = false;
+                    run = false;
+                }
             }
         }
     }
 
+
     public void Chase()
     {
-        agent.SetDestination(target.transform.position);
+        agent.SetDestination(target.position);
         walk = false;
         run = true;
         agent.speed = runSpeed;
-        if (Vector3.Distance(target.transform.position, transform.position) <= minAttackDistance && !isAttacking)
+        if (Vector3.Distance(target.position, transform.position) <= minAttackDistance && !isAttacking)
             StartAttack();
     }
 
     public void StartAttack()
     {
-        if (!isAttacking && !isOnCooldown) // Only start attack if not already attacking and not on cooldown
+        if (!isAttacking && !isOnCooldown)
         {
             isAttacking = true;
             if (!canMoveWhileAttacking)
