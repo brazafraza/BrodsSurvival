@@ -26,21 +26,47 @@ public class NPC : MonoBehaviour
     public bool firstTimeInteraction = true;
     public int currentDialog;
 
+    [Header("Quest Vars")]
     public bool shouldRecordShoot;
     public bool shouldRecordBuild;
+    public bool shouldRecordBreak;
+    public bool shouldRecordSmelt;
+    public bool shouldRecordCraft;
+    public bool shouldRecordKill;
+
     public int questShootCount;
     public int questBuildCount;
+    public int questBreakCount;
+    public int questSmeltCount;
+    public int questCraftCount;
+    public int questKillCount;
+
     public int requiredBuildAmount;
     public int requiredShootAmount;
+    public int requiredBreakAmount;
+    public int requiredSmeltAmount;
+    public int requiredCraftAmount;
+    public int requiredKillAmount;
+
     public bool resetShootCount;
     public bool resetBuildCount;
-
+    public bool resetBreakCount;
+    public bool resetSmeltCount;
+    public bool resetCraftCount;
+    public bool resetKillCount;
+    [Space]
     private bool firstTimeQuestMenuOpened = true;
 
     public bool questFaileds;
 
+    [Header("Scripts")]
     public Weapon weapon;
     public QuestUI questUI;
+    public BuildingHandler buildingHandler;
+
+    public Furnace furnace;
+    //public break handling?
+
     public IslandHappiness islandHappiness;
     public DayNightCycle dayNightCycle;
 
@@ -184,7 +210,23 @@ public class NPC : MonoBehaviour
         int buildRequiredAmount = currentActiveQuest.info.buildRequirementAmount;
         requiredBuildAmount = buildRequiredAmount;
 
-        if (questShootCount >= shootRequiredAmount && questBuildCount >= buildRequiredAmount)
+        string resourcesBroken = currentActiveQuest.info.resourcesBroken;
+        int timesResourcesBroken = currentActiveQuest.info.timesResourcesBroken;
+        requiredCraftAmount = timesResourcesBroken;
+
+        string itemSmelted = currentActiveQuest.info.itemSmelted;
+        int timesSmelted = currentActiveQuest.info.timesSmelted;
+        requiredSmeltAmount = timesSmelted;
+
+        string craftItem = currentActiveQuest.info.craftItem;
+        int timesCrafting = currentActiveQuest.info.timesCrafting;
+        requiredCraftAmount = timesCrafting;
+
+        string killType = currentActiveQuest.info.killType;
+        int timesKilled = currentActiveQuest.info.timesKilled;
+        requiredKillAmount = timesKilled;
+
+        if (questShootCount >= shootRequiredAmount && questBuildCount >= buildRequiredAmount && questBreakCount >= timesResourcesBroken && questSmeltCount >= timesSmelted && questCraftCount >= timesCrafting && questKillCount >= timesKilled)
         {
             return true;
         }
@@ -205,6 +247,11 @@ public class NPC : MonoBehaviour
             Debug.Log("QuestFailed");
             islandHappiness.happiness -= 10;
             resetShootCount = true;
+            resetBreakCount = true;
+            resetCraftCount = true;
+            resetBuildCount = true;
+            resetSmeltCount = true;
+            resetKillCount = true;
             questFaileds = false;
 
             if (activeQuestIndex < quests.Count - 1)
@@ -276,6 +323,11 @@ public class NPC : MonoBehaviour
         currentActiveQuest.declined = false;
         npcDialogText.text = currentActiveQuest.info.acceptAnswer;
         resetShootCount = false;
+        resetBreakCount = false;
+        resetCraftCount = false;
+        resetBuildCount = false;
+        resetSmeltCount = false;
+        resetKillCount = false;
         CloseDialogUI();
     }
 
@@ -302,6 +354,11 @@ public class NPC : MonoBehaviour
 
         islandHappiness.happiness += happinessGained;
         resetShootCount = true;
+        resetBreakCount = true;
+        resetCraftCount = true;
+        resetBuildCount = true;
+        resetSmeltCount = true;
+        resetKillCount = true;
 
     }
 
@@ -331,5 +388,29 @@ public class NPC : MonoBehaviour
     {
         Debug.Log("Build count received: " + buildCount);
         questBuildCount = buildCount;
+    }
+
+    public void ReceiveBreakCount(int breakCount)
+    {
+        Debug.Log("Break count received: " + breakCount);
+        questBreakCount = breakCount;
+    }
+
+    public void ReceiveCraftCount(int craftCount)
+    {
+        Debug.Log("Craft count received: " + craftCount);
+        questCraftCount = craftCount;
+    }
+
+    public void ReceiveSmeltCount(int smeltCount)
+    {
+        Debug.Log("Smelt count received: " + smeltCount);
+        questSmeltCount = smeltCount;
+    }
+
+    public void ReceiveKillCount(int killCount)
+    {
+        Debug.Log("Kill count received: " + killCount);
+        questKillCount = killCount;
     }
 }

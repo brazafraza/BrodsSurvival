@@ -38,15 +38,24 @@ public class BasicAI : MonoBehaviour
     public bool walk;
     public bool run;
 
+    public float walkingDuration = 0f;
+    public float maxWalkingDuration = 20f;
+
+    public int killCount;
+
+    public NPC npc;
+
     private void Start()
     {
+        npc = FindObjectOfType<NPC>();
+
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentWanderTime = wanderWaitTime;
 
         if (agent == null)
         {
-           // Debug.LogError("No NavMeshAgent component found.");
+            Debug.LogError("No NavMeshAgent component found.");
         }
     }
 
@@ -55,6 +64,17 @@ public class BasicAI : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            if (npc.firstTimeInteraction == false)
+            {
+                npc.shouldRecordKill = true;
+            }
+
+            if (npc.shouldRecordKill)
+            {
+                killCount++;
+                npc.ReceiveKillCount(killCount);
+
+            }
             return;
         }
 
@@ -109,6 +129,7 @@ public class BasicAI : MonoBehaviour
             wanderPos.x += Random.Range(-wanderRange, wanderRange);
             wanderPos.z += Random.Range(-wanderRange, wanderRange);
             currentWanderTime = 0;
+            walkingDuration = 0; // Reset walking duration when setting a new destination
             agent.speed = walkSpeed;
             agent.SetDestination(wanderPos);
             walk = true;
@@ -116,24 +137,26 @@ public class BasicAI : MonoBehaviour
         }
         else
         {
-            // Additional debug logs for troubleshooting
-            //Debug.Log($"Agent.velocity: {agent.velocity.magnitude}");
-            //Debug.Log($"Agent.isStopped: {agent.isStopped}");
-            //Debug.Log($"Agent.pathPending: {agent.pathPending}");
-            //Debug.Log($"Agent.remainingDistance: {agent.remainingDistance}");
-            //Debug.Log($"Agent.stoppingDistance: {agent.stoppingDistance}");
-            //Debug.Log($"Agent.hasPath: {agent.hasPath}");
-
             // Define a small tolerance for considering the agent as stopped
             float stoppingThreshold = 0.1f;
 
-            // Improved condition to determine if the agent has effectively stopped
             if (!agent.pathPending && agent.remainingDistance <= stoppingThreshold)
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                   // Debug.Log("Agent has effectively stopped.");
+                    //Debug.Log("Agent has effectively stopped.");
                     currentWanderTime += Time.deltaTime;
+                    walk = false;
+                    run = false;
+                }
+            }
+            else
+            {
+                walkingDuration += Time.deltaTime;
+                if (walkingDuration > maxWalkingDuration)
+                {
+                    //Debug.Log("Animal has been walking for too long, stopping.");
+                    agent.isStopped = true;
                     walk = false;
                     run = false;
                 }
@@ -141,13 +164,13 @@ public class BasicAI : MonoBehaviour
         }
     }
 
-
     public void Chase()
     {
         agent.SetDestination(target.position);
         walk = false;
         run = true;
         agent.speed = runSpeed;
+        walkingDuration = 0; // Reset walking duration when starting a new chase
         if (Vector3.Distance(target.position, transform.position) <= minAttackDistance && !isAttacking)
             StartAttack();
     }

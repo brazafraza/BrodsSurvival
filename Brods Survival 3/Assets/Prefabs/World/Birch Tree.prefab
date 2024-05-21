@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1176338105336727151}
   m_Layer: 0
   m_Name: Birch Tree
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -120,6 +120,8 @@ MonoBehaviour:
   prefferedTools:
   - {fileID: 11400000, guid: 382f0a4bce3394342bf0f61746383b7d, type: 2}
   toolMultiplier: 2.5
+  breakCount: 0
+  npc: {fileID: 0}
 --- !u!54 &1176338105336727151
 Rigidbody:
   m_ObjectHideFlags: 0

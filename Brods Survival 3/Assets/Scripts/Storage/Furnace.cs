@@ -13,6 +13,9 @@ public class Furnace : MonoBehaviour
     [Space]
     public bool isOn;
     public GameObject VFX;
+    public NPC npc;
+
+    public int smeltCount;
 
     private float currentFuelTimer;
     private float fuelTimer;
@@ -22,6 +25,8 @@ public class Furnace : MonoBehaviour
 
     private void Start()
     {
+        npc = FindObjectOfType<NPC>();
+
         if (GetComponent<Storage>() != null)
         {
             storage = GetComponent<Storage>();
@@ -120,6 +125,18 @@ public class Furnace : MonoBehaviour
                     }
 
                     smeltingSlot.stackSize--;
+
+                    if (npc.firstTimeInteraction == false)
+                    {
+                        npc.shouldRecordSmelt = true;
+                    }
+
+                    if (npc.shouldRecordSmelt)
+                    {
+                        smeltCount++;
+                        npc.ReceiveSmeltCount(smeltCount);
+
+                    }
 
                 }
 

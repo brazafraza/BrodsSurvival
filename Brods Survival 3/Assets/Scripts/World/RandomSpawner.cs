@@ -7,6 +7,7 @@ using UnityEngine;
 public class RandomSpawner : MonoBehaviour
 {
     public float repsawnTime = 1200f;
+    public float originalRespawnTime = 1200f;
     public int maxEntities = 20;
     public GameObject[] spawnableEntities;
     public List<GameObject> spawnedEntities;
@@ -17,6 +18,8 @@ public class RandomSpawner : MonoBehaviour
     public Color color = Color.yellow;
 
     private float currentTimer;
+
+    public IslandHappiness islandHappiness;
 
     private void OnDrawGizmos()
     {
@@ -30,6 +33,7 @@ public class RandomSpawner : MonoBehaviour
     private void Start()
     {
         currentTimer = repsawnTime;
+        
     }
 
     private void Update()
@@ -116,5 +120,50 @@ public class RandomSpawner : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    public void islandHappy()
+    {
+        if (islandHappiness.happiness == 10f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 200);
+        }
+        if (islandHappiness.happiness == 20f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 150);
+        }
+        if (islandHappiness.happiness == 30f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 130);
+        }
+        if (islandHappiness.happiness == 40f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 115);
+        }
+        if (islandHappiness.happiness == 50f)
+        {
+            repsawnTime = originalRespawnTime; 
+        }
+        if (islandHappiness.happiness == 60f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 85);
+        }
+        if (islandHappiness.happiness == 70f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 70);
+        }
+        if (islandHappiness.happiness == 80f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 65);
+        }
+        if (islandHappiness.happiness == 90f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 40);
+        }
+    
+        if (islandHappiness.happiness == 100f)
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 25);
+        }
     }
 }

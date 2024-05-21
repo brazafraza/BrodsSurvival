@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
+  m_Name: Wooden Door
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 98b60cc554515d645a70a138cd4e6f26, type: 3}
+  recipeName: Wooden Door
+  requirements:
+  - {fileID: 11400000, guid: c6fd7d1d40ffe1748ae1e6a7f596fd52, type: 2}
+  craftingTime: 5
+  outcome: {fileID: 11400000, guid: 88c726f9d9d081f419d27001ea5a15e3, type: 2}
+  outcomeAmount: 1

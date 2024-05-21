@@ -42,8 +42,8 @@ public class IslandHappiness : MonoBehaviour
         happinessBar.numberText.text = happiness.ToString("f0");
         happinessBar.bar.fillAmount = happiness / 100;
 
-        EndOfDay();
-        BarConsequences();
+       // EndOfDay();
+       // BarConsequences();
 
         
 
@@ -113,5 +113,8 @@ public class IslandHappiness : MonoBehaviour
         //if hapiness is low set respawn rates lower
         //if hapiness is low set enemy respawn rates higher
         //if hapiness is low make enemies stronger
+
+        
+        
     }
 }

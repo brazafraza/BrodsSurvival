@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialDialog:
   - I want to hear your firepower again
-  - Shoot your gun 5 times for me 2
+  - Build 5 pieces
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
@@ -25,12 +25,14 @@ MonoBehaviour:
   finalWords: Final words
   happinessGain: 10
   shootRequirmentItem: 
-  shootRequirementAmount: 10
-  buildRequirmentItem: 
-  buildRequirementAmount: 0
-  Action: Shoot
-  timesPerformed: 5
+  shootRequirementAmount: 0
+  buildRequirmentItem: any
+  buildRequirementAmount: 5
   resourcesBroken: 
   timesResourcesBroken: 0
-  builtThisMany: 
-  timesBuilt: 0
+  itemSmelted: 
+  timesSmelted: 0
+  craftItem: 
+  timesCrafting: 0
+  killType: 
+  timesKilled: 0

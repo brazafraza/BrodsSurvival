@@ -5,6 +5,8 @@ using UnityEngine;
 public class CraftingManager : MonoBehaviour
 {
     private InventoryManager inventory;
+    public NPC npc;
+    public int craftCount;
 
     public RecipeTemplate recipeTemplate;
 
@@ -89,6 +91,18 @@ public class CraftingManager : MonoBehaviour
         }
 
         TakeResources(template.recipe);
+
+        if (npc.firstTimeInteraction == false)
+        {
+            npc.shouldRecordCraft= true;
+        }
+
+        if (npc.shouldRecordCraft)
+        {
+            craftCount++;
+            npc.ReceiveCraftCount(craftCount);
+
+        }
 
         recipeInCraft = template;
         isCrafting = true;

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c69e8145c437be54c861e9836e6de5db, type: 3}
-  m_Name: WoodenWindow
+  m_Name: Furnace
   m_EditorClassIdentifier: 
-  ID: 1
+  ID: 12
   itemType: 4
-  icon: {fileID: 21300000, guid: 7d2d7cb18b60d624d820d69344ff73a4, type: 3}
-  itemName: Wooden Window
-  description: Store your items
+  icon: {fileID: 21300000, guid: 1bbc7ac7b9c0e4e4e87c5b25e946b945, type: 3}
+  itemName: Furnace
+  description: Smelt your items
   isStackable: 0
   maxStack: 1
   damage: 20
@@ -39,7 +39,7 @@ MonoBehaviour:
   healthChange: 10
   hungerChange: 10
   thirstChange: 10
-  ghost: {fileID: -5468892905582498443, guid: b8622d9083620384ea2a0490f08f8bd6, type: 3}
+  ghost: {fileID: 5307980896686587222, guid: 421b43c38fe680441a4d273cd7c53e50, type: 3}
   isFuel: 0
   outcome: {fileID: 0}
   outcomeAmount: 1

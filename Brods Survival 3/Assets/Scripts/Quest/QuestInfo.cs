@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,25 +28,35 @@ public class QuestInfo : ScriptableObject
     public string finalWords;
 
     [Header("Rewards")]
-   // public int coinReward;
+    // public int coinReward;
     public int happinessGain;
-   // public string rewardItem1;
-   // public string rewardItem2;
+    // public string rewardItem1;
+    // public string rewardItem2;
 
     [Header("Requirements")]
     //add in here gun shot req
     public string shootRequirmentItem;
     public int shootRequirementAmount;
-
+    [Space]
     public string buildRequirmentItem;
     public int buildRequirementAmount;
-    [Space]
-    public string Action;
-    public int timesPerformed;
     [Space]
     public string resourcesBroken;
     public int timesResourcesBroken;
     [Space]
-    public string builtThisMany;
-    public int timesBuilt;
+    public string itemSmelted;
+    public int timesSmelted;
+    [Space]
+    public string craftItem;
+    public int timesCrafting;
+    [Space]
+    public string killType;
+    public int timesKilled;
+
+
+
+    //public string Action;
+    // public int timesPerformed;
+
+
 }

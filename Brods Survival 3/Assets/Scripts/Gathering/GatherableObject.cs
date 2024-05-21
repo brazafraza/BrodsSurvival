@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class GatherableObject : MonoBehaviour
@@ -12,9 +13,17 @@ public class GatherableObject : MonoBehaviour
     public ItemSO[] prefferedTools;
     public float toolMultiplier = 2;
 
+    public int breakCount;
+
+    public NPC npc;
+
     bool hasDied;
 
-
+    private void Start()
+    {
+       npc = FindObjectOfType<NPC>();
+       
+    }
 
     private void Update()
     {
@@ -22,7 +31,19 @@ public class GatherableObject : MonoBehaviour
         {
             if (deathType == DeathType.Destroy)
             {
+                if (npc.firstTimeInteraction == false && CompareTag("Tree"))
+                {
+                    npc.shouldRecordBreak = true;
+                }
+
+                if (npc.shouldRecordBreak && CompareTag("Tree"))
+                {
+                    breakCount++;
+                    npc.ReceiveBreakCount(breakCount);
+
+                }
                 Destroy(gameObject);
+
             }
             else if (deathType == DeathType.EnablePhysics)
             {
@@ -33,10 +54,35 @@ public class GatherableObject : MonoBehaviour
 
                     GetComponent<Rigidbody>().AddTorque(Vector3.right * 20);
 
+                    if (npc.firstTimeInteraction == false && CompareTag("Tree"))
+                    {
+                        npc.shouldRecordBreak = true;
+                    }
+
+                    if (npc.shouldRecordBreak && CompareTag("Tree"))
+                    {
+                        breakCount++;
+                        npc.ReceiveBreakCount(breakCount);
+
+                    }
                     Destroy(gameObject, 10f);
                 }
-                else
+                else 
+                {
+                    if (npc.firstTimeInteraction == false && CompareTag("Tree"))
+                    {
+                        npc.shouldRecordBreak = true;
+                    }
+
+                    if (npc.shouldRecordBreak && CompareTag("Tree"))
+                    {
+                        breakCount++;
+                        npc.ReceiveBreakCount(breakCount);
+
+                    }
                     Destroy(gameObject);
+                }
+                    
             }
 
 
