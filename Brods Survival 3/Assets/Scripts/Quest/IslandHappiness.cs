@@ -13,6 +13,8 @@ public class IslandHappiness : MonoBehaviour
 
 
     public StatsBar happinessBar;
+    public StatsBar timeBarL;
+    public StatsBar timeBarR;
     public DayNightCycle dayNightCycle;
 
     [Header("UI")]
@@ -30,8 +32,7 @@ public class IslandHappiness : MonoBehaviour
 
     private void Start()
     {
-        happiness = maxHappiness;
-       
+        happiness = maxHappiness;  
     }
 
     private void Update()
@@ -42,14 +43,31 @@ public class IslandHappiness : MonoBehaviour
         happinessBar.numberText.text = happiness.ToString("f0");
         happinessBar.bar.fillAmount = happiness / 100;
 
-       // EndOfDay();
-       // BarConsequences();
+       
 
-        
+        if (dayNightCycle.timeOfDay >= 1350)
+        {
+            timeBarR.numberText.text = dayNightCycle.timeOfDay.ToString("f0");
+            timeBarR.bar.fillAmount = dayNightCycle.timeOfDay / 2700f;
 
-        if (Input.GetKeyDown(KeyCode.J))
+            timeBarL.numberText.text = dayNightCycle.timeOfDay.ToString("f0");
+            timeBarL.bar.fillAmount = dayNightCycle.timeOfDay / 2700f;
+
+        }
+
+        if (dayNightCycle.timeOfDay <= 1350)
+        {
+            timeBarR.numberText.text = dayNightCycle.timeOfDay.ToString("f0");
+            timeBarR.bar.fillAmount = 1 - (dayNightCycle.timeOfDay / 2700f);
+
+            timeBarL.numberText.text = dayNightCycle.timeOfDay.ToString("f0");
+            timeBarL.bar.fillAmount = 1 - (dayNightCycle.timeOfDay / 2700f);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.J ) && Input.GetKeyDown(KeyCode.LeftShift))
             happiness = happiness - 10;
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && Input.GetKeyDown(KeyCode.LeftShift))
             happiness = happiness + 10;
     }
 

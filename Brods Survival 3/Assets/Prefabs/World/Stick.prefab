@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3534378457862049892}
   - component: {fileID: 2414766717498258958}
   - component: {fileID: 3233722108014487888}
-  - component: {fileID: 4028052456585562870}
+  - component: {fileID: 4072012216608362199}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7537752354488062956}
   m_LocalRotation: {x: -0.99812865, y: -0, z: -0, w: -0.061150134}
-  m_LocalPosition: {x: -1412.3, y: 82.41133, z: 549.3771}
+  m_LocalPosition: {x: -1412.09, y: 82.41133, z: 549.3771}
   m_LocalScale: {x: -6.24756, y: 7.1833963, z: 14.0767355}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5f7a55b0f725116438794d97124e9440, type: 2}
   stackSize: 1
---- !u!65 &4028052456585562870
-BoxCollider:
+--- !u!64 &4072012216608362199
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,6 +109,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.01746495, y: 0.020485006, z: 0.05235948}
-  m_Center: {x: 0.0005969736, y: 0, z: -0.020322148}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6659003102834268097, guid: d946d0fbdd89bb1468e956e05ae8bdad, type: 3}

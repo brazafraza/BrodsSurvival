@@ -216,9 +216,11 @@ MonoBehaviour:
   deathType: 0
   gatherDatas:
   - {fileID: 11400000, guid: 0cfbf4f90b2a826479e7ffb0bd7fe14d, type: 2}
-  hits: 0
+  hits: 5
   prefferedTools: []
   toolMultiplier: 2
+  breakCount: 0
+  npc: {fileID: 0}
 --- !u!1 &1108218652907952867
 GameObject:
   m_ObjectHideFlags: 0

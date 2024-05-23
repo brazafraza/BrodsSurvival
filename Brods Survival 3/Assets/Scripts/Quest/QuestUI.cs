@@ -12,7 +12,7 @@ public class QuestUI : MonoBehaviour
     public QuestManager questManager;
     public NPC npc;
     public InventoryManager inventoryManager;
-    
+
     public TextMeshProUGUI dialogText;
 
     public Button option1BTN;
@@ -20,83 +20,120 @@ public class QuestUI : MonoBehaviour
 
     public bool menuOpen;
     public bool questAccepted = false;
+    public bool playerLookingAtNPC = false;
 
     private void Start()
     {
         questMenu.SetActive(false);
     }
+
     private void Update()
     {
-        if (!menuOpen)
-        {
-           
-            CloseDialogUI();
+        CheckIfLookingAtNPC();
 
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (menuOpen && questAccepted)
-            {
-               // Debug.Log("Quest UI declined");
-                questAccepted = false;
-                menuOpen = false;
-                CloseDialogUI();
-            }
-            if (menuOpen)
-            {
-                menuOpen = false;
-                CloseDialogUI();
-                
-            }
-            else if (!menuOpen)
+            if (!menuOpen && playerLookingAtNPC)
             {
                 menuOpen = true;
+                Debug.Log("Open menu");
                 OpenDialogUI();
-            }
 
+                if (npc.firstTimeInteraction)
+                {
+                    questAccepted = true;
+                }
+            }
+            else if (menuOpen)
+            {
+                menuOpen = false;
+                Debug.Log("Close menu");
+                CloseDialogUI();
+            }
         }
+        // if raycast hits object tagged NPC, player can press E to interact. set questAccepted to true and open menu
+        //if (Input.GetKeyDown(KeyCode.E) && menuOpen)
+        //{
+        //    menuOpen = false;
+        //    Debug.Log("Close menu");
+        //    CloseDialogUI();
+        //}
+        //if (Input.GetKeyDown(KeyCode.E) && playerLookingAtNPC && !menuOpen)
+        //{
+        //    menuOpen = true;
+        //    Debug.Log("Open menu");
+        //    OpenDialogUI();
+        //    if (npc.firstTimeInteraction)
+        //    {
+        //        questAccepted = true;
+        //    }     
+        //}
+        //if (menuOpen && questAccepted && playerLookingAtNPC)
+        //{
+        //    questAccepted = false;
+        //    menuOpen = false;
+        //    CloseDialogUI();
+        //}
+        //if (menuOpen && playerLookingAtNPC)
+        //{
+        //    menuOpen = true;
+        //    OpenDialogUI();
+        //    // CloseDialogUI();
+        //}
+        //else if (!menuOpen)
+        //{
+        //    menuOpen = true;
+        //    //OpenDialogUI();
+        //}
+
         if (menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened)
         {
             cameraLook.canMove = false;
             cameraLook.lockCursor = false;
         }
-        if (!menuOpen &&!questManager.isQuestMenuOpen &&!inventoryManager.opened)
+        if (!menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened)
         {
             cameraLook.canMove = true;
             cameraLook.lockCursor = true;
         }
 
-
         if (questAccepted)
         {
             npc.StartConversation();
         }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            questAccepted = true;
-        }
-
-
     }
+
+    private void CheckIfLookingAtNPC()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.gameObject == npc.gameObject)
+            {
+                playerLookingAtNPC = true;
+            }
+            else
+            {
+                playerLookingAtNPC = false;
+            }
+        }
+        else
+        {
+            playerLookingAtNPC = false;
+        }
+    }
+
     public void OpenDialogUI()
     {
-        //disable mouse and cam movement
         menuOpen = true;
-       
         questMenu.SetActive(true);
     }
 
     public void CloseDialogUI()
     {
         menuOpen = false;
-        
         questMenu.SetActive(false);
-    }
-
-    private void openKey()
-    {
-
     }
 }

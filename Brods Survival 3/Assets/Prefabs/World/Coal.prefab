@@ -112,7 +112,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathType: 0
-  gatherDatas: []
-  hits: 0
+  gatherDatas:
+  - {fileID: 11400000, guid: 0f1c045f835ff744d87c12e6b495058f, type: 2}
+  hits: 5
   prefferedTools: []
   toolMultiplier: 2
+  breakCount: 0
+  npc: {fileID: 0}

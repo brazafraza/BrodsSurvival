@@ -21,22 +21,36 @@ public class GatherableObject : MonoBehaviour
 
     private void Start()
     {
-       npc = FindObjectOfType<NPC>();
+       npc = FindAnyObjectByType<NPC>();
+
+        if (npc == null)
+        {
+            Debug.Log("No npc found bear");
+        }
        
     }
 
     private void Update()
     {
+        //if (npc == null)
+        //{
+        //    npc = FindAnyObjectByType<NPC>();
+
+        //}
+
         if (hits <= 0 && !hasDied)
         {
+           
+
             if (deathType == DeathType.Destroy)
             {
-                if (npc.firstTimeInteraction == false && CompareTag("Tree"))
+               // npc = FindAnyObjectByType<NPC>();
+                if (CompareTag("Tree") && npc.firstTimeInteraction == false)
                 {
                     npc.shouldRecordBreak = true;
                 }
 
-                if (npc.shouldRecordBreak && CompareTag("Tree"))
+                if (CompareTag("Tree") && npc.shouldRecordBreak)
                 {
                     breakCount++;
                     npc.ReceiveBreakCount(breakCount);
@@ -47,34 +61,37 @@ public class GatherableObject : MonoBehaviour
             }
             else if (deathType == DeathType.EnablePhysics)
             {
+
+               //npc = FindAnyObjectByType<NPC>();
                 if (GetComponent<Rigidbody>() != null)
                 {
                     GetComponent<Rigidbody>().isKinematic = false;
                     GetComponent<Rigidbody>().useGravity = true;
 
                     GetComponent<Rigidbody>().AddTorque(Vector3.right * 20);
-
-                    if (npc.firstTimeInteraction == false && CompareTag("Tree"))
+                    if (CompareTag("Tree") && npc.firstTimeInteraction == false)
                     {
                         npc.shouldRecordBreak = true;
                     }
 
-                    if (npc.shouldRecordBreak && CompareTag("Tree"))
+                    if (CompareTag("Tree") && npc.shouldRecordBreak)
                     {
                         breakCount++;
                         npc.ReceiveBreakCount(breakCount);
 
                     }
+
                     Destroy(gameObject, 10f);
                 }
                 else 
                 {
-                    if (npc.firstTimeInteraction == false && CompareTag("Tree"))
+                  //  npc = FindAnyObjectByType<NPC>();
+                    if (CompareTag("Tree") && npc.firstTimeInteraction == false)
                     {
                         npc.shouldRecordBreak = true;
                     }
 
-                    if (npc.shouldRecordBreak && CompareTag("Tree"))
+                    if (CompareTag("Tree") && npc.shouldRecordBreak)
                     {
                         breakCount++;
                         npc.ReceiveBreakCount(breakCount);
