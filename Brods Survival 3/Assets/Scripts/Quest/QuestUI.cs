@@ -108,7 +108,7 @@ public class QuestUI : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 7.5f))
         {
             if (hit.collider.gameObject == npc.gameObject)
             {

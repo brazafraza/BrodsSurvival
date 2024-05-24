@@ -75,8 +75,8 @@ GameObject:
   - component: {fileID: 1113212060691963799}
   - component: {fileID: 1024162392799102105}
   - component: {fileID: 1024162392799102110}
-  - component: {fileID: 1024162392799102109}
   - component: {fileID: 1024162392799102108}
+  - component: {fileID: 1024162392799102109}
   - component: {fileID: 1024162392799102107}
   - component: {fileID: 1024162392799102106}
   m_Layer: 0
@@ -95,7 +95,7 @@ Transform:
   m_GameObject: {fileID: 1108176281468609297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.6240845, y: 0, z: -36.58374}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1111302881966347471}
@@ -146,6 +146,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &1024162392799102108
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108176281468609297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.62
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1024162392799102109
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -159,19 +172,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.55, y: 1.3006146, z: 2.0069275}
   m_Center: {x: 0, y: 0.6296927, z: 0.11201477}
---- !u!135 &1024162392799102108
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108176281468609297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1024162392799102107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,17 +188,17 @@ MonoBehaviour:
   agent: {fileID: 0}
   isAttacking: 0
   health: 100
-  damage: 0
-  maxChaseDistance: 0
-  minAttackDistance: 1.5
-  maxAttackDistance: 2.5
+  damage: 50
+  maxChaseDistance: 50
+  minAttackDistance: 3
+  maxAttackDistance: 5
   attackCooldown: 2
   currentWanderTime: 0
-  wanderWaitTime: 10
-  canMoveWhileAttacking: 0
+  wanderWaitTime: 2
+  canMoveWhileAttacking: 1
   walkSpeed: 2
   runSpeed: 3.5
-  wanderRange: 5
+  wanderRange: 10
   walk: 0
   run: 0
 --- !u!114 &1024162392799102106

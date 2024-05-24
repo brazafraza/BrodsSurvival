@@ -57,6 +57,7 @@ public class BasicAI : MonoBehaviour
         }
     }
 
+    
     private void Update()
     {
         if (health <= 0)
@@ -66,14 +67,19 @@ public class BasicAI : MonoBehaviour
         }
 
         UpdateAnimations();
-
+        if (target == null)
+            Debug.Log("No target");
         if (target != null)
         {
             if (Vector3.Distance(target.transform.position, transform.position) > maxChaseDistance)
                 target = null;
 
             if (!isAttacking)
+            {
                 Chase();
+                Debug.Log("Chasing");
+            }
+                
         }
         else
         {

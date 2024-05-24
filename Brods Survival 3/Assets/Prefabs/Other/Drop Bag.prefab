@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4241999416790102413}
   - component: {fileID: 2494883073707647086}
   - component: {fileID: 4299796901828733586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drop Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}

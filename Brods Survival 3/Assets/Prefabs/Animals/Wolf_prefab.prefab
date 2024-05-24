@@ -1055,7 +1055,7 @@ Transform:
   m_GameObject: {fileID: 7233705879273903295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8182983, y: 0.000022888184, z: -36.598877}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7238767976079033467}
@@ -1148,17 +1148,17 @@ MonoBehaviour:
   agent: {fileID: 0}
   isAttacking: 0
   health: 100
-  damage: 0
-  maxChaseDistance: 0
-  minAttackDistance: 1.5
-  maxAttackDistance: 2.5
+  damage: 50
+  maxChaseDistance: 50
+  minAttackDistance: 3
+  maxAttackDistance: 5
   attackCooldown: 2
   currentWanderTime: 0
-  wanderWaitTime: 10
-  canMoveWhileAttacking: 0
+  wanderWaitTime: 2
+  canMoveWhileAttacking: 1
   walkSpeed: 2
   runSpeed: 3.5
-  wanderRange: 5
+  wanderRange: 10
   walk: 0
   run: 0
 --- !u!114 &7233705879273903292
