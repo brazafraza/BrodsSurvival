@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1954746024498242773}
   m_Layer: 0
   m_Name: Swan_goose_prefab
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

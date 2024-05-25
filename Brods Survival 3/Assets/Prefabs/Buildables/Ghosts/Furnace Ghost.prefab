@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3676032746392913281}
   - component: {fileID: 5307980896686587222}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Furnace Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildPrefab: {fileID: 5454507757831400163, guid: 97db61aa03841964ca1ca0001681eaa0, type: 3}
   canBuild: 0
+  col: []
 --- !u!1 &8074145438686867747
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +59,7 @@ GameObject:
   - component: {fileID: 6154939560308030888}
   - component: {fileID: 4362782058964770584}
   - component: {fileID: 3941626411904535612}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Furnace
   m_TagString: Untagged
   m_Icon: {fileID: 0}

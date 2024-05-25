@@ -8,6 +8,9 @@ TagManager:
   - Weapon
   - Fists
   - Tree
+  - Resource
+  - Enemy
+  - Foundation
   layers:
   - Default
   - TransparentFX
@@ -19,8 +22,8 @@ TagManager:
   - Player
   - Post Processing
   - WalkThrough
-  - 
-  - 
+  - Buildable
+  - BuildPreview
   - 
   - 
   - 

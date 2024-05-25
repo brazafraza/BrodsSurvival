@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8427689452170526393}
   m_Layer: 0
   m_Name: MetalRock
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -117,3 +117,5 @@ MonoBehaviour:
   hits: 5
   prefferedTools: []
   toolMultiplier: 2
+  breakCount: 0
+  npc: {fileID: 0}

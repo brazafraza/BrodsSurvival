@@ -19,9 +19,17 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 2239
       objectReference: {fileID: 0}
+    - target: {fileID: 3456069223669516694, guid: 5b1c9ad2bf27fe548aa8be9649f0f120, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5548929071425958496, guid: 5b1c9ad2bf27fe548aa8be9649f0f120, type: 3}
       propertyPath: m_Name
       value: Wooden Window Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548929071425958496, guid: 5b1c9ad2bf27fe548aa8be9649f0f120, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6880255703497954094, guid: 5b1c9ad2bf27fe548aa8be9649f0f120, type: 3}
       propertyPath: m_Mesh
@@ -109,3 +117,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildPrefab: {fileID: 5548929071425958496, guid: 5b1c9ad2bf27fe548aa8be9649f0f120, type: 3}
   canBuild: 0
+  col: []

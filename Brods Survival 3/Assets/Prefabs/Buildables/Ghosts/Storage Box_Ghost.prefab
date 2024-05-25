@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6178622046325878667}
   - component: {fileID: 7072825207267646815}
   - component: {fileID: 7178230167321699079}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6152154983953892002}
   - component: {fileID: 6002216643270826033}
   - component: {fileID: 646781861493169373}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Storage Box_Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,9 @@ MonoBehaviour:
   slotPrefab: {fileID: -2725318150690823803, guid: e89633efc6bf16f4a9311bca1a33e0f9, type: 3}
   storageSize: 12
   opened: 0
+  dropPos: {fileID: 0}
+  dropBag: {fileID: 0}
+  isFurnace: 0
 --- !u!65 &6152154983953892002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -163,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildPrefab: {fileID: 8419254182125340408, guid: 1d820c3934ff39f42ad3224dfd4b1bad, type: 3}
   canBuild: 0
+  col: []
 --- !u!23 &646781861493169373
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -216,7 +220,7 @@ GameObject:
   - component: {fileID: 5630764183431293935}
   - component: {fileID: 1787911732941197024}
   - component: {fileID: 5373102253291902880}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

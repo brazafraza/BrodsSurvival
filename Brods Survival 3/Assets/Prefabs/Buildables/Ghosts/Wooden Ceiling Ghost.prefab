@@ -11,9 +11,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c6de469324c40794dac8f5441f5feb33, type: 2}
+    - target: {fileID: 709299237685573088, guid: 4e37527966e040644b0ddc5b87827b13, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3999272163942950408, guid: 4e37527966e040644b0ddc5b87827b13, type: 3}
       propertyPath: m_Name
       value: Wooden Ceiling Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 3999272163942950408, guid: 4e37527966e040644b0ddc5b87827b13, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4774788594938736503, guid: 4e37527966e040644b0ddc5b87827b13, type: 3}
       propertyPath: m_Mesh
@@ -109,3 +117,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildPrefab: {fileID: 3999272163942950408, guid: 4e37527966e040644b0ddc5b87827b13, type: 3}
   canBuild: 0
+  col: []

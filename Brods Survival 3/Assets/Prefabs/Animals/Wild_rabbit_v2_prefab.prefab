@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3093345710430451766}
   m_Layer: 0
   m_Name: Wild_rabbit_v2_prefab
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

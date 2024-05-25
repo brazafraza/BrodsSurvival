@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingHandler : MonoBehaviour
@@ -7,7 +5,7 @@ public class BuildingHandler : MonoBehaviour
     public Slot slotInUse;
     public Transform offGroundPoint;
     [Space]
-    public float range = 5f;
+    public float range = 10f;
     public Color allowed;
     public Color blocked;
     [Space]
@@ -16,37 +14,25 @@ public class BuildingHandler : MonoBehaviour
 
     public NPC npc;
     public int buildCount = 0;
-    private float gridSize = 0f; // Grid size is initially 0
-    private bool gridSizeSet = false; // Flag to check if the grid size has been set
-    private Vector3 gridOrigin; // Origin of the grid
+
+    public float offset = 1.0f;
+    //public float offset = 1.0f;
+    public float gridSize = 1.0f;
+    private Vector3 currentrot = Vector3.zero;
+
+    public Transform cam;
+    public RaycastHit hit;
+    public LayerMask layer;
+
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
         UpdateBuilding();
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (gridSize > 0 && gridSizeSet)
-        {
-            DrawGridGizmos();
-        }
-    }
-
-    private void DrawGridGizmos()
-    {
-        Gizmos.color = Color.green;
-
-        float halfRange = range / 2.0f;
-
-        for (float x = gridOrigin.x - halfRange; x <= gridOrigin.x + halfRange; x += gridSize)
-        {
-            for (float z = gridOrigin.z - halfRange; z <= gridOrigin.z + halfRange; z += gridSize)
-            {
-                Vector3 pos = new Vector3(x, gridOrigin.y, z);
-                Gizmos.DrawWireCube(pos, new Vector3(gridSize, 0.1f, gridSize));
-            }
-        }
     }
 
     public void UpdateColors()
@@ -64,16 +50,7 @@ public class BuildingHandler : MonoBehaviour
 
     public void UpdateBuilding()
     {
-        if (slotInUse == null)
-        {
-            if (ghost != null)
-            {
-                Destroy(ghost.gameObject);
-            }
-            return;
-        }
-
-        if (slotInUse.stackSize <= 0 || slotInUse.data == null)
+        if (slotInUse == null || slotInUse.stackSize <= 0 || slotInUse.data == null)
         {
             if (ghost != null)
             {
@@ -84,70 +61,61 @@ public class BuildingHandler : MonoBehaviour
 
         if (ghost == null)
         {
-            ghost = Instantiate(slotInUse.data.ghost, offGroundPoint.transform.position, GetComponentInParent<Player>().transform.rotation);
+            ghost = Instantiate(slotInUse.data.ghost, offGroundPoint.transform.position, Quaternion.identity);
         }
 
         UpdateColors();
 
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, range, layer))
         {
             if (hit.transform.GetComponent<BuildBlocked>() == null)
             {
                 Vector3 hitPoint = hit.point;
 
-                // Snap to grid if grid size is set
-                Vector3 snappedPosition = gridSizeSet ? SnapToGrid(hitPoint) : hitPoint;
-                ghost.transform.position = snappedPosition;
-                ghost.transform.rotation = GetComponentInParent<Player>().transform.rotation;
+                // Adjust ghost position
+                ghost.AdjustPosition(hitPoint);
+
+                Vector3 adjustedPosition = ghost.transform.position;
+                Vector3 currentRotation = ghost.transform.rotation.eulerAngles;
+
+                adjustedPosition = new Vector3(Mathf.Round(adjustedPosition.x), Mathf.Round(adjustedPosition.y), Mathf.Round(adjustedPosition.z)); // Snap to grid
+                adjustedPosition *= gridSize; // Snap to grid
+
+                ghost.transform.position = adjustedPosition;
+                ghost.transform.rotation = Quaternion.Euler(currentRotation);
                 canBuild = true;
+
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    currentRotation += new Vector3(0, 30, 0);
+                    ghost.transform.rotation = Quaternion.Euler(currentRotation);
+                }
             }
             else
             {
                 ghost.transform.position = offGroundPoint.position;
-                ghost.transform.rotation = GetComponentInParent<Player>().transform.rotation;
+                ghost.transform.rotation = Quaternion.identity;
                 canBuild = false;
             }
         }
         else
         {
             ghost.transform.position = offGroundPoint.position;
-            ghost.transform.rotation = GetComponentInParent<Player>().transform.rotation;
+            ghost.transform.rotation = Quaternion.identity;
             canBuild = false;
         }
 
         if (Input.GetButtonDown("Fire1") && canBuild && ghost.canBuild)
         {
-            slotInUse.stackSize--;
-            slotInUse.UpdateSlot();
-
             Vector3 buildPosition = ghost.transform.position;
             Quaternion buildRotation = ghost.transform.rotation;
 
             GameObject newObj = Instantiate(ghost.buildPrefab, buildPosition, buildRotation);
 
-            // Set the grid size if it hasn't been set yet
-            if (!gridSizeSet)
-            {
-                MeshRenderer[] childRenderers = newObj.GetComponentsInChildren<MeshRenderer>();
-                if (childRenderers.Length > 0)
-                {
-                    Bounds combinedBounds = new Bounds(childRenderers[0].bounds.center, Vector3.zero);
-                    foreach (MeshRenderer renderer in childRenderers)
-                    {
-                        combinedBounds.Encapsulate(renderer.bounds);
-                    }
-                    gridSize = Mathf.Max(combinedBounds.size.x, combinedBounds.size.z); // Assuming the object is rectangular or cube-like
-                    gridSizeSet = true;
-                    gridOrigin = buildPosition; // Set the origin of the grid
-                    Debug.Log($"Grid size set to {gridSize}, origin set to {gridOrigin}");
-                }
-                else
-                {
-                    Debug.LogError("Newly instantiated object does not have any child MeshRenderer components.");
-                }
-            }
+            slotInUse.stackSize--;
+            slotInUse.UpdateSlot();
 
             // Flag event
             if (!npc.firstTimeInteraction)
@@ -163,13 +131,5 @@ public class BuildingHandler : MonoBehaviour
         }
     }
 
-    private Vector3 SnapToGrid(Vector3 position)
-    {
-        if (gridSize == 0) return position; // If gridSize is not set, don't snap
 
-        float x = Mathf.Round((position.x - gridOrigin.x) / gridSize) * gridSize + gridOrigin.x;
-        float y = gridOrigin.y; // Ensuring the Y axis is consistent with the grid origin
-        float z = Mathf.Round((position.z - gridOrigin.z) / gridSize) * gridSize + gridOrigin.z;
-        return new Vector3(x, y, z);
-    }
 }

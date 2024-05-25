@@ -83,6 +83,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden Ramp Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 7066266033883323384, guid: 6da6d0ddd9960f547b2aaabf52af6afa, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100755545928679421, guid: 6da6d0ddd9960f547b2aaabf52af6afa, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 9124077574438997510, guid: 6da6d0ddd9960f547b2aaabf52af6afa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -109,3 +117,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildPrefab: {fileID: 7066266033883323384, guid: 6da6d0ddd9960f547b2aaabf52af6afa, type: 3}
   canBuild: 0
+  col: []

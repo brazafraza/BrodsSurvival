@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 1024162392799102106}
   m_Layer: 0
   m_Name: Brown_bear_prefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   attackCooldown: 2
   currentWanderTime: 0
   wanderWaitTime: 2
-  canMoveWhileAttacking: 1
+  canMoveWhileAttacking: 0
   walkSpeed: 2
   runSpeed: 3.5
   wanderRange: 10

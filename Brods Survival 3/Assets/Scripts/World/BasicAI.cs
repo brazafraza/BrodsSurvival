@@ -67,8 +67,8 @@ public class BasicAI : MonoBehaviour
         }
 
         UpdateAnimations();
-        if (target == null)
-            Debug.Log("No target");
+        //if (target == null)
+            //Debug.Log("No target");
         if (target != null)
         {
             if (Vector3.Distance(target.transform.position, transform.position) > maxChaseDistance)
@@ -205,6 +205,10 @@ public class BasicAI : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null)
-            target = other.transform;
+            if(gameObject.CompareTag("Enemy"))
+            {
+                target = other.transform;
+            }
+            
     }
 }

@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 3025726335505743036}
   m_Layer: 0
   m_Name: Rock1
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,3 +344,5 @@ MonoBehaviour:
   hits: 8
   prefferedTools: []
   toolMultiplier: 2
+  breakCount: 0
+  npc: {fileID: 0}

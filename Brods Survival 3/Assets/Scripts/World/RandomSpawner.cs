@@ -38,6 +38,7 @@ public class RandomSpawner : MonoBehaviour
 
     private void Update()
     {
+        islandHappy();
         if (currentTimer < repsawnTime)
             currentTimer += Time.deltaTime;
         else
@@ -91,30 +92,22 @@ public class RandomSpawner : MonoBehaviour
 
         while (!foundSpot)
         {
-            Vector3 spawnPos = transform.position;
-           // Vector3 rotationPos = transform.rotation;
-            
-           
-            //make random rotation here
-
-            spawnPos.x += Random.Range(-width, width);
-            spawnPos.y += height;
-            spawnPos.z += Random.Range(-length, length);
+            // Calculate a random position within the defined bounds
+            Vector3 spawnPos = new Vector3(
+                Random.Range(transform.position.x - width / 2, transform.position.x + width / 2),
+                transform.position.y + height, // Spawn at the top of the height, adjust as necessary
+                Random.Range(transform.position.z - length / 2, transform.position.z + length / 2)
+            );
 
             Quaternion randomYRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-
-
 
             if (Physics.Raycast(spawnPos, Vector3.down, out RaycastHit hit, Mathf.Infinity))
             {
                 if (hit.transform.GetComponent<Terrain>() != null)
                 {
                     GameObject spawnedObj = Instantiate(obj, hit.point, randomYRotation);
-
                     spawnedEntities.Add(spawnedObj);
-
                     foundSpot = true;
-                    
                 }
             }
         }
@@ -122,48 +115,95 @@ public class RandomSpawner : MonoBehaviour
         yield return null;
     }
 
+
     public void islandHappy()
     {
-        if (islandHappiness.happiness == 10f)
+        if (islandHappiness.happiness == 10f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 200);
         }
-        if (islandHappiness.happiness == 20f)
+        if (islandHappiness.happiness == 20f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 150);
         }
-        if (islandHappiness.happiness == 30f)
+        if (islandHappiness.happiness == 30f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 130);
         }
-        if (islandHappiness.happiness == 40f)
+        if (islandHappiness.happiness == 40f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 115);
         }
-        if (islandHappiness.happiness == 50f)
+        if (islandHappiness.happiness == 50f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = originalRespawnTime; 
         }
-        if (islandHappiness.happiness == 60f)
+        if (islandHappiness.happiness == 60f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 85);
         }
-        if (islandHappiness.happiness == 70f)
+        if (islandHappiness.happiness == 70f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 70);
         }
-        if (islandHappiness.happiness == 80f)
+        if (islandHappiness.happiness == 80f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 65);
         }
-        if (islandHappiness.happiness == 90f)
+        if (islandHappiness.happiness == 90f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 40);
         }
     
-        if (islandHappiness.happiness == 100f)
+        if (islandHappiness.happiness == 100f && (gameObject.CompareTag("Resource") || gameObject.CompareTag("Tree")))
         {
             repsawnTime = repsawnTime - ((repsawnTime / 100) * 25);
         }
+
+        //enemies respawn
+        if (islandHappiness.happiness == 10f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 25);
+        }
+        if (islandHappiness.happiness == 20f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 40);
+        }
+        if (islandHappiness.happiness == 30f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 65);
+        }
+        if (islandHappiness.happiness == 40f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 70);
+        }
+        if (islandHappiness.happiness == 50f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = originalRespawnTime;
+        }
+        if (islandHappiness.happiness == 60f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 85);
+        }
+        if (islandHappiness.happiness == 70f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 115);
+        }
+        if (islandHappiness.happiness == 80f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 115);
+        }
+        if (islandHappiness.happiness == 90f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 130);
+        }
+
+        if (islandHappiness.happiness == 100f && gameObject.CompareTag("Enemy"))
+        {
+            repsawnTime = repsawnTime - ((repsawnTime / 100) * 150);
+        }
     }
 }
+
+
+

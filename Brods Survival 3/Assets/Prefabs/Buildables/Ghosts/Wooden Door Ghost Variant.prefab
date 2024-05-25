@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3257539596030358464, guid: e594576af32361447a191a8362f8d11b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3270946252751875458, guid: e594576af32361447a191a8362f8d11b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -71,6 +75,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden Door Ghost Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8363616588603778767, guid: e594576af32361447a191a8362f8d11b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3301227973945440974, guid: e594576af32361447a191a8362f8d11b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e594576af32361447a191a8362f8d11b, type: 3}
@@ -93,3 +101,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildPrefab: {fileID: 8363616588603778767, guid: e594576af32361447a191a8362f8d11b, type: 3}
   canBuild: 0
+  col: []

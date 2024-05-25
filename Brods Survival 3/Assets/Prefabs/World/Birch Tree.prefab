@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1176338105336727151}
   m_Layer: 0
   m_Name: Birch Tree
-  m_TagString: Tree
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

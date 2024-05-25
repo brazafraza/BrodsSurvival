@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pine_tree1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d4758023302b2db48828fed00bce60be, type: 3}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d4758023302b2db48828fed00bce60be, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -89,3 +93,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: Pine Tree
+  playerInRange: 0
