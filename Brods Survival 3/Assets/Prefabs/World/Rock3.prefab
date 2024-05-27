@@ -114,7 +114,7 @@ MonoBehaviour:
   deathType: 0
   gatherDatas:
   - {fileID: 11400000, guid: bf98ea26c8ba9964497d9b8c0d2784ec, type: 2}
-  hits: 5
+  hits: 8
   prefferedTools:
   - {fileID: 0}
   toolMultiplier: 2

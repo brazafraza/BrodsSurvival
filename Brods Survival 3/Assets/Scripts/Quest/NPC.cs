@@ -59,6 +59,8 @@ public class NPC : MonoBehaviour
 
     public bool questFaileds;
 
+    public TextMeshProUGUI failedOrComplete;
+
     [Header("Scripts")]
     public Weapon weapon;
     public QuestUI questUI;
@@ -244,6 +246,9 @@ public class NPC : MonoBehaviour
         }
         if (dayNightCycle.timeOfDay > 2150 && dayNightCycle.timeOfDay < 2151 && questFaileds)
         {
+            failedOrComplete.text = ("Quest failed, I am upset!");
+            CleanseText();
+
             Debug.Log("QuestFailed");
             islandHappiness.happiness -= 10;
             resetShootCount = true;
@@ -344,6 +349,10 @@ public class NPC : MonoBehaviour
 
     private void ReceiveRewardAndCompleteQuest()
     {
+        
+        failedOrComplete.text = ("Quest completed, you've made me happy!");
+        CleanseText();
+
         Debug.Log("adding happ");
         QuestManager.Instance.MarkQuestCompleted(currentActiveQuest);
 
@@ -413,4 +422,16 @@ public class NPC : MonoBehaviour
         Debug.Log("Kill count received: " + killCount);
         questKillCount = killCount;
     }
+
+    public void CleanseText()
+    {
+       
+        Invoke("CleanseText22", 5f);
+    }
+
+    public void CleanseText22()
+    {
+        failedOrComplete.text = ("");
+    }
+
 }
