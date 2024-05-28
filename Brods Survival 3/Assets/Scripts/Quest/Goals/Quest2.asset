@@ -20,7 +20,9 @@ MonoBehaviour:
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: 'Build 5 structures for me.
+
+    Do not disapoint me!'
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

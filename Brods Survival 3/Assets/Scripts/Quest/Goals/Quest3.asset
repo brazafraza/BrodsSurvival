@@ -20,7 +20,9 @@ MonoBehaviour:
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: 'Again. Shoot your bow 10 times for me.
+
+'
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

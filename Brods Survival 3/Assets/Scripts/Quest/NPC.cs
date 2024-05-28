@@ -93,7 +93,10 @@ public class NPC : MonoBehaviour
             questShootCount = 0;
             questBuildCount = 0;
         }
+
+       // if(play)
     }
+
 
     public void StartConversation()
     {

@@ -12,6 +12,8 @@ public class QuestUI : MonoBehaviour
     public QuestManager questManager;
     public NPC npc;
     public InventoryManager inventoryManager;
+    public GameMenu gameMenu;
+    public Tutorial tutorial;
 
     public TextMeshProUGUI dialogText;
 
@@ -21,15 +23,23 @@ public class QuestUI : MonoBehaviour
     public bool menuOpen;
     public bool questAccepted = false;
     public bool playerLookingAtNPC = false;
+    public bool playerLookingAtTut = false;
 
     private void Start()
     {
         questMenu.SetActive(false);
+        gameMenu = FindAnyObjectByType<GameMenu>();
     }
 
     private void Update()
     {
         CheckIfLookingAtNPC();
+        CheckIfLookingAtTut();
+
+        if (playerLookingAtNPC)
+        {
+          //  interactionText
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -86,16 +96,42 @@ public class QuestUI : MonoBehaviour
         //    //OpenDialogUI();
         //}
 
-        if (menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened)
+        //if (gameMenu.opened)
+        //{
+        //    Debug.Log("enable");
+        //    cameraLook.canMove = false;
+        //    cameraLook.lockCursor = false;
+        //}
+
+        //else if ((menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened))
+        //{
+        //    Debug.Log("QUEST UI: mouse disabled");
+        //    cameraLook.canMove = false;
+        //    cameraLook.lockCursor = false;
+        //}
+
+        //if ((!menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened) || !gameMenu.opened)
+        //{
+        //    Debug.Log("QUEST UI: mouse enabled");
+        //    cameraLook.canMove = true;
+        //    cameraLook.lockCursor = true;
+        //}
+
+        if (menuOpen || questManager.isQuestMenuOpen || inventoryManager.opened || gameMenu.opened)
         {
+            //enable mouse
             cameraLook.canMove = false;
             cameraLook.lockCursor = false;
         }
-        if (!menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened)
+        
+        if(!menuOpen && !questManager.isQuestMenuOpen && !inventoryManager.opened && !gameMenu.opened)
         {
+            //disable mouse
             cameraLook.canMove = true;
             cameraLook.lockCursor = true;
         }
+
+        
 
         if (questAccepted)
         {
@@ -122,6 +158,28 @@ public class QuestUI : MonoBehaviour
         else
         {
             playerLookingAtNPC = false;
+        }
+    }
+
+    private void CheckIfLookingAtTut()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 7.5f))
+        {
+            if (hit.collider.gameObject == tutorial.gameObject)
+            {
+                playerLookingAtTut = true;
+            }
+            //else
+            //{
+            //    playerLookingAtTut = false;
+            //}
+        }
+        else
+        {
+            playerLookingAtTut = false;
         }
     }
 

@@ -10,6 +10,11 @@ public class InteractionHandler : MonoBehaviour
     public float interactionRange = 2f;
     public KeyCode interactionKey = KeyCode.E;
     public TextMeshProUGUI interactionText;
+    public QuestUI questUi;
+
+    public Tutorial tutorial;
+
+    public GameObject hudCrosshair;
     void Update()
     {
         
@@ -20,9 +25,26 @@ public class InteractionHandler : MonoBehaviour
     private void Interact()
     {
         RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactionRange, interactableLayers))
+  
+        if(tutorial.tutorialActive)
         {
+            interactionText.text = "Press 'E' to read stone tablet";
+            hudCrosshair.SetActive(false);
+            interactionText.gameObject.SetActive(true);
+
+        }
+    
+        else if (questUi.playerLookingAtNPC && !questUi.menuOpen)
+        {
+            Debug.Log("text should appear");
+            interactionText.text = $"Press 'E' to speak to the island";
+            hudCrosshair.SetActive(false);
+            interactionText.gameObject.SetActive(true);
+
+        }
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, interactionRange, interactableLayers))
+        {
+            hudCrosshair.SetActive(false);
             Pickup pickup = hit.transform.GetComponent<Pickup>();
             Storage storage = hit.transform.GetComponent<Storage>();
             Water water = hit.transform.GetComponent<Water>();
@@ -55,9 +77,11 @@ public class InteractionHandler : MonoBehaviour
             {
                 interactionText.gameObject.SetActive(true);
 
+                
+
                 if (pickup != null)
                 {
-                    interactionText.text = $"Pickup x{pickup.stackSize} {pickup.data.itemName}";
+                    interactionText.text = $"Press 'E' to pickup x{pickup.stackSize} {pickup.data.itemName}";
                 }
 
                 if (storage != null)
@@ -72,14 +96,19 @@ public class InteractionHandler : MonoBehaviour
             }
             else
             {
+               // Debug.Log("1st inactive");
                 interactionText.gameObject.SetActive(false);
+                hudCrosshair.SetActive(true);
             }
 
-       
+
         }
+
         else
         {
+           // Debug.Log("2nd inactive");
             interactionText.gameObject.SetActive(false);
+            hudCrosshair.SetActive(true);
         }
     }
 }

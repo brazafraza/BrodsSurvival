@@ -13,6 +13,9 @@ public class GameMenu : MonoBehaviour
     public enum MenuMode { Main, Pause}
     public MenuMode menuMode;
 
+    public GameObject menuAlt;
+    public bool settingsMenuActive = false;
+
     [Header("General")]
     public Transform UI;
     public GameObject newGameButton;
@@ -38,6 +41,15 @@ public class GameMenu : MonoBehaviour
 
     private void Update()
     {
+        if (settingsMenuActive)
+        {
+            menuAlt.SetActive(false);
+        }
+        if (!settingsMenuActive)
+        {
+            menuAlt.SetActive(true);
+        }
+
         if (menuMode == MenuMode.Main)
             
         {
@@ -46,18 +58,28 @@ public class GameMenu : MonoBehaviour
         }
         else if(menuMode == MenuMode.Pause)
         {
+
+
             if (Input.GetKeyDown(KeyCode.Escape))
+            {
                 opened = !opened;
+            }
+                
 
             if (opened)
             {
                 UI.transform.localPosition = new Vector3(0, 0, 0); Time.timeScale = 0;
                 Time.timeScale = 0;
+
+             //   Cursor.visible = true;
+               // Cursor.lockState = CursorLockMode.None;
             }    
             else
             {
                 UI.transform.localPosition = new Vector3(-10000, 0, 0);
                 Time.timeScale = 1;
+                //Cursor.visible = false;
+               // Cursor.lockState = CursorLockMode.Locked;
             }
                 
         }
@@ -138,6 +160,7 @@ public class GameMenu : MonoBehaviour
 
     public void Settings()
     {
+        settingsMenuActive = true;
         settingsMenu.SetActive(true);
     }
 

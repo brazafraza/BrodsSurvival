@@ -19,7 +19,7 @@ namespace AQUAS_Lite
         void Start()
         {
             Set();
-            waterObject.SetActive(true);
+           // waterObject.SetActive(true);
         }
         void Set()
         {
