@@ -13,16 +13,16 @@ public class PlayerStats : MonoBehaviour
     public float hunger;
     public float maxHunger = 100f;
     [Space]
-    public float thirst;
-    public float maxThirst = 100f;
+    //public float thirst;
+    //public float maxThirst = 100f;
 
     [Header("Stats Depletion")]
-    public float hungerDepletion = 0.5f;
+    public float hungerDepletion = 0.05f;
     public float thirstDepletion = 0.75f;
 
     [Header("Stats Damage")]
     public float hungerDamage = 1.5f;
-    public float thirstDamage = 2.25f;
+    //public float thirstDamage = 2.25f;
     public float drownDamage = 0.2f;
 
     [Header("UI")]
@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour
         //      change this in future?
         health = maxHealth;
         hunger = maxHunger;
-        thirst = maxThirst;
+       // thirst = maxThirst;
     }
     private void Update()
     {
@@ -54,8 +54,8 @@ public class PlayerStats : MonoBehaviour
         hungerBar.numberText.text = hunger.ToString("f0");
         hungerBar.bar.fillAmount = hunger / 100;
 
-        thirstBar.numberText.text = thirst.ToString("f0");
-        thirstBar.bar.fillAmount = thirst / 100;
+       // thirstBar.numberText.text = thirst.ToString("f0");
+       // thirstBar.bar.fillAmount = thirst / 100;
     }
 
     private void UpdateStats()
@@ -69,14 +69,14 @@ public class PlayerStats : MonoBehaviour
             health = maxHealth;
         }
 
-        if (thirst <= 0)
-        {
-            thirst = 0;
-        }
-        if (thirst >= maxThirst)
-        {
-            thirst = maxThirst;
-        }
+        //if (thirst <= 0)
+        //{
+          //  thirst = 0;
+       // }
+       // if (thirst >= maxThirst)
+       // {
+           // thirst = maxThirst;
+        //}
 
         if (hunger <= 0)
         {
@@ -93,10 +93,10 @@ public class PlayerStats : MonoBehaviour
             health -= hungerDamage * Time.deltaTime;
         }
 
-        if (thirst <= 0)
-        {
-            health -= thirstDamage * Time.deltaTime;
-        }
+        //if (thirst <= 0)
+       // {
+       //     health -= thirstDamage * Time.deltaTime;
+       // }
 
         if (GetComponentInChildren<PostProcessingHandler>().Water != null)
             health -= drownDamage * Time.deltaTime;
@@ -107,10 +107,10 @@ public class PlayerStats : MonoBehaviour
             hunger -= hungerDepletion * Time.deltaTime;
         }
 
-        if (thirst > 0)
-        {
-            thirst -= thirstDepletion * Time.deltaTime;
-        }
+       // if (thirst > 0)
+       // {
+        //    thirst -= thirstDepletion * Time.deltaTime;
+        //}
 
     }
 

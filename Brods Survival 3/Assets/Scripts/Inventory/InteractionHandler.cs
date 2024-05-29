@@ -25,15 +25,17 @@ public class InteractionHandler : MonoBehaviour
     private void Interact()
     {
         RaycastHit hit;
-  
-        if(tutorial.tutorialActive)
+
+        if (questUi.playerLookingAtTut && !tutorial.tutorialActive)
         {
+            Debug.Log("text should appear");
             interactionText.text = "Press 'E' to read stone tablet";
             hudCrosshair.SetActive(false);
             interactionText.gameObject.SetActive(true);
 
         }
-    
+
+
         else if (questUi.playerLookingAtNPC && !questUi.menuOpen)
         {
             Debug.Log("text should appear");

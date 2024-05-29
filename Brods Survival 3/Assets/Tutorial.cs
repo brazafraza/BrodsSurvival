@@ -23,7 +23,7 @@ public class Tutorial : MonoBehaviour
         if (questUi.playerLookingAtTut)
         {
             playerLookingAt = true;
-            textActive = true;
+            //textActive = true;
 
             if (Input.GetKeyDown(KeyCode.E))
             {

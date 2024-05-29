@@ -38,7 +38,7 @@ public class SaveHandler : MonoBehaviour
         // PLAYER STATS
         FindObjectOfType<PlayerStats>().health = SaveData.Singleton.currentHealth;
         FindObjectOfType<PlayerStats>().hunger = SaveData.Singleton.currentHunger;
-        FindObjectOfType<PlayerStats>().thirst = SaveData.Singleton.currentThirst;
+     //   FindObjectOfType<PlayerStats>().thirst = SaveData.Singleton.currentThirst;
 
         // DAY NIGHT CYCLE
         FindObjectOfType<DayNightCycle>().timeOfDay = SaveData.Singleton.timeOfDay;
@@ -233,7 +233,7 @@ public class SaveHandler : MonoBehaviour
         // PLAYER STATS
         SaveData.Singleton.currentHealth = FindObjectOfType<PlayerStats>().health;
         SaveData.Singleton.currentHunger = FindObjectOfType<PlayerStats>().hunger;
-        SaveData.Singleton.currentThirst = FindObjectOfType<PlayerStats>().thirst;
+      //  SaveData.Singleton.currentThirst = FindObjectOfType<PlayerStats>().thirst;
 
         // DAY NIGHT CYCLE
         SaveData.Singleton.timeOfDay = FindObjectOfType<DayNightCycle>().timeOfDay;

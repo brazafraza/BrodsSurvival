@@ -20,7 +20,7 @@ public class DeathScreen : MonoBehaviour
 
         player.GetComponent<PlayerStats>().health = player.GetComponent<PlayerStats>().maxHealth;
         player.GetComponent<PlayerStats>().hunger = player.GetComponent<PlayerStats>().maxHunger;
-        player.GetComponent<PlayerStats>().thirst = player.GetComponent<PlayerStats>().maxThirst;
+        //player.GetComponent<PlayerStats>().thirst = player.GetComponent<PlayerStats>().maxThirst;
 
         player.cam.lockCursor = false;
         player.cam.canMove = false;

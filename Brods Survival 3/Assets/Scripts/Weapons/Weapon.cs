@@ -414,16 +414,21 @@ public class Weapon : MonoBehaviour
 
     public void CheckForHit()
     {
-
-
-
         RaycastHit hit;
 
         if (Physics.SphereCast(shootPoint.position, 0.2f, shootPoint.forward, out hit, weaponData.range, shootableLayers))
         {
-
             Hit();
             Debug.Log("hit");
+
+            // If hit an enemy, apply damage
+            BasicAI ai = hit.transform.GetComponent<BasicAI>();
+            if (ai != null)
+            {
+                ai.health -= weaponData.damage;
+                Debug.Log($"Hitted and damaged: {hit.transform.name}");
+            }
+
             //Gizmos.color = Color.green;
             //Gizmos.DrawWireSphere(hit.point, 0.2f);
         }
@@ -431,10 +436,12 @@ public class Weapon : MonoBehaviour
         {
             Miss();
             Debug.Log("miss");
+
             //Gizmos.color = Color.red;
             //Gizmos.DrawWireSphere(hit.point, 0.2f);
         }
     }
+
 
 
     public void Miss()

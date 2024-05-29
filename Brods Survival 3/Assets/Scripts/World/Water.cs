@@ -9,6 +9,6 @@ public class Water : MonoBehaviour
 
     public void Drink(PlayerStats stats)
     {
-        stats.thirst += drink;
+       // stats.thirst += drink;
     }
 }
