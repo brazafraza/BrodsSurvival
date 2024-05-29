@@ -44,6 +44,7 @@ public class Storage : MonoBehaviour
     {
        
     }
+
     public void GenerateSlots()
     {
         List<StorageSlot> slotList = new List<StorageSlot>();
