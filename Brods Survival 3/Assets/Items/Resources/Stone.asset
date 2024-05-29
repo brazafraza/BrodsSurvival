@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 4
   itemType: 0
-  icon: {fileID: 21300000, guid: 540b206cf4b853746bb0c1b17c538ee2, type: 3}
+  icon: {fileID: 21300000, guid: 3b1e3e5127ac941fa9bddde4bf7bfa50, type: 3}
   itemName: Stone
   description: Break rock
   isStackable: 1

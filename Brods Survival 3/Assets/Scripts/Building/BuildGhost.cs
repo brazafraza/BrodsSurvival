@@ -7,7 +7,7 @@ public class BuildGhost : MonoBehaviour
 {
     public GameObject buildPrefab;
     public bool canBuild;
-    public List<Collider> col = new List<Collider>();
+   [HideInInspector] public List<Collider> col = new List<Collider>();
 
     private void Start()
     {

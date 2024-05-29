@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   itemType: 4
-  icon: {fileID: 21300000, guid: f92e52c244e2482448f3bba7d1a24987, type: 3}
+  icon: {fileID: 21300000, guid: 673198bf494cc442db29dd15b16e9c62, type: 3}
   itemName: Wooden Ramp
   description: Store your items
   isStackable: 0

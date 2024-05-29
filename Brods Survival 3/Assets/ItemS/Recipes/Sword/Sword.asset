@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 2e8b9dc045fc5854499f292d579563c1, type: 3}
+  icon: {fileID: 21300000, guid: cc25d2b9c1e1d4a889e7b54a6635225f, type: 3}
   recipeName: Sword
   requirements:
   - {fileID: 11400000, guid: 4113ce2d695911741b5ed896b1c213fd, type: 2}

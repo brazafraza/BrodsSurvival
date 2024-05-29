@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Wooden Foundation
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 36ffb09d9fe217b478bc2c051693c53c, type: 3}
+  icon: {fileID: 21300000, guid: 3874f9f46c7f44f1da160386074f9b21, type: 3}
   recipeName: Wooden Foundation
   requirements:
   - {fileID: 11400000, guid: e50f09d394c92d749a9cda0c5af212e1, type: 2}

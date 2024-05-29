@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Stone Hatchet
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 6a1324ab7615ab14b9476a1f77768b6d, type: 3}
+  icon: {fileID: 21300000, guid: 9c19f16bc2b014bb69ffa9378949e8f1, type: 3}
   recipeName: Stone Hatchet
   requirements:
   - {fileID: 11400000, guid: 831e244757db97642ae9c6e28e29a8f4, type: 2}

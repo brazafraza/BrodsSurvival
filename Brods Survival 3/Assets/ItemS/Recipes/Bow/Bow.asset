@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: eb6839bc9278dc642b69ffac25d5f4c3, type: 3}
+  icon: {fileID: 21300000, guid: c61092c671a194af98b63599ff9a00e4, type: 3}
   recipeName: Bow
   requirements:
   - {fileID: 11400000, guid: be545a32ca4eb644e8a44f1663861d04, type: 2}

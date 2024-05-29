@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 5
   itemType: 0
-  icon: {fileID: 21300000, guid: a000b094c9adaaf4691220f218894b20, type: 3}
+  icon: {fileID: 21300000, guid: e4e60fa6ac7b24d8280c0b370da6bf4c, type: 3}
   itemName: Coal
   description: Burn Stuff
   isStackable: 1

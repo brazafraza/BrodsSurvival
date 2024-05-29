@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Wooden Ceiling
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 6088ac821c1446c4292cb3d8a82bb85d, type: 3}
+  icon: {fileID: 21300000, guid: 407d2333b0ded40a1a2ecb2cb1dd9b94, type: 3}
   recipeName: Wooden Ceiling
   requirements:
   - {fileID: 11400000, guid: 641cc783662d8d44aad3fa18836bed5f, type: 2}

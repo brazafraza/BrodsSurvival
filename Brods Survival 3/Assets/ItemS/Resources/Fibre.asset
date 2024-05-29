@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 5
   itemType: 0
-  icon: {fileID: 21300000, guid: c6f7fca0ed1ac4fde8ce2a7120d98bc0, type: 3}
+  icon: {fileID: 21300000, guid: 04dd8e48931b546939f98e67b7dd74cd, type: 3}
   itemName: Fibre
   description: A bundle of plant fibre.
   isStackable: 1

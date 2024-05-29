@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Wooden Wall
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: a880f4cc0501c8e4db01f86a7cc70c46, type: 3}
+  icon: {fileID: 21300000, guid: d407f56e1069e4837921a75901f63cbe, type: 3}
   recipeName: Wooden Wall
   requirements:
   - {fileID: 11400000, guid: e50f09d394c92d749a9cda0c5af212e1, type: 2}

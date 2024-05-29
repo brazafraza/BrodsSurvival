@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Grass
   m_EditorClassIdentifier: 
   footsteps:
-  - {fileID: 8300000, guid: c7e995776eb52744396cd6a0cd0047ab, type: 3}
-  - {fileID: 8300000, guid: 8ccf083a1c0d0dc438bc0117cefe183b, type: 3}
-  - {fileID: 8300000, guid: a30d546828af74a45b6ee44f2946a14f, type: 3}
+  - {fileID: 8300000, guid: 81acf857561f0d549a4cf6f342427c5c, type: 3}
+  - {fileID: 8300000, guid: 214b33f9386698f4cb7306496a7d3e7b, type: 3}
+  - {fileID: 8300000, guid: 2297ba72fa7859b438a01828e19e1a66, type: 3}

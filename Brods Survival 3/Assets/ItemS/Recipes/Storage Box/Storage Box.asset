@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Storage Box
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: f2359515b77d00c46a950841adca9f43, type: 3}
+  icon: {fileID: 21300000, guid: b7daef7a729ef450a8d95b6af30ad83a, type: 3}
   recipeName: Storage Box
   requirements:
   - {fileID: 11400000, guid: f231c0206186c024e8983b8441be34a9, type: 2}

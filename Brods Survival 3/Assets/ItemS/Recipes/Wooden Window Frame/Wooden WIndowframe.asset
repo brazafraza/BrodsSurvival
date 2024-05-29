@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Wooden WIndowframe
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 7d2d7cb18b60d624d820d69344ff73a4, type: 3}
+  icon: {fileID: 21300000, guid: a02979a51d7d9411ebb64498470c51c3, type: 3}
   recipeName: Wooden Windowframe
   requirements:
   - {fileID: 11400000, guid: 525dafd9554f0174cbbb80d6a25cdc8e, type: 2}

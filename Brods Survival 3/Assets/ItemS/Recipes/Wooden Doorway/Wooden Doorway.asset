@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Wooden Doorway
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: b41c08b7942ed01408115e570d4d73d7, type: 3}
+  icon: {fileID: 21300000, guid: 4afe61f1b41c64b8db8bd1f9866d0e64, type: 3}
   recipeName: Wooden Doorway
   requirements:
   - {fileID: 11400000, guid: 339788550d19a3b4faba49b838f45d7e, type: 2}
