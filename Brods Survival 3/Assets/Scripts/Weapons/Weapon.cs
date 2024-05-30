@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
     // Define the delegate type for the shoot event
     public delegate void ShootAction();
     // Define the shoot event
-    public static event ShootAction OnShoot;
+  //  public static event ShootAction OnShoot;
 
     private void Start()
     {
@@ -254,7 +254,7 @@ public class Weapon : MonoBehaviour
         if (muzzleFlash != null)
         {
             muzzleFlash.Stop();
-            muzzleFlash.startRotation = Random.Range(0, 360);
+            //muzzleFlash.startRotation = Random.Range(0, 360);
             muzzleFlash.Play();
         }
         else
@@ -407,6 +407,7 @@ public class Weapon : MonoBehaviour
         }
 
         anim.SetTrigger("Swing");
+        audioS.PlayOneShot(weaponData.shootSound);
         currentFireRate = 0;
 
         // CheckForHit called from other script
@@ -421,12 +422,27 @@ public class Weapon : MonoBehaviour
             Hit();
             Debug.Log("hit");
 
+            //if statemetns to check what tag is hit (rock, wood etc)
+            if (hit.collider.CompareTag("Stone"))
+                audioS.PlayOneShot(weaponData.hitStoneSound);
+            if (hit.collider.CompareTag("Tree"))
+                audioS.PlayOneShot(weaponData.hitTreeSound);
+            if (hit.collider.CompareTag("Metal"))
+                audioS.PlayOneShot(weaponData.hitMetalSound);
+            if (hit.collider.CompareTag("Passive"))
+                audioS.PlayOneShot(weaponData.hitAnimalSound);
+            if (hit.collider.CompareTag("Enemy"))
+                audioS.PlayOneShot(weaponData.hitAnimalSound);
+
+
             // If hit an enemy, apply damage
             BasicAI ai = hit.transform.GetComponent<BasicAI>();
             if (ai != null)
             {
                 ai.health -= weaponData.damage;
                 Debug.Log($"Hitted and damaged: {hit.transform.name}");
+
+               
             }
 
             //Gizmos.color = Color.green;

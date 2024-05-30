@@ -15,6 +15,10 @@ public class Furnace : MonoBehaviour
     public GameObject VFX;
     public NPC npc;
 
+    public AudioSource audioS;
+    public AudioClip furnaceOn;
+    public AudioClip furnaceOff;
+
     public int smeltCount;
 
     private float currentFuelTimer;
@@ -25,6 +29,7 @@ public class Furnace : MonoBehaviour
 
     private void Start()
     {
+        audioS = GetComponent<AudioSource>();
         npc = FindObjectOfType<NPC>();
 
         if (GetComponent<Storage>() != null)
@@ -81,6 +86,7 @@ public class Furnace : MonoBehaviour
             if (fuelSlot == null)
             {
                 TurnOff();
+               // audioS.PlayOneShot(furnaceOff);
             }
             else
             {
@@ -154,11 +160,14 @@ public class Furnace : MonoBehaviour
     {
         isOn = true;
         VFX.SetActive(true);
+        audioS.PlayOneShot(furnaceOn);
     }
 
 
     public void TurnOff()
     {
+        audioS.PlayOneShot(furnaceOff);
+
         isOn = false;
 
         VFX.SetActive(false);

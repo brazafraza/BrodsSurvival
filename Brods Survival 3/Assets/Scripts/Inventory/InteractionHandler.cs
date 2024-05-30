@@ -12,6 +12,9 @@ public class InteractionHandler : MonoBehaviour
     public TextMeshProUGUI interactionText;
     public QuestUI questUi;
 
+    public AudioSource audioS;
+    public AudioClip pickUp;
+
     public Tutorial tutorial;
 
     public GameObject hudCrosshair;
@@ -57,6 +60,7 @@ public class InteractionHandler : MonoBehaviour
                 if (pickup != null)
                 {
                     GetComponentInParent<WindowHandler>().inventory.AddItem(pickup);
+                    audioS.PlayOneShot(pickUp);
                 }
 
                 if (storage != null)

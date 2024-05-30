@@ -8,6 +8,14 @@ public class GatherableObject : MonoBehaviour
     public enum DeathType { Destroy, EnablePhysics}
     public DeathType deathType;
 
+    private AudioSource audioS;
+
+    //audio clips
+    public AudioClip treeBreak;
+    public AudioClip stoneBreak;
+    public AudioClip metalBreak;
+    public AudioClip animalBreak;
+
     public GatherDataSO[] gatherDatas;
     public int hits;
     public ItemSO[] prefferedTools;
@@ -21,7 +29,8 @@ public class GatherableObject : MonoBehaviour
 
     private void Start()
     {
-       npc = FindAnyObjectByType<NPC>();
+        audioS = GetComponent<AudioSource>();
+        npc = FindAnyObjectByType<NPC>();
 
         if (npc == null)
         {
@@ -56,6 +65,12 @@ public class GatherableObject : MonoBehaviour
                     npc.ReceiveBreakCount(breakCount);
 
                 }
+                if (CompareTag("Stone"))
+                    audioS.PlayOneShot(stoneBreak);
+                if (CompareTag("Metal"))
+                    audioS.PlayOneShot(stoneBreak);
+                if (CompareTag("Enemy") || CompareTag("Passive"))
+                    audioS.PlayOneShot(animalBreak);
                 Destroy(gameObject);
 
             }
@@ -80,6 +95,9 @@ public class GatherableObject : MonoBehaviour
                         npc.ReceiveBreakCount(breakCount);
 
                     }
+                    if (CompareTag("Tree"))
+                        audioS.PlayOneShot(treeBreak);
+
 
                     Destroy(gameObject, 10f);
                 }
@@ -117,7 +135,7 @@ public class GatherableObject : MonoBehaviour
         if (hits <= 0)
             return;
 
-        bool usingRightTool = false;
+       // bool usingRightTool = false;
 
        //CHECK FOR TOOL
        if (prefferedTools.Length > 0)
@@ -126,7 +144,7 @@ public class GatherableObject : MonoBehaviour
             {
                 if (prefferedTools[i] == toolUsed)
                 {
-                    usingRightTool = true;
+                //   usingRightTool = true;
                     break;
                 }
             }             

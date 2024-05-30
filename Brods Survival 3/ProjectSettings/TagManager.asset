@@ -11,6 +11,9 @@ TagManager:
   - Resource
   - Enemy
   - Foundation
+  - Stone
+  - Metal
+  - Passive
   layers:
   - Default
   - TransparentFX

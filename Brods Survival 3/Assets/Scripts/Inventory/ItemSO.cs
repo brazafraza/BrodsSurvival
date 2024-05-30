@@ -45,6 +45,10 @@ public class ItemSO : ScriptableObject
     [Space]
    
     public AudioClip shootSound;
+    public AudioClip hitAnimalSound;
+    public AudioClip hitMetalSound;
+    public AudioClip hitTreeSound;
+    public AudioClip hitStoneSound;
     public AudioClip reloadSound;
     public AudioClip takeoutSound;
     public AudioClip emptySound;

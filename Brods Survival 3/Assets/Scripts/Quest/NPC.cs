@@ -12,6 +12,11 @@ public class NPC : MonoBehaviour
     public bool playerInRange;
     public bool isTalkingWithPlayer;
 
+
+    public AudioSource audioS;
+    public AudioClip questC;
+    public AudioClip questF;
+
     TextMeshProUGUI npcDialogText;
 
     Button optionButton1;
@@ -74,6 +79,8 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
+
+        audioS = GetComponent<AudioSource>();
         // questUI
         npcDialogText = questUI.dialogText;
 
@@ -262,6 +269,8 @@ public class NPC : MonoBehaviour
             resetKillCount = true;
             questFaileds = false;
 
+            audioS.PlayOneShot(questF);
+
             if (activeQuestIndex < quests.Count - 1)
             {
                 activeQuestIndex++;
@@ -371,6 +380,8 @@ public class NPC : MonoBehaviour
         resetBuildCount = true;
         resetSmeltCount = true;
         resetKillCount = true;
+
+        audioS.PlayOneShot(questC);
 
     }
 

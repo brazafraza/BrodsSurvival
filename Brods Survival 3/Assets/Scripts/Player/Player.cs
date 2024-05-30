@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 
     [Header("Footsteps")]
     private AudioSource audioS;
+    public AudioClip swimmingSound;
 
 
     private float currentCrouchLength;
@@ -238,7 +239,7 @@ public class Player : MonoBehaviour
                 moveDir.y = -3f;
         }
 
-
+        audioS.PlayOneShot(swimmingSound);
         moveDir = transform.TransformDirection(moveDir);
         moveDir *= Time.deltaTime;
 

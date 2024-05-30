@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class IslandHappiness : MonoBehaviour
 {
-  
+
 
 
     //add clock bar too
+
 
 
 
@@ -32,6 +33,7 @@ public class IslandHappiness : MonoBehaviour
 
     private void Start()
     {
+
         happiness = maxHappiness;  
     }
 

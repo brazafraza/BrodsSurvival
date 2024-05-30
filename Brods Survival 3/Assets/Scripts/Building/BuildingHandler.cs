@@ -15,6 +15,9 @@ public class BuildingHandler : MonoBehaviour
     public NPC npc;
     public int buildCount = 0;
 
+    public AudioSource audioS;
+    public AudioClip buildSound;
+
     public float offset = 1.0f;
     //public float offset = 1.0f;
     public float gridSize = 1.0f;
@@ -113,6 +116,8 @@ public class BuildingHandler : MonoBehaviour
             Quaternion buildRotation = ghost.transform.rotation;
 
             GameObject newObj = Instantiate(ghost.buildPrefab, buildPosition, buildRotation);
+
+            audioS.PlayOneShot(buildSound);
 
             slotInUse.stackSize--;
             slotInUse.UpdateSlot();

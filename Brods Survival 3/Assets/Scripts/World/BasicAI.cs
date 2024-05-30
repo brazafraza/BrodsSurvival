@@ -13,6 +13,12 @@ public class BasicAI : MonoBehaviour
 
     public float health = 100f;
 
+    [Header("Audio")]
+    public AudioSource audioS;
+    public AudioClip animalWalk;
+    public AudioClip animalAg;
+    public AudioClip animalDie;
+
     [Header("Attack Settings")]
     public float damage;
     public float maxChaseDistance;
@@ -33,13 +39,14 @@ public class BasicAI : MonoBehaviour
     public float runSpeed = 3.5f;
     public float wanderRange = 5f;
 
-    private string debugState = null;
+  //  private string debugState = null;
 
     public bool walk;
     public bool run;
 
     private void Start()
     {
+        audioS = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentWanderTime = wanderWaitTime;
@@ -62,6 +69,7 @@ public class BasicAI : MonoBehaviour
     {
         if (health <= 0)
         {
+            audioS.PlayOneShot(animalDie);
             Die();
             return;
         }
@@ -134,6 +142,7 @@ public class BasicAI : MonoBehaviour
             agent.SetDestination(wanderPos);
             walk = true;
             run = false;
+            audioS.PlayOneShot(animalWalk);
         }
         else
         {
@@ -158,6 +167,7 @@ public class BasicAI : MonoBehaviour
             Debug.LogWarning("NavMeshAgent is not properly initialized or not on a NavMesh.");
             return;
         }
+        audioS.PlayOneShot(animalAg);
 
         agent.SetDestination(target.position);
         walk = false;
