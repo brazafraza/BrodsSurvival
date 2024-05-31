@@ -201,6 +201,7 @@ public class Weapon : MonoBehaviour
 
         audioS.PlayOneShot(weaponData.shootSound);
 
+
         currentFireRate = 0;
 
         slotEquippedOn.stackSize--;
@@ -407,7 +408,8 @@ public class Weapon : MonoBehaviour
         }
 
         anim.SetTrigger("Swing");
-        audioS.PlayOneShot(weaponData.shootSound);
+        //audioS.PlayOneShot(weaponData.shootSound);
+
         currentFireRate = 0;
 
         // CheckForHit called from other script
@@ -421,18 +423,12 @@ public class Weapon : MonoBehaviour
         {
             Hit();
             Debug.Log("hit");
+            if (gameObject.CompareTag("MWeapon"))
+            {
+                audioS.PlayOneShot(weaponData.shootSound);
+            }
+            
 
-            //if statemetns to check what tag is hit (rock, wood etc)
-            if (hit.collider.CompareTag("Stone"))
-                audioS.PlayOneShot(weaponData.hitStoneSound);
-            if (hit.collider.CompareTag("Tree"))
-                audioS.PlayOneShot(weaponData.hitTreeSound);
-            if (hit.collider.CompareTag("Metal"))
-                audioS.PlayOneShot(weaponData.hitMetalSound);
-            if (hit.collider.CompareTag("Passive"))
-                audioS.PlayOneShot(weaponData.hitAnimalSound);
-            if (hit.collider.CompareTag("Enemy"))
-                audioS.PlayOneShot(weaponData.hitAnimalSound);
 
 
             // If hit an enemy, apply damage
@@ -450,6 +446,10 @@ public class Weapon : MonoBehaviour
         }
         else
         {
+            if (gameObject.CompareTag("MWeapon"))
+            {
+                audioS.PlayOneShot(weaponData.shootSound);
+            }
             Miss();
             Debug.Log("miss");
 
@@ -468,6 +468,7 @@ public class Weapon : MonoBehaviour
     public void Hit()
     {
         anim.SetTrigger("Hit");
+
     }
 
     public void ExecuteHit()

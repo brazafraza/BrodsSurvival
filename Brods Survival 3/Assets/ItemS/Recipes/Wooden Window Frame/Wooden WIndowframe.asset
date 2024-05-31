@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Wooden WIndowframe
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: a02979a51d7d9411ebb64498470c51c3, type: 3}
-  recipeName: Wooden Windowframe
+  recipeName: Wooden Window
   requirements:
   - {fileID: 11400000, guid: 525dafd9554f0174cbbb80d6a25cdc8e, type: 2}
   craftingTime: 5
-  outcome: {fileID: 11400000, guid: 92bad029497315b42a9eeea8465047f5, type: 2}
+  outcome: {fileID: 11400000, guid: 8b44e3e7cedec2545a7e9ace0981f8b7, type: 2}
   outcomeAmount: 1

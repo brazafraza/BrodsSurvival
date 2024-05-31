@@ -147,9 +147,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathType: 1
-  treeBreak: {fileID: 0}
+  treeBreak: {fileID: 8300000, guid: 2f020b822a7d25e4e9d7e8a700b05b22, type: 3}
   stoneBreak: {fileID: 0}
   metalBreak: {fileID: 0}
+  animalBreak: {fileID: 0}
+  treeHit: {fileID: 8300000, guid: 5f7ca7ce09b7feb4a8cda500f0d5555f, type: 3}
+  stoneHit: {fileID: 0}
+  metalHit: {fileID: 0}
+  animalHit: {fileID: 0}
   gatherDatas:
   - {fileID: 11400000, guid: 4a79cc2a6427dac4a8189573a844e1e6, type: 2}
   hits: 5
@@ -158,6 +163,7 @@ MonoBehaviour:
   toolMultiplier: 2.5
   breakCount: 0
   npc: {fileID: 0}
+  playerAS: {fileID: 0}
 --- !u!54 &9065988893026029524
 Rigidbody:
   m_ObjectHideFlags: 0

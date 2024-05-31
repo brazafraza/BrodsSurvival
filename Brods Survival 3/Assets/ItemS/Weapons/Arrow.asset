@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 6
   itemType: 0
-  icon: {fileID: 21300000, guid: 2167a8fd3c49f974d838c41e851c948f, type: 3}
+  icon: {fileID: 21300000, guid: 5714b8a5d333397499aee25d4709d519, type: 3}
   itemName: Arrow
   description: yay
   isStackable: 1
@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 0}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}

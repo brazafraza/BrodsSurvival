@@ -9,12 +9,18 @@ public class GatherableObject : MonoBehaviour
     public DeathType deathType;
 
     private AudioSource audioS;
+    private AudioSource audioSPlayer;
 
     //audio clips
     public AudioClip treeBreak;
     public AudioClip stoneBreak;
     public AudioClip metalBreak;
     public AudioClip animalBreak;
+    public AudioClip treeHit;
+    public AudioClip stoneHit;
+    public AudioClip metalHit;
+    public AudioClip animalHit;
+
 
     public GatherDataSO[] gatherDatas;
     public int hits;
@@ -27,10 +33,15 @@ public class GatherableObject : MonoBehaviour
 
     bool hasDied;
 
+    public GameObject playerAS;
+
     private void Start()
     {
         audioS = GetComponent<AudioSource>();
         npc = FindAnyObjectByType<NPC>();
+
+        playerAS = GameObject.Find("Player");
+        audioSPlayer = playerAS.GetComponent<AudioSource>();
 
         if (npc == null)
         {
@@ -49,7 +60,29 @@ public class GatherableObject : MonoBehaviour
 
         if (hits <= 0 && !hasDied)
         {
-           
+            if (CompareTag("Stone"))
+            {
+                audioSPlayer.PlayOneShot(stoneBreak);
+             //   Debug.Log("audio stone");
+            }
+            if (CompareTag("Metal"))
+            {
+                audioSPlayer.PlayOneShot(metalBreak);
+               Debug.Log("metal broken");
+            }
+            if (CompareTag("Enemy") || CompareTag("Passive"))
+
+            {
+                audioSPlayer.PlayOneShot(animalBreak);
+                //Debug.Log("audio animal");
+            }
+            if (CompareTag("Enemy") || CompareTag("Passive"))
+
+            {
+                audioSPlayer.PlayOneShot(treeBreak);
+                //Debug.Log("audio tree");
+            }
+
 
             if (deathType == DeathType.Destroy)
             {
@@ -65,12 +98,7 @@ public class GatherableObject : MonoBehaviour
                     npc.ReceiveBreakCount(breakCount);
 
                 }
-                if (CompareTag("Stone"))
-                    audioS.PlayOneShot(stoneBreak);
-                if (CompareTag("Metal"))
-                    audioS.PlayOneShot(stoneBreak);
-                if (CompareTag("Enemy") || CompareTag("Passive"))
-                    audioS.PlayOneShot(animalBreak);
+                
                 Destroy(gameObject);
 
             }
@@ -96,7 +124,7 @@ public class GatherableObject : MonoBehaviour
 
                     }
                     if (CompareTag("Tree"))
-                        audioS.PlayOneShot(treeBreak);
+                        audioSPlayer.PlayOneShot(treeBreak);
 
 
                     Destroy(gameObject, 10f);
@@ -155,6 +183,28 @@ public class GatherableObject : MonoBehaviour
         int selectedGatherData = Random.Range(0, gatherDatas.Length);
 
         inventory.AddItem(gatherDatas[selectedGatherData].item, gatherDatas[selectedGatherData].amount);
+
+        if (CompareTag("Tree"))
+        {
+            audioS.PlayOneShot(treeHit);
+            Debug.Log("audio tree");
+        }
+        if (CompareTag("Stone"))
+        {
+            audioS.PlayOneShot(stoneHit);
+            Debug.Log("audio stone");
+        }
+        if (CompareTag("Metal"))
+        {
+            audioS.PlayOneShot(metalHit);
+            Debug.Log("metal audio");
+        }
+        if (CompareTag("Enemy") || CompareTag("Passive"))
+
+        {
+            audioS.PlayOneShot(animalHit);
+            Debug.Log("audio animal");
+        }
 
         hits--;
        

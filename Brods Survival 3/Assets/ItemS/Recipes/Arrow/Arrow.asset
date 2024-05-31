@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 2167a8fd3c49f974d838c41e851c948f, type: 3}
+  icon: {fileID: 21300000, guid: 5714b8a5d333397499aee25d4709d519, type: 3}
   recipeName: Arrow
   requirements:
   - {fileID: 11400000, guid: ec4e59a68f65d96439d70262ddbdf14f, type: 2}

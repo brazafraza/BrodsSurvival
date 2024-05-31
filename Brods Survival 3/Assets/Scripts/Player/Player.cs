@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
                 moveDir.y = -3f;
         }
 
-        audioS.PlayOneShot(swimmingSound);
+        //audioS.PlayOneShot(swimmingSound);
         moveDir = transform.TransformDirection(moveDir);
         moveDir *= Time.deltaTime;
 

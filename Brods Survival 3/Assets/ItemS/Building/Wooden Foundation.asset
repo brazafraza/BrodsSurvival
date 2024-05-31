@@ -33,13 +33,17 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 0}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}
   healthChange: 10
   hungerChange: 10
   thirstChange: 10
-  ghost: {fileID: -4519521078571364321, guid: b80d94344a1021248938e15a2b91033d, type: 3}
+  ghost: {fileID: -6156521441582772234, guid: 7d31cd2fecae86343b70bb3c3f9c0ff1, type: 3}
   isFuel: 0
   outcome: {fileID: 0}
   outcomeAmount: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   itemType: 1
-  icon: {fileID: 21300000, guid: 01cd97971b37947c99c52882c5d46aea, type: 3}
+  icon: {fileID: 21300000, guid: 56d3f103ed4551e4ab06f428ecc9e6d4, type: 3}
   itemName: Coconut
   description: Eat
   isStackable: 1
@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 0}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}

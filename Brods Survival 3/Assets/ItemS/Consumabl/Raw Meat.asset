@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 13
   itemType: 1
-  icon: {fileID: 21300000, guid: 473a07e54a592654cb13d628a632924d, type: 3}
+  icon: {fileID: 21300000, guid: ac1f4ffb0e069c740be41e559310c2d1, type: 3}
   itemName: Raw Meat
   description: Cook
   isStackable: 1
@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 0}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}

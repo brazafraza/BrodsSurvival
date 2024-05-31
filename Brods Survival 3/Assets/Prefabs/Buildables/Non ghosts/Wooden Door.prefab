@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 6170712187522238040}
   - component: {fileID: 2001785271189071367}
   - component: {fileID: -5504491669007172869}
+  - component: {fileID: 1647966616546124533}
   m_Layer: 10
   m_Name: Wooden Door
   m_TagString: Untagged
@@ -191,3 +192,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1647966616546124533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363616588603778767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f7bcf087ee81049b4f8ae44c9e979c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

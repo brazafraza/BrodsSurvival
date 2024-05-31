@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 3
   itemType: 0
-  icon: {fileID: 21300000, guid: c44aaa02046b3f042961084bd7c668ea, type: 3}
+  icon: {fileID: 21300000, guid: 5faacb114a6310c418d5ba2194a9fa55, type: 3}
   itemName: Metal Ingot
   description: Metal ingot
   isStackable: 1
@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 0}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}
