@@ -15,6 +15,7 @@ TagManager:
   - Metal
   - Passive
   - MWeapon
+  - Door
   layers:
   - Default
   - TransparentFX

@@ -37,9 +37,12 @@ public class InteractionHandler : MonoBehaviour
             interactionText.gameObject.SetActive(true);
 
         }
+       
 
+            
+        
 
-        else if (questUi.playerLookingAtNPC && !questUi.menuOpen)
+        if (questUi.playerLookingAtNPC && !questUi.menuOpen)
         {
             Debug.Log("text should appear");
             interactionText.text = $"Press 'E' to speak to the island";
@@ -53,6 +56,15 @@ public class InteractionHandler : MonoBehaviour
             Pickup pickup = hit.transform.GetComponent<Pickup>();
             Storage storage = hit.transform.GetComponent<Storage>();
             Water water = hit.transform.GetComponent<Water>();
+
+            if (hit.collider.CompareTag("Door"))
+            {
+                  Debug.Log("2");
+                interactionText.text = $"Press 'E' to interact";
+                hudCrosshair.SetActive(false);
+                interactionText.gameObject.SetActive(true);
+                return;
+            }
 
             if (Input.GetKeyDown(interactionKey))
             {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3253494340932842742}
   - component: {fileID: 3261684473844251424}
   - component: {fileID: 3270946252751875458}
-  - component: {fileID: 3301227973945440974}
   m_Layer: 10
   m_Name: Tavern_door_room
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3301227973945440974
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3257539596030358464}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.6562773, y: 2.1386657, z: 0.26677534}
-  m_Center: {x: 0.7572554, y: 0.17959042, z: -0.06667121}
 --- !u!1 &8363616588603778767
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,9 +95,11 @@ GameObject:
   - component: {fileID: 2001785271189071367}
   - component: {fileID: -5504491669007172869}
   - component: {fileID: 1647966616546124533}
+  - component: {fileID: 1859645813}
+  - component: {fileID: 1859645818}
   m_Layer: 10
   m_Name: Wooden Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,3 +192,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f7bcf087ee81049b4f8ae44c9e979c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 1859645813}
+  cameraLook: {fileID: 0}
+  interactionDistance: 5
+--- !u!95 &1859645813
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363616588603778767}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f966952eebdedf4c99aa04c3b717e20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &1859645818
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363616588603778767}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6334473, y: 0.8669588, z: 0.07922365}
+  m_Center: {x: 0.31418458, y: 0.46933147, z: -0.030896002}

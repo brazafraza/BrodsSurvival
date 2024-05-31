@@ -3,7 +3,17 @@ guid: fc6e0a348e07b894fb317b7d9e3d996c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - treeBreak: {fileID: 8300000, guid: 2f020b822a7d25e4e9d7e8a700b05b22, type: 3}
+  - stoneBreak: {fileID: 8300000, guid: 1c79fb554276f1245b37673f638e8663, type: 3}
+  - metalBreak: {fileID: 8300000, guid: 1c79fb554276f1245b37673f638e8663, type: 3}
+  - animalBreak: {fileID: 8300000, guid: 2e84b8d0d3cb89c40be2c86642008678, type: 3}
+  - treeHit: {fileID: 8300000, guid: 5f7ca7ce09b7feb4a8cda500f0d5555f, type: 3}
+  - stoneHit: {fileID: 8300000, guid: ecef61601a8b1a64fa4e61fc8fb677d8, type: 3}
+  - metalHit: {fileID: 8300000, guid: 9954a112aa4bcfc42908cd03245c758c, type: 3}
+  - animalHit: {fileID: 8300000, guid: 2b81b7fafb50332429dd15c518e0c71f, type: 3}
+  - npc: {instanceID: 0}
+  - playerAS: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
