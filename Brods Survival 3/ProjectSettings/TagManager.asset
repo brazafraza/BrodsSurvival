@@ -16,6 +16,7 @@ TagManager:
   - Passive
   - MWeapon
   - Door
+  - Water
   layers:
   - Default
   - TransparentFX

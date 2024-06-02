@@ -143,21 +143,27 @@ public class Player : MonoBehaviour
 
     public void PlaySwim()
     {
-        swimNoisePlay = true;
-        audioS.PlayOneShot(swimmingSound);
-        Debug.Log("Swim noise played");
-        Invoke("ResetSwim", 12f);
+        if(swimNoisePlay)
+        {
+            swimNoisePlay = true;
+            audioS.PlayOneShot(swimmingSound);
+            Debug.Log("Swim noise played");
+            Invoke("PlaySwim", 3f);
+        }
+        
     }
 
-    public void ResetSwim()
+
+    public void StopSwim()
     {
         swimNoisePlay = false;
+        audioS.Stop();
     }
     private void Movement()
     {
         Vector3 moveDir = Vector3.zero;
         if (!swimNoisePlay)
-            PlaySwim();
+            //PlaySwim();
       
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             moveDir.z += 1;
@@ -170,8 +176,8 @@ public class Player : MonoBehaviour
 
         if (!inWater)
         {
-            ResetSwim();
-            audioS.Stop();
+            //ResetSwim();
+            
 
             //running
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
@@ -295,12 +301,23 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("Water"))
+        {
+            swimNoisePlay = true;
+            PlaySwim();
+        }
+       
+
         if (other.GetComponent<Water>() != null)
             water = other.GetComponent<Water>();
     }
 
     private void OnTriggerExit(Collider other)
     {
+        swimNoisePlay = false;
+
+        StopSwim();
+
         if (other.GetComponent<Water>() != null)
             if (water == other.GetComponent<Water>())
                 water = null;
