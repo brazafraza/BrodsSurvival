@@ -33,6 +33,6 @@ Material:
     - _Cutoff: 0.10714287
     - _Shininess: 0.042590186
     m_Colors:
-    - _Color: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
-    - _SpecColor: {r: 0.09558821, g: 0.09558821, b: 0.09558821, a: 1}
+    - _Color: {r: 1, g: 0.9434318, b: 0.8066038, a: 1}
+    - _SpecColor: {r: 0.5188679, g: 0.40665582, b: 0.24719651, a: 1}
   m_BuildTextureStacks: []

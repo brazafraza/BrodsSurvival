@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Arrow wood
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5f7a55b0f725116438794d97124e9440, type: 2}
-  amountNeeded: 5
+  amountNeeded: 3

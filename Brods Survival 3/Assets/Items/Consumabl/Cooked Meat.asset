@@ -40,8 +40,8 @@ MonoBehaviour:
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}
-  healthChange: 20
-  hungerChange: 25
+  healthChange: 25
+  hungerChange: 30
   thirstChange: 0
   ghost: {fileID: 0}
   isFuel: 0

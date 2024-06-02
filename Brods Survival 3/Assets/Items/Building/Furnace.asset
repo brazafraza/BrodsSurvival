@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 12
   itemType: 4
-  icon: {fileID: 21300000, guid: 1bbc7ac7b9c0e4e4e87c5b25e946b945, type: 3}
+  icon: {fileID: 21300000, guid: 8678796cfb3d09044a70d70cf70cb7b9, type: 3}
   itemName: Furnace
   description: Smelt your items
   isStackable: 0
@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 0}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}

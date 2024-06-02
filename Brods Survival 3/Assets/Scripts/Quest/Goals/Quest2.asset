@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quest2
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - Show me your survival skills.
   - Build 5 pieces
   acceptOption: Yes
   acceptAnswer: Accepted answer
@@ -21,6 +21,7 @@ MonoBehaviour:
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
   comebackInProgress: 'Build 5 structures for me.
+
 
     Do not disapoint me!'
   comebackCompleted: Completed

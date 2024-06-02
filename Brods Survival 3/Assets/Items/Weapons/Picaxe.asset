@@ -19,7 +19,7 @@ MonoBehaviour:
   description: A metal picaxe
   isStackable: 0
   maxStack: 1
-  damage: 20
+  damage: 5
   range: 2
   magSize: 30
   bulletData: {fileID: 0}
@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 8300000, guid: 16460997a6b13f840a55cb69b0ed3da5, type: 3}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}

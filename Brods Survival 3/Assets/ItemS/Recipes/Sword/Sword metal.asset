@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Sword metal
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 05819629cb73a2745ac7b49918858f67, type: 2}
-  amountNeeded: 10
+  amountNeeded: 15

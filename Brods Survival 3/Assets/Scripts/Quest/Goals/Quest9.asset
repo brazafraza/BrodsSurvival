@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest9
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - I control the trees on the island, don't worry about cutting down too many.
   - Cut 30 trees
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Collect the wood from 30 trees from me.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

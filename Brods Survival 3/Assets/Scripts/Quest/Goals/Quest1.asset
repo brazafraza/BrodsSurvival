@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Quest1
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to see how you can handle a weapon.
-  - Use a weapon 5 times.
+  - I want to see your aggression.
+  - Use a bow 5 times.
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
   comebackInProgress: 'Shoot a bow 5 times.
+
 
     Do not dissapoint me!'
   comebackCompleted: Completed

@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest6
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - Show me your handy work.
   - Craft 5 items
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Craft 5 items from your inventory.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest7
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - You've impressed me. Show me your combat skills again.
   - Kill 15 mobs
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Eliminate 15 hostile enemies for me.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

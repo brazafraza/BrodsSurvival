@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest4
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - Show me your hunting skills.
   - Eliminate 5 mobs
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Eliminate 5 hostile creatures on the island.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

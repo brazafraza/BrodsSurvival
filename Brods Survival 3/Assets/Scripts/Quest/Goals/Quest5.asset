@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest5
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - Show me your lumbering skills.
   - Cut down 20 trees
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Cut down 20 trees.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

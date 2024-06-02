@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quest3
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - I want to hear your firepower.
   - Use your gun 10 times for me
   acceptOption: Yes
   acceptAnswer: Accepted answer

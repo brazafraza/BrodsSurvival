@@ -10,8 +10,8 @@ public class IslandHappiness : MonoBehaviour
     //add clock bar too
 
 
-
-
+    public GameObject hotbar;
+    public GameMenu gameMenu;
 
     public StatsBar happinessBar;
     public StatsBar timeBarL;
@@ -33,19 +33,23 @@ public class IslandHappiness : MonoBehaviour
 
     private void Start()
     {
-
+        gameMenu = FindAnyObjectByType<GameMenu>();
         happiness = maxHappiness;  
     }
 
     private void Update()
     {
+
         if (happiness <= 0)
             happiness = 0;
 
         happinessBar.numberText.text = happiness.ToString("f0");
         happinessBar.bar.fillAmount = happiness / 100;
 
-       
+        if (gameMenu.opened)
+            hotbar.SetActive(false);
+        if (!gameMenu.opened)
+            hotbar.SetActive(true);
 
         if (dayNightCycle.timeOfDay >= 1350)
         {

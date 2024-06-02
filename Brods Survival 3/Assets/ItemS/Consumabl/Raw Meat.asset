@@ -41,7 +41,7 @@ MonoBehaviour:
   takeoutSound: {fileID: 0}
   emptySound: {fileID: 0}
   healthChange: -5
-  hungerChange: 25
+  hungerChange: 10
   thirstChange: 0
   ghost: {fileID: 0}
   isFuel: 0

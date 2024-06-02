@@ -6,6 +6,8 @@ using UnityEngine;
 public class DayNightCycle : MonoBehaviour
 {
     public Transform sun;
+    
+
 
     [Header("Cycle")]
     public float timeOfDay = 1350f;
@@ -45,6 +47,9 @@ public class DayNightCycle : MonoBehaviour
         {
             sun.GetComponentInChildren<Light>().intensity = Mathf.Lerp(sun.GetComponentInChildren<Light>().intensity, dayTimeSunIntensity, intensityChangeSpeed * Time.deltaTime);
             RenderSettings.ambientIntensity = Mathf.Lerp(RenderSettings.ambientIntensity, dayTimeAmbienIntensity, intensityChangeSpeed * Time.deltaTime);
+            //set fog colour
+            RenderSettings.fogDensity = 0.00045f;
+            RenderSettings.fogColor = Color.grey;
             if (skyboxDay != null)
             {
                 // StartCoroutine(TransitionSkyboxDay());
@@ -57,6 +62,9 @@ public class DayNightCycle : MonoBehaviour
         {
             sun.GetComponentInChildren<Light>().intensity = Mathf.Lerp(sun.GetComponentInChildren<Light>().intensity, nightTimeSunIntensity, intensityChangeSpeed * Time.deltaTime);
             RenderSettings.ambientIntensity = Mathf.Lerp(RenderSettings.ambientIntensity, nightTimeAmbienIntensity, intensityChangeSpeed * Time.deltaTime);
+            
+            RenderSettings.fogDensity = 0.1f;
+            RenderSettings.fogColor = Color.black;
             if (skyboxNight != null)
             {
 

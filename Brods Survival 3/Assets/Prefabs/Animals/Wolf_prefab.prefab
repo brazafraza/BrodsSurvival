@@ -1148,12 +1148,12 @@ MonoBehaviour:
   target: {fileID: 0}
   agent: {fileID: 0}
   isAttacking: 0
-  health: 100
+  health: 180
   audioS: {fileID: 0}
   animalWalk: {fileID: 8300000, guid: aab0f8b96b9dd5f4db462ed55d75f3bb, type: 3}
   animalAg: {fileID: 8300000, guid: b08c2a67a7c0de543bf5c289a497b1b4, type: 3}
   animalDie: {fileID: 8300000, guid: 57d45a52ef1ca1b48a18397e20e5637b, type: 3}
-  damage: 50
+  damage: 30
   maxChaseDistance: 50
   minAttackDistance: 3
   maxAttackDistance: 5
@@ -1183,6 +1183,10 @@ MonoBehaviour:
   stoneBreak: {fileID: 0}
   metalBreak: {fileID: 0}
   animalBreak: {fileID: 8300000, guid: 2e84b8d0d3cb89c40be2c86642008678, type: 3}
+  treeHit: {fileID: 0}
+  stoneHit: {fileID: 0}
+  metalHit: {fileID: 0}
+  animalHit: {fileID: 0}
   gatherDatas:
   - {fileID: 11400000, guid: 0cfbf4f90b2a826479e7ffb0bd7fe14d, type: 2}
   hits: 5
@@ -1190,6 +1194,7 @@ MonoBehaviour:
   toolMultiplier: 2
   breakCount: 0
   npc: {fileID: 0}
+  playerAS: {fileID: 0}
 --- !u!82 &1731265633380294751
 AudioSource:
   m_ObjectHideFlags: 0

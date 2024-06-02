@@ -37,12 +37,8 @@ public class InteractionHandler : MonoBehaviour
             interactionText.gameObject.SetActive(true);
 
         }
-       
 
-            
-        
-
-        if (questUi.playerLookingAtNPC && !questUi.menuOpen)
+        else if (questUi.playerLookingAtNPC && !questUi.menuOpen)
         {
             Debug.Log("text should appear");
             interactionText.text = $"Press 'E' to speak to the island";

@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest10
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - 'Have you crafting a furnace yet? '
   - Smelt or cook 25 items
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Cook or smelt 25 items using a furnace.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10

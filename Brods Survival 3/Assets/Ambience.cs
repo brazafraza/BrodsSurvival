@@ -11,13 +11,16 @@ public class Ambience : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioS = GetComponent<AudioSource>();
+       // audioS = GetComponent<AudioSource>();
         audioS.PlayOneShot(islandAmb);
     }
 
     private void Update()
     {
-        audioS.PlayOneShot(islandAmb);
+        if(!audioS.isPlaying)
+            audioS.PlayOneShot(islandAmb);
+
+
     }
 
     private void OnTriggerEnter(Collider other)

@@ -8,6 +8,7 @@ using System.IO;
 
 public class GameMenu : MonoBehaviour
 {
+    public GameObject hotbar;
 
     public bool opened;
     public enum MenuMode { Main, Pause}
@@ -41,6 +42,8 @@ public class GameMenu : MonoBehaviour
 
     private void Update()
     {
+      //  hotbar = FindGameObjectOfType<hotbar>;
+
         if (settingsMenuActive)
         {
             menuAlt.SetActive(false);
@@ -71,6 +74,8 @@ public class GameMenu : MonoBehaviour
                 UI.transform.localPosition = new Vector3(0, 0, 0); Time.timeScale = 0;
                 Time.timeScale = 0;
 
+               // hotbar.SetActive(false);
+
              //   Cursor.visible = true;
                // Cursor.lockState = CursorLockMode.None;
             }    
@@ -78,8 +83,9 @@ public class GameMenu : MonoBehaviour
             {
                 UI.transform.localPosition = new Vector3(-10000, 0, 0);
                 Time.timeScale = 1;
+               // hotbar.SetActive(true);
                 //Cursor.visible = false;
-               // Cursor.lockState = CursorLockMode.Locked;
+                // Cursor.lockState = CursorLockMode.Locked;
             }
                 
         }

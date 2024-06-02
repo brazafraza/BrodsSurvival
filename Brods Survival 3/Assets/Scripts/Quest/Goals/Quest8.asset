@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Quest8
   m_EditorClassIdentifier: 
   initialDialog:
-  - I want to hear your firepower again
+  - Expand your primitive empire.
   - Build 25 pieces
   acceptOption: Yes
   acceptAnswer: Accepted answer
   declineOption: Decline
   declineAnswer: Decline answer
   comebackAfterDecline: Comeback after decline
-  comebackInProgress: Do not disapoint me 2
+  comebackInProgress: Build 25 more structures on the island.
   comebackCompleted: Completed
   finalWords: Final words
   happinessGain: 10
