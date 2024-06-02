@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 using UnityEngine;
 
 public class GatherableObject : MonoBehaviour
 {
-    public enum DeathType { Destroy, EnablePhysics}
+    public enum DeathType { Destroy, EnablePhysics }
     public DeathType deathType;
 
     private AudioSource audioS;
@@ -21,7 +20,6 @@ public class GatherableObject : MonoBehaviour
     public AudioClip metalHit;
     public AudioClip animalHit;
 
-
     public GatherDataSO[] gatherDatas;
     public int hits;
     public ItemSO[] prefferedTools;
@@ -32,6 +30,7 @@ public class GatherableObject : MonoBehaviour
     public NPC npc;
 
     bool hasDied;
+    bool isDead = false;
 
     public GameObject playerAS;
 
@@ -47,46 +46,67 @@ public class GatherableObject : MonoBehaviour
         {
             Debug.Log("No npc found bear");
         }
-       
+
+        if (CompareTag("Enemy") || CompareTag("Passive"))
+        {
+            DisableNonAudioFunctions();
+        }
     }
 
     private void Update()
     {
-        //if (npc == null)
-        //{
-        //    npc = FindAnyObjectByType<NPC>();
-
-        //}
-
-        if (hits <= 0 && !hasDied)
+        if (isDead || !(CompareTag("Enemy") || CompareTag("Passive")))
         {
-            if (CompareTag("Stone"))
+            if (hits <= 0 && !hasDied)
             {
-                audioSPlayer.PlayOneShot(stoneBreak);
-             //   Debug.Log("audio stone");
+                HandleObjectDestruction();
+                hasDied = true;
             }
-            if (CompareTag("Metal"))
+        }
+    }
+
+    private void HandleObjectDestruction()
+    {
+        if (CompareTag("Stone"))
+        {
+            audioSPlayer.PlayOneShot(stoneBreak);
+        }
+        if (CompareTag("Metal"))
+        {
+            audioSPlayer.PlayOneShot(metalBreak);
+        }
+        if (CompareTag("Enemy") || CompareTag("Passive"))
+        {
+            audioSPlayer.PlayOneShot(animalBreak);
+        }
+        if (CompareTag("Tree"))
+        {
+            audioSPlayer.PlayOneShot(treeBreak);
+        }
+
+        if (deathType == DeathType.Destroy)
+        {
+            if (CompareTag("Tree") && npc.firstTimeInteraction == false)
             {
-                audioSPlayer.PlayOneShot(metalBreak);
-               Debug.Log("metal broken");
+                npc.shouldRecordBreak = true;
             }
-            if (CompareTag("Enemy") || CompareTag("Passive"))
 
+            if (CompareTag("Tree") && npc.shouldRecordBreak)
             {
-                audioSPlayer.PlayOneShot(animalBreak);
-                //Debug.Log("audio animal");
-            }
-            if (CompareTag("Enemy") || CompareTag("Passive"))
-
-            {
-                audioSPlayer.PlayOneShot(treeBreak);
-                //Debug.Log("audio tree");
+                breakCount++;
+                npc.ReceiveBreakCount(breakCount);
             }
 
-
-            if (deathType == DeathType.Destroy)
+            Destroy(gameObject);
+        }
+        else if (deathType == DeathType.EnablePhysics)
+        {
+            if (GetComponent<Rigidbody>() != null)
             {
-               // npc = FindAnyObjectByType<NPC>();
+                GetComponent<Rigidbody>().isKinematic = false;
+                GetComponent<Rigidbody>().useGravity = true;
+
+                GetComponent<Rigidbody>().AddTorque(Vector3.right * 20);
                 if (CompareTag("Tree") && npc.firstTimeInteraction == false)
                 {
                     npc.shouldRecordBreak = true;
@@ -96,118 +116,90 @@ public class GatherableObject : MonoBehaviour
                 {
                     breakCount++;
                     npc.ReceiveBreakCount(breakCount);
-
                 }
-                
-                Destroy(gameObject);
+                if (CompareTag("Tree"))
+                    audioSPlayer.PlayOneShot(treeBreak);
 
+                Destroy(gameObject, 10f);
             }
-            else if (deathType == DeathType.EnablePhysics)
+            else
             {
-
-               //npc = FindAnyObjectByType<NPC>();
-                if (GetComponent<Rigidbody>() != null)
+                if (CompareTag("Tree") && npc.firstTimeInteraction == false)
                 {
-                    GetComponent<Rigidbody>().isKinematic = false;
-                    GetComponent<Rigidbody>().useGravity = true;
-
-                    GetComponent<Rigidbody>().AddTorque(Vector3.right * 20);
-                    if (CompareTag("Tree") && npc.firstTimeInteraction == false)
-                    {
-                        npc.shouldRecordBreak = true;
-                    }
-
-                    if (CompareTag("Tree") && npc.shouldRecordBreak)
-                    {
-                        breakCount++;
-                        npc.ReceiveBreakCount(breakCount);
-
-                    }
-                    if (CompareTag("Tree"))
-                        audioSPlayer.PlayOneShot(treeBreak);
-
-
-                    Destroy(gameObject, 10f);
+                    npc.shouldRecordBreak = true;
                 }
-                else 
+
+                if (CompareTag("Tree") && npc.shouldRecordBreak)
                 {
-                  //  npc = FindAnyObjectByType<NPC>();
-                    if (CompareTag("Tree") && npc.firstTimeInteraction == false)
-                    {
-                        npc.shouldRecordBreak = true;
-                    }
-
-                    if (CompareTag("Tree") && npc.shouldRecordBreak)
-                    {
-                        breakCount++;
-                        npc.ReceiveBreakCount(breakCount);
-
-                    }
-                    Destroy(gameObject);
+                    breakCount++;
+                    npc.ReceiveBreakCount(breakCount);
                 }
-                    
+                Destroy(gameObject);
             }
-
-
-            hasDied = true;
         }
-
-       
-            
-        
     }
-
 
     public void Gather(ItemSO toolUsed, InventoryManager inventory)
     {
-        if (hits <= 0)
+        if (hits <= 0 || (!isDead && (CompareTag("Enemy") || CompareTag("Passive"))))
+        {
+            PlayHitSound();
             return;
+        }
 
-       // bool usingRightTool = false;
-
-       //CHECK FOR TOOL
-       if (prefferedTools.Length > 0)
-       {
+        if (prefferedTools.Length > 0)
+        {
             for (int i = 0; i < prefferedTools.Length; i++)
             {
                 if (prefferedTools[i] == toolUsed)
                 {
-                //   usingRightTool = true;
                     break;
                 }
-            }             
-       }
+            }
+        }
 
-
-        //GATHER
         int selectedGatherData = Random.Range(0, gatherDatas.Length);
 
         inventory.AddItem(gatherDatas[selectedGatherData].item, gatherDatas[selectedGatherData].amount);
 
+        PlayHitSound();
+
+        hits--;
+    }
+
+    private void PlayHitSound()
+    {
         if (CompareTag("Tree"))
         {
             audioS.PlayOneShot(treeHit);
-            Debug.Log("audio tree");
         }
         if (CompareTag("Stone"))
         {
             audioS.PlayOneShot(stoneHit);
-            Debug.Log("audio stone");
         }
         if (CompareTag("Metal"))
         {
             audioS.PlayOneShot(metalHit);
-            Debug.Log("metal audio");
         }
-        if (CompareTag("Enemy") || CompareTag("Passive"))
-
+        if (CompareTag("Enemy"))
+        {
+            audioS.Stop();
+            audioS.PlayOneShot(animalHit);
+        }
+        if (CompareTag("Passive"))
         {
             audioS.PlayOneShot(animalHit);
-            Debug.Log("audio animal");
         }
-
-        hits--;
-       
     }
-    
+
+    private void DisableNonAudioFunctions()
+    {
+        this.enabled = false;
+    }
+
+    public void EnableAllFunctions()
+    {
+        this.enabled = true;
+        isDead = true;
+    }
 }

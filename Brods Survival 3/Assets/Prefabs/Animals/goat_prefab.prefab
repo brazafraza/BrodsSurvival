@@ -993,11 +993,13 @@ MonoBehaviour:
   target: {fileID: 0}
   agent: {fileID: 0}
   isAttacking: 0
+  chasing: 0
   health: 100
   audioS: {fileID: 0}
   animalWalk: {fileID: 0}
   animalAg: {fileID: 0}
   animalDie: {fileID: 0}
+  animalAttack: {fileID: 0}
   damage: 0
   maxChaseDistance: 0
   minAttackDistance: 1.5
@@ -1018,7 +1020,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4095247638645800246}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc6e0a348e07b894fb317b7d9e3d996c, type: 3}
   m_Name: 
@@ -1027,14 +1029,19 @@ MonoBehaviour:
   treeBreak: {fileID: 0}
   stoneBreak: {fileID: 0}
   metalBreak: {fileID: 0}
-  animalBreak: {fileID: 8300000, guid: 2e84b8d0d3cb89c40be2c86642008678, type: 3}
+  animalBreak: {fileID: 8300000, guid: 2b81b7fafb50332429dd15c518e0c71f, type: 3}
+  treeHit: {fileID: 0}
+  stoneHit: {fileID: 0}
+  metalHit: {fileID: 0}
+  animalHit: {fileID: 8300000, guid: 2e84b8d0d3cb89c40be2c86642008678, type: 3}
   gatherDatas:
   - {fileID: 11400000, guid: 0cfbf4f90b2a826479e7ffb0bd7fe14d, type: 2}
-  hits: 5
+  hits: 10
   prefferedTools: []
   toolMultiplier: 2
   breakCount: 0
   npc: {fileID: 0}
+  playerAS: {fileID: 0}
 --- !u!82 &2779041202347296698
 AudioSource:
   m_ObjectHideFlags: 0

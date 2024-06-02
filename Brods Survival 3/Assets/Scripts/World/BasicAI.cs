@@ -11,6 +11,8 @@ public class BasicAI : MonoBehaviour
     private Animator anim;
     public bool isAttacking;
 
+    public bool chasing = false;
+
     public float health = 100f;
 
     [Header("Audio")]
@@ -18,6 +20,7 @@ public class BasicAI : MonoBehaviour
     public AudioClip animalWalk;
     public AudioClip animalAg;
     public AudioClip animalDie;
+    public AudioClip animalAttack;
 
     [Header("Attack Settings")]
     public float damage;
@@ -39,7 +42,7 @@ public class BasicAI : MonoBehaviour
     public float runSpeed = 3.5f;
     public float wanderRange = 5f;
 
-  //  private string debugState = null;
+    //  private string debugState = null;
 
     public bool walk;
     public bool run;
@@ -64,19 +67,17 @@ public class BasicAI : MonoBehaviour
         }
     }
 
-    
     private void Update()
     {
         if (health <= 0)
         {
+            audioS.Stop();
             audioS.PlayOneShot(animalDie);
             Die();
             return;
         }
 
         UpdateAnimations();
-        //if (target == null)
-            //Debug.Log("No target");
         if (target != null)
         {
             if (Vector3.Distance(target.transform.position, transform.position) > maxChaseDistance)
@@ -85,9 +86,9 @@ public class BasicAI : MonoBehaviour
             if (!isAttacking)
             {
                 Chase();
-                Debug.Log("Chasing");
+                //Debug.Log("Chasing");
             }
-                
+
         }
         else
         {
@@ -101,13 +102,23 @@ public class BasicAI : MonoBehaviour
     {
         if (agent == null || !agent.isOnNavMesh)
             return;
-
+        chasing = false;
         agent.SetDestination(transform.position);
         Destroy(agent);
         anim.SetTrigger("Die");
-        GetComponent<GatherableObject>().enabled = true;
+
+        // Enable the remaining part of the GatherableObject script
+        GatherableObject gatherableObject = GetComponent<GatherableObject>();
+        if (gatherableObject != null)
+        {
+            gatherableObject.EnableAllFunctions();
+        }
+
         Destroy(this);
     }
+
+
+
 
     private void OnDrawGizmos()
     {
@@ -126,6 +137,8 @@ public class BasicAI : MonoBehaviour
 
     public void Wander()
     {
+        chasing = false;
+
         if (agent == null || !agent.isOnNavMesh)
         {
             Debug.LogWarning("NavMeshAgent is not properly initialized or not on a NavMesh.");
@@ -142,7 +155,8 @@ public class BasicAI : MonoBehaviour
             agent.SetDestination(wanderPos);
             walk = true;
             run = false;
-            audioS.PlayOneShot(animalWalk);
+            if (!audioS.isPlaying)
+                audioS.PlayOneShot(animalWalk);
         }
         else
         {
@@ -160,6 +174,14 @@ public class BasicAI : MonoBehaviour
         }
     }
 
+    public void PlayAnimalChase()
+    {
+        if (chasing && !audioS.isPlaying)
+        {
+            audioS.PlayOneShot(animalAg);
+        }
+    }
+
     public void Chase()
     {
         if (agent == null || !agent.isOnNavMesh)
@@ -167,7 +189,8 @@ public class BasicAI : MonoBehaviour
             Debug.LogWarning("NavMeshAgent is not properly initialized or not on a NavMesh.");
             return;
         }
-        audioS.PlayOneShot(animalAg);
+        chasing = true;
+        PlayAnimalChase();
 
         agent.SetDestination(target.position);
         walk = false;
@@ -179,6 +202,9 @@ public class BasicAI : MonoBehaviour
 
     public void StartAttack()
     {
+        if (!audioS.isPlaying)
+            audioS.PlayOneShot(animalAttack);
+        chasing = false;
         if (!isAttacking && !isOnCooldown)
         {
             isAttacking = true;
@@ -215,10 +241,10 @@ public class BasicAI : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null)
-            if(gameObject.CompareTag("Enemy"))
+            if (gameObject.CompareTag("Enemy"))
             {
                 target = other.transform;
             }
-            
+
     }
 }

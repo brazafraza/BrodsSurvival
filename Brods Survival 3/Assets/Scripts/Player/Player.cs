@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     [Header("Footsteps")]
     private AudioSource audioS;
     public AudioClip swimmingSound;
+    public AudioClip jumpSound;
 
 
     private float currentCrouchLength;
@@ -75,7 +76,7 @@ public class Player : MonoBehaviour
         inWater = water != null;
 
 
-        if (crouching && !inWater)
+        if (running && !inWater)
         {
             if (currentCrouchLength < crouchStepLength)
             {
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (running && !inWater) //crouching
+        else if (crouching && !inWater) //crouching
         {
             if (currentWalkLenth < runStepLength)
             {
@@ -233,6 +234,7 @@ public class Player : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Space))
                 {
+                    audioS.PlayOneShot(jumpSound);
                     yVelocity = jumpForce;
                 }
             }

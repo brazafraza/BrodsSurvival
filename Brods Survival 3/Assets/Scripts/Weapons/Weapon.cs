@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
 {
     private Player player;
     private AudioSource audioS;
+    public AudioClip animalHit;
 
     [HideInInspector] public Animator anim;
     [HideInInspector] public Slot slotEquippedOn;
@@ -178,6 +179,7 @@ public class Weapon : MonoBehaviour
             if (ai != null)
             {
                 ai.health -= weaponData.damage;
+                audioS.PlayOneShot(animalHit);
             }
 
             //hit complete pass value
@@ -422,7 +424,7 @@ public class Weapon : MonoBehaviour
         if (Physics.SphereCast(shootPoint.position, 0.2f, shootPoint.forward, out hit, weaponData.range, shootableLayers))
         {
             Hit();
-            Debug.Log("hit");
+           // Debug.Log("hit");
             if (gameObject.CompareTag("MWeapon"))
             {
                 audioS.PlayOneShot(weaponData.shootSound);
@@ -436,7 +438,7 @@ public class Weapon : MonoBehaviour
             if (ai != null)
             {
                 ai.health -= weaponData.damage;
-                Debug.Log($"Hitted and damaged: {hit.transform.name}");
+              //  Debug.Log($"Hitted and damaged: {hit.transform.name}");
 
                
             }
@@ -451,7 +453,7 @@ public class Weapon : MonoBehaviour
                 audioS.PlayOneShot(weaponData.shootSound);
             }
             Miss();
-            Debug.Log("miss");
+          //  Debug.Log("miss");
 
             //Gizmos.color = Color.red;
             //Gizmos.DrawWireSphere(hit.point, 0.2f);

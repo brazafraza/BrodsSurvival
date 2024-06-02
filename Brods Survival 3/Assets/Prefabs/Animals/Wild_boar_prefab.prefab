@@ -75,8 +75,8 @@ GameObject:
   - component: {fileID: 5879275592617024640}
   - component: {fileID: 5823766049529987832}
   - component: {fileID: 5823766049529987811}
-  - component: {fileID: 5823766049529987812}
   - component: {fileID: 5823766049529987813}
+  - component: {fileID: 5823766049529987812}
   - component: {fileID: 5823766049529987814}
   - component: {fileID: 5823766049529987815}
   - component: {fileID: -4477324513774867221}
@@ -147,19 +147,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &5823766049529987812
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872763752665633638}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.67, y: 0.69606996, z: 1.6426318}
-  m_Center: {x: 0, y: 0.51696503, z: 0.12368405}
 --- !u!135 &5823766049529987813
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -173,6 +160,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &5823766049529987812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872763752665633638}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 0.69606996, z: 1.6426318}
+  m_Center: {x: 0, y: 0.51696503, z: 0.12368405}
 --- !u!114 &5823766049529987814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,22 +188,24 @@ MonoBehaviour:
   target: {fileID: 0}
   agent: {fileID: 0}
   isAttacking: 0
-  health: 150
+  chasing: 0
+  health: 200
   audioS: {fileID: 0}
   animalWalk: {fileID: 8300000, guid: 425a517feef0176459617f74ca2227f3, type: 3}
   animalAg: {fileID: 8300000, guid: 4dbfd9c274fc7834d8b3a9393d3fda64, type: 3}
   animalDie: {fileID: 8300000, guid: 004a5df66447642488b0388ca423902e, type: 3}
-  damage: 15
-  maxChaseDistance: 0
-  minAttackDistance: 1.5
-  maxAttackDistance: 2.5
+  animalAttack: {fileID: 8300000, guid: 0654a03812c159744a51431bfdcd385f, type: 3}
+  damage: 50
+  maxChaseDistance: 50
+  minAttackDistance: 3
+  maxAttackDistance: 5
   attackCooldown: 2
   currentWanderTime: 0
-  wanderWaitTime: 10
+  wanderWaitTime: 2
   canMoveWhileAttacking: 0
-  walkSpeed: 2
-  runSpeed: 3.5
-  wanderRange: 5
+  walkSpeed: 3
+  runSpeed: 4.5
+  wanderRange: 10
   walk: 0
   run: 0
 --- !u!114 &5823766049529987815
@@ -213,7 +215,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5872763752665633638}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc6e0a348e07b894fb317b7d9e3d996c, type: 3}
   m_Name: 
@@ -222,14 +224,14 @@ MonoBehaviour:
   treeBreak: {fileID: 0}
   stoneBreak: {fileID: 0}
   metalBreak: {fileID: 0}
-  animalBreak: {fileID: 8300000, guid: 2e84b8d0d3cb89c40be2c86642008678, type: 3}
+  animalBreak: {fileID: 8300000, guid: 2b81b7fafb50332429dd15c518e0c71f, type: 3}
   treeHit: {fileID: 0}
   stoneHit: {fileID: 0}
   metalHit: {fileID: 0}
-  animalHit: {fileID: 0}
+  animalHit: {fileID: 8300000, guid: 2e84b8d0d3cb89c40be2c86642008678, type: 3}
   gatherDatas:
   - {fileID: 11400000, guid: 0cfbf4f90b2a826479e7ffb0bd7fe14d, type: 2}
-  hits: 5
+  hits: 10
   prefferedTools: []
   toolMultiplier: 2
   breakCount: 0

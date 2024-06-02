@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Raw Meat
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 5de2170722e3b0d49959e657cf5b2f5d, type: 2}
-  amount: 3
+  amount: 1
