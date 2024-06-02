@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.721
   m_CustomReflection: {fileID: 8900000, guid: ebaa0716f467b2e46ad598de33148cd1, type: 2}
   m_Sun: {fileID: 422673141}
-  m_IndirectSpecularColor: {r: 0.083734125, g: 0.3057481, b: 0.52636415, a: 0.721}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.721}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1691,7 +1691,7 @@ Transform:
   m_Children:
   - {fileID: 292262575}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &143600490
 MonoBehaviour:
@@ -2484,6 +2484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   isTalkingWithPlayer: 0
+  audioS: {fileID: 0}
+  questC: {fileID: 0}
+  questF: {fileID: 0}
   quests:
   - questName: Shoot gun
     questGiver: Island
@@ -2541,6 +2544,7 @@ MonoBehaviour:
   resetCraftCount: 0
   resetKillCount: 0
   questFaileds: 0
+  failedOrComplete: {fileID: 0}
   weapon: {fileID: 7971061981505709391}
   questUI: {fileID: 1702394820}
   buildingHandler: {fileID: 0}
@@ -5576,7 +5580,7 @@ Transform:
   - {fileID: 1315398603}
   - {fileID: 1451621839}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &462367975
 GameObject:
@@ -11067,7 +11071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &925901254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11150,6 +11154,7 @@ RectTransform:
   - {fileID: 1958769310}
   - {fileID: 683569961}
   - {fileID: 859846873}
+  - {fileID: 1838610934}
   m_Father: {fileID: 6479818053544808728}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14287,7 +14292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15019,7 +15024,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 925901257}
     m_Modifications:
     - target: {fileID: 4299796901828733586, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: data
@@ -15031,19 +15036,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3209494
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3209494
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3209494
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1390.54
+      value: -2476.833
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 132.84
+      value: -184.48381
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 768.88
+      value: 1015.6516
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15051,15 +15068,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18255,9 +18272,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1535854367
 MonoBehaviour:
@@ -20286,6 +20303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8a129b6292c4b44a369f07ae5c1a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hotbar: {fileID: 0}
+  gameMenu: {fileID: 0}
   happinessBar: {fileID: 842681935}
   timeBarL: {fileID: 1336743555}
   timeBarR: {fileID: 1416649744}
@@ -20339,12 +20358,15 @@ MonoBehaviour:
   questManager: {fileID: 1702394821}
   npc: {fileID: 212394888}
   inventoryManager: {fileID: 602963142}
+  gameMenu: {fileID: 0}
+  tutorial: {fileID: 0}
   dialogText: {fileID: 1310134379}
   option1BTN: {fileID: 1944586490}
   option2BTN: {fileID: 1898936431}
   menuOpen: 0
   questAccepted: 0
   playerLookingAtNPC: 0
+  playerLookingAtTut: 0
 --- !u!114 &1702394821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21416,6 +21438,11 @@ Transform:
   m_Father: {fileID: 1556507786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1838610934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5175283550426100354, guid: 78ebff9336009ad4fa720af851ebfb68, type: 3}
+  m_PrefabInstance: {fileID: 1253811057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842086919
 GameObject:
   m_ObjectHideFlags: 0
@@ -24291,7 +24318,7 @@ Transform:
   - {fileID: 653420073}
   - {fileID: 1548140521}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2069116138
 GameObject:
@@ -24507,8 +24534,8 @@ RectTransform:
   m_Father: {fileID: 1026915770}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.3145307}
+  m_AnchorMax: {x: 1, y: 0.68551075}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31682,8 +31709,11 @@ MonoBehaviour:
   canBuild: 0
   npc: {fileID: 212394888}
   buildCount: 0
+  audioS: {fileID: 0}
+  buildSound: {fileID: 0}
   offset: 1
   gridSize: 1
+  cam: {fileID: 0}
   layer:
     serializedVersion: 2
     m_Bits: 1015
@@ -33522,7 +33552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8537800843410501603, guid: bc5c45707f82e4ae68e6970efaacd0a3, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8537800843410501603, guid: bc5c45707f82e4ae68e6970efaacd0a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35095,6 +35125,7 @@ MonoBehaviour:
   crouching: 0
   walking: 0
   running: 0
+  swimmingSound: {fileID: 0}
   runStepLength: 1.2
   walkStepLentgh: 0.75
   crouchStepLength: 0.4
@@ -35160,12 +35191,9 @@ MonoBehaviour:
   maxHealth: 1000
   hunger: 0
   maxHunger: 100
-  thirst: 0
-  maxThirst: 100
   hungerDepletion: 0.5
   thirstDepletion: 0.75
   hungerDamage: 1.5
-  thirstDamage: 2.25
   drownDamage: 0.2
   healthBar: {fileID: 766666025}
   hungerBar: {fileID: 1195512628}
@@ -35428,6 +35456,11 @@ MonoBehaviour:
   interactionRange: 2
   interactionKey: 101
   interactionText: {fileID: 1984448328}
+  questUi: {fileID: 0}
+  audioS: {fileID: 0}
+  pickUp: {fileID: 0}
+  tutorial: {fileID: 0}
+  hudCrosshair: {fileID: 0}
 --- !u!114 &6479818054974774121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35455,7 +35488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: daa819d417157ff429b969e5f05e1ce4, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 576a727ac55733b46aed2d4eb43252aa, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -35532,8 +35565,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857f76a6ad01e73479b23582d292f61f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalPostProcessing: {fileID: 11400000, guid: daa819d417157ff429b969e5f05e1ce4, type: 2}
-  waterPostProcessing: {fileID: 11400000, guid: d252bd3aa91c7364fafa827c651d0a2d, type: 2}
+  normalPostProcessing: {fileID: 11400000, guid: 576a727ac55733b46aed2d4eb43252aa, type: 2}
+  waterPostProcessing: {fileID: 11400000, guid: 576a727ac55733b46aed2d4eb43252aa, type: 2}
+  cavePostProcessing: {fileID: 11400000, guid: 576a727ac55733b46aed2d4eb43252aa, type: 2}
+  amb: {fileID: 0}
 --- !u!65 &6479818054974774125
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37310,6 +37345,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathType: 0
+  treeBreak: {fileID: 0}
+  stoneBreak: {fileID: 0}
+  metalBreak: {fileID: 0}
+  animalBreak: {fileID: 0}
+  treeHit: {fileID: 0}
+  stoneHit: {fileID: 0}
+  metalHit: {fileID: 0}
+  animalHit: {fileID: 0}
   gatherDatas:
   - {fileID: 11400000, guid: 0b69b6317cc3ec943ba789fbc8bb2b9d, type: 2}
   hits: 5
@@ -37317,6 +37360,7 @@ MonoBehaviour:
   toolMultiplier: 2
   breakCount: 0
   npc: {fileID: 0}
+  playerAS: {fileID: 0}
 --- !u!4 &8461946378065876120
 Transform:
   m_ObjectHideFlags: 0
@@ -38012,7 +38056,7 @@ PrefabInstance:
       objectReference: {fileID: 1325038197}
     - target: {fileID: 2881304878977304421, guid: 8972a89004f6447f7866a78cb1e9f432, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2881304878977304421, guid: 8972a89004f6447f7866a78cb1e9f432, type: 3}
       propertyPath: m_LocalPosition.x

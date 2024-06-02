@@ -34,7 +34,7 @@ public class IslandHappiness : MonoBehaviour
     private void Start()
     {
         gameMenu = FindAnyObjectByType<GameMenu>();
-        happiness = maxHappiness;  
+        happiness = maxHappiness/2;  
     }
 
     private void Update()

@@ -12,6 +12,9 @@ public class PostProcessingHandler : MonoBehaviour
 
     public PostProcessProfile normalPostProcessing;
     public PostProcessProfile waterPostProcessing;
+    public PostProcessProfile cavePostProcessing;
+
+    public Ambience amb;
 
     private void Start()
     {
@@ -20,6 +23,11 @@ public class PostProcessingHandler : MonoBehaviour
 
     private void Update()
     {
+        if (amb.isInCave)
+        {
+            volume.profile = cavePostProcessing;
+            return;
+        }
         if (water == null)
             volume.profile = normalPostProcessing;
         else

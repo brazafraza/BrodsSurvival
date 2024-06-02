@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
     public bool inWater;
     public float swimSpeed = 2f;
 
+    public bool swimNoisePlay;
+
     void Start()
     {
         windowHandler = GetComponent<WindowHandler>();
@@ -139,10 +141,24 @@ public class Player : MonoBehaviour
         Movement();
     }
 
+    public void PlaySwim()
+    {
+        swimNoisePlay = true;
+        audioS.PlayOneShot(swimmingSound);
+        Debug.Log("Swim noise played");
+        Invoke("ResetSwim", 12f);
+    }
+
+    public void ResetSwim()
+    {
+        swimNoisePlay = false;
+    }
     private void Movement()
     {
         Vector3 moveDir = Vector3.zero;
-
+        if (!swimNoisePlay)
+            PlaySwim();
+      
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             moveDir.z += 1;
         if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
@@ -154,8 +170,8 @@ public class Player : MonoBehaviour
 
         if (!inWater)
         {
-
-
+            ResetSwim();
+            audioS.Stop();
 
             //running
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
@@ -239,7 +255,7 @@ public class Player : MonoBehaviour
                 moveDir.y = -3f;
         }
 
-        //audioS.PlayOneShot(swimmingSound);
+        
         moveDir = transform.TransformDirection(moveDir);
         moveDir *= Time.deltaTime;
 
