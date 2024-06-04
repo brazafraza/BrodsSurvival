@@ -38,7 +38,7 @@ MonoBehaviour:
   hitTreeSound: {fileID: 0}
   hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 0}
-  takeoutSound: {fileID: 0}
+  takeoutSound: {fileID: 8300000, guid: 16460997a6b13f840a55cb69b0ed3da5, type: 3}
   emptySound: {fileID: 0}
   healthChange: 10
   hungerChange: 10

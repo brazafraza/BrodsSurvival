@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c69e8145c437be54c861e9836e6de5db, type: 3}
-  m_Name: Hatchet
+  m_Name: Torch
   m_EditorClassIdentifier: 
   ID: 7
   itemType: 3
-  icon: {fileID: 21300000, guid: 9c19f16bc2b014bb69ffa9378949e8f1, type: 3}
-  itemName: Hatchet
-  description: A metal hatchet
+  icon: {fileID: 21300000, guid: 7584ff2127391734f9579642bcd955bc, type: 3}
+  itemName: Torch
+  description: Light up the area
   isStackable: 0
   maxStack: 1
-  damage: 5
+  damage: 1
   range: 2
   magSize: 30
   bulletData: {fileID: 0}
@@ -33,7 +33,7 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 8300000, guid: 2fb14186e3069684c91a1eff5278bc16, type: 3}
-  hitAnimalSound: {fileID: 0}
+  hitAnimalSound: {fileID: 8300000, guid: 2b81b7fafb50332429dd15c518e0c71f, type: 3}
   hitMetalSound: {fileID: 0}
   hitTreeSound: {fileID: 0}
   hitStoneSound: {fileID: 0}

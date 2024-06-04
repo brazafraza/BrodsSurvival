@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c7707253c9e0846a602f2d17b54d15, type: 3}
+  m_Name: Campfire
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: e4e60fa6ac7b24d8280c0b370da6bf4c, type: 3}
+  recipeName: Campfire
+  requirements:
+  - {fileID: 11400000, guid: b87174dc1a010cd419ff40c7c7409b21, type: 2}
+  - {fileID: 11400000, guid: 47c08d097561f8b4b8b3929a7aef5b18, type: 2}
+  craftingTime: 5
+  outcome: {fileID: 11400000, guid: 92bad029497315b42a9eeea8465047f5, type: 2}
+  outcomeAmount: 1

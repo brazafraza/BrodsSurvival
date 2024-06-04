@@ -33,6 +33,10 @@ MonoBehaviour:
   shotgunFire: 0
   pelletsPerShot: 8
   shootSound: {fileID: 8300000, guid: 01878a0752228e943902d0eb1c3f455c, type: 3}
+  hitAnimalSound: {fileID: 0}
+  hitMetalSound: {fileID: 0}
+  hitTreeSound: {fileID: 0}
+  hitStoneSound: {fileID: 0}
   reloadSound: {fileID: 8300000, guid: 76ad40d481dae3046a3b27daab28d491, type: 3}
   takeoutSound: {fileID: 8300000, guid: 16460997a6b13f840a55cb69b0ed3da5, type: 3}
   emptySound: {fileID: 8300000, guid: 2fb14186e3069684c91a1eff5278bc16, type: 3}
